@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&display=swap');
 @import "tailwindcss";
 @theme {
-  --font-display: "Satoshi", "sans-serif";
+  --font-display: "Anek Bangla", "sans-serif";
   --breakpoint-3xl: 120rem;
   --color-primary_300: #DA0F0E;
   --color-primary_200: #AF181C;
