@@ -3,6 +3,7 @@ import Flag_of_Bangladesh from '../assets/Flag_of_Bangladesh.svg'
 import { useForm, SubmitHandler } from "react-hook-form"
 import {BiRightArrowAlt} from "react-icons/bi";
 import donar from '../assets/donar.svg'
+import donar_bg_assets from '../assets/donar_bg.svg'
 
 type Inputs = {
 	phoneNumber: string,
@@ -27,11 +28,12 @@ function Register() {
 
 	return (
 		<>
-			<div className="h-screen w-full netural_300  grid grid-cols-1 md:grid-cols-2 place-items-center">
-				<div>
-					<img src={donar} alt="donar_blob" />
+			<div
+			className="h-screen w-full netural_300  grid grid-cols-1 md:grid-cols-2 place-items-center">
+				<div className='reletive'>
+					<img src={donar} alt="donar_blob" className='absolute left-[-30px] top-0 bottom-0' />
 				</div>
-				<div className='w-[450px] h-[484px] bg-[#D9D9D9] rounded-lg px-8 pt-6 pb-8 mb-4'>
+				<div className='w-[450px] h-[484px] bg-[#D9D9D9] rounded-lg px-8 py-14 mb-4'>
 					<h1 className='text-5xl font-bold text-primary_300 text-center'>রেজিস্টেশন করুন</h1>
 
 				<form onSubmit={handleSubmit(onSubmit)} className="">
@@ -60,13 +62,14 @@ function Register() {
 						<label className="block mb-1 text-md font-bold text-primary_200">পাসওয়ার্ড*</label>
 							<input {...register("password")} id='password' 
 							className="w-full h-14 bg-transparent placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
-							// className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
 							type="password" placeholder="***********" />
 						</div>
 							<p className="text-primary_200 text-xs italic py-2">পাসওয়ার্ড ভুলে গেছেন?  <span className='text-primary_300 font-bold underline'>রিসেট করুন</span></p>
 							<button className="w-full h-14 items-center bg-primary_300 text-netural_300 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100">
 							পরবর্তী ধাপে যান <BiRightArrowAlt className='inline-block' />
 							</button>
+							<p className="text-primary_200 text-xs italic py-2 text-center">ইতিমধ্যে একাউন্ট আছে? <span className='text-primary_300 font-bold underline'>লগইন</span></p>
+
 					</div>
 					{errors.phoneNumber && <span className="text-red-500">This field is required</span>}
 					{errors.password && <span className="text-red-500">This field is required</span>}
