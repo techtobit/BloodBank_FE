@@ -28,7 +28,7 @@ function Register() {
 			<div className="w-full max-w-xs">
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className="w-full max-w-sm min-w-[200px] mt-4">
-						<label className="block mb-1 text-sm text-slate-600">Enter Phone Number</label>
+						<label className="block mb-1 text-sm text-primary_300">Enter Phone Number</label>
 						<div className="relative mt-2">
 							<div className="absolute top-2 left-0 flex items-center pl-3">
 								<div className="h-full gap-[4px] text-sm flex justify-center items-center bg-transparent text-slate-700 focus:outline-none">

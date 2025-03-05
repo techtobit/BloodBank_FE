@@ -1,6 +1,15 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --font-display: "Satoshi", "sans-serif";
+  --breakpoint-3xl: 120rem;
+  --color-primary_300: #DA0F0E;
+  --color-primary_200: #AF181C;
+	--color-primary_100: #7A1B22;
+	--color-secondary_300: #EDDBDB;
+	--color-secondary_200: #E3C7C7;
+	--color-secondary_100: #D9B3B3;
+	--color-netural_300: #F7F7F7;
+	--color-netural_200: #F3EEEE;
+	--color-netural_100: #D9D9D9;
 
-/* ... */
+}
