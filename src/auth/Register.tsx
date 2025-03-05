@@ -25,7 +25,7 @@ function Register() {
 
 	return (
 		<>
-			<div className="w-full max-w-xs">
+			<div className="w-full max-w-xs bg-netural_300">
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className="w-full max-w-sm min-w-[200px] mt-4">
 						<label className="block mb-1 text-sm text-primary_300">Enter Phone Number</label>
