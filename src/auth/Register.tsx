@@ -15,7 +15,7 @@ import lShape from '../assets/svg/lShape.svg';
 
 type Inputs = {
 	phoneNumber: number,
-	country: string,
+	blood_group: string,
 	division: string,
 	district: string,
 	upazila: string,
@@ -81,10 +81,20 @@ function Register() {
 						/>
 					</div>
 					<div className="mt-4">
-						<label className="block mb-1 text-md font-bold text-primary_200 ">দেশ*</label>
-						<input {...register("country")} id='country'
-							className="w-full h-14 cursor-not-allowed  bg-netural_300 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
-							type="text" placeholder="বাংলাদেশ"  value='বাংলাদেশ' />
+						<label className="block mb-1 text-md font-bold text-primary_200 ">রক্তের গ্রুপ*</label>
+						<select {...register("blood_group")} id='blood_group'
+						className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						>
+							<option value="A+" className=''>A+ (এ পজেটিভ)</option>
+							<option value="A-">A- (এ নেগেটিভ)</option>
+							<option value="B+">B+ (বি পজেটিভ)</option>
+							<option value="B-">B- (বি নেগেটিভ)</option>
+							<option value="AB+">AB+ (এবি পজেটিভ)</option>
+							<option value="AB-">AB- (এবি নেগেটিভ)</option>
+							<option value="O+">O+ (ও পজেটিভ)</option>
+							<option value="O-">O- (ও নেগেটিভ)</option>
+
+						</select>
 					</div>
 					<div className="mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">বিভাগ*</label>
@@ -94,7 +104,7 @@ function Register() {
 					</div>
 					<div className="mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">জেলা*</label>
-						<input {...register("password")} id='password'
+						<input {...register("district")} id='district'
 							className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							type="text" placeholder="" />
 					</div>
