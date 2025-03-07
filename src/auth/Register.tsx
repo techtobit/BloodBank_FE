@@ -21,19 +21,19 @@ type Inputs = {
 	division: string,
 	district: string,
 	upazila: string,
-	password1: string,
-	password2: string
+	password: string,
+	confirm_password: string
 }
 
 
 function Register() {
 
-	const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+	const { register, watch, handleSubmit, formState: { errors } } = useForm<Inputs>();
 	const [district, setDistrict] = useState<string[]>([])
 	const [upazila, setUpazila] = useState<string[]>([])
 
 
-	function getDistrict(v:any) {
+	function getDistrict(v: string) {
 		axios.get(`https://bdapi.editboxpro.com/api/districts/${v}`)
 			.then(response => {
 				setDistrict(response.data);
@@ -42,7 +42,7 @@ function Register() {
 				console.error('There was an error!', error);
 			});
 	}
-	function getUpazilas(v:any) {
+	function getUpazilas(v: string) {
 		axios.get(`https://bdapi.editboxpro.com/api/upazilas/${v}`)
 			.then(response => {
 				setUpazila(response.data);
@@ -53,12 +53,12 @@ function Register() {
 	}
 
 
-	const handleChangeDistrict = (e: any) => {
-		const v= e.target.value;
+	const handleChangeDistrict = (e: string) => {
+		const v = e.target.value;
 		getDistrict(v);
 	}
-	const handleChangeUpazila = (e: any) => {
-		const v= e.target.value;
+	const handleChangeUpazila = (e: string) => {
+		const v = e.target.value;
 		getUpazilas(v);
 	}
 
@@ -95,31 +95,34 @@ function Register() {
 				<img src={leaf70deg} alt="leaf70deg" className='absolute right-[4%] bottom-0' />
 				<img src={leafGray} alt="leafGray" className='absolute right-[20%] bottom-0' />
 			</div>
-			<div className='w-full z-10 bg-white/30 backdrop-invert backdrop-opacity-10 rounded-lg  px-8 py-5 mr-[10%]'>
+			<div className='w-full z-10 bg-white/30 backdrop-invert backdrop-opacity-10 rounded-lg px-8 py-5 mr-[15%] '>
 
-				<h1 className='text-5xl font-[800] text-primary_300 text-center'>রেজিস্টেশন করুন</h1>
+				<h1 className='text-5xl font-[800] text-primary_300 text-center my-5'>রেজিস্টেশন করুন</h1>
 				<form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-2 items-center justify-center">
 					{/* <div className="w-full max-w-sm min-w-[200px] mt-4"> */}
 					<div className="mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">নাম*</label>
-						<input {...register("full_name")} id='full_name'
-							className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
-							type="text" placeholder="সম্পূর্ন নাম লিখুন" />
+						<input 
+							id='full_name'
+							{...register("full_name", { required: true, maxLength: 30 })}
+							placeholder={errors.full_name ? 'এই ঘরটি পূরণ করেনি' : 'সম্পূর্ন নাম লিখুন'}
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+							type="text"  />
 					</div>
 					<div className="relative mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">মোবাইল নাম্বার*</label>
-						<div className="absolute top-10.5 left-0 flex items-center pl-3">
+						<div className="absolute top-8.5 left-0 flex items-center pl-3">
 							<div className="h-full gap-[4px]  text-sm flex justify-center items-center bg-netural_100 text-slate-700 focus:outline-none">
 								<img src={Flag_of_Bangladesh} alt="Flag_of_Bangladesh" />
 								<span className='text-lg font-bold text-primary_100' >+88</span>
 								<div className="h-6 border-sm border-l border-primary_100 "></div>
 							</div>
 						</div>
-						<input
-							{...register('phoneNumber')}
+						<input 
+							{...register('phoneNumber', { required: true, minLength: 11, maxLength: 11 })}
+							placeholder={errors.phoneNumber ? '১১ সংখ্যার নাম্বর লিখেনি' : '01886627127'}
 							type="tel"
-							className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-22 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
-							placeholder="01886627127"
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-22 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							pattern="[0-9]*"
 							inputMode="numeric"
 							maxLength={11}
@@ -129,7 +132,7 @@ function Register() {
 					<div className="mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200 ">রক্তের গ্রুপ*</label>
 						<select {...register("blood_group")} id='blood_group'
-							className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''>রক্তের গ্রুপ নির্বাচন করুন</option>
 							<option value="A+" className=''>A+ (এ পজেটিভ)</option>
@@ -145,8 +148,8 @@ function Register() {
 					</div>
 					<div className="mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
-						<select {...register("division")} id='division' onChange={handleChangeDistrict}  
-							className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						<select {...register("division", { required: true })} id='division' onChange={handleChangeDistrict}
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''  >বিভাগ নির্বাচন করুন</option>
 							<option value="dhaka">ঢাকা</option>
@@ -161,26 +164,26 @@ function Register() {
 						</select>
 					</div>
 					<div className="mt-4">
-					<label className="block mb-1 text-md font-bold text-primary_200">জেলা*</label>
-						<select  {...register("district")} id='district' onChange={handleChangeUpazila}
-							className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						<label className="block mb-1 text-md font-bold text-primary_200">জেলা*</label>
+						<select  {...register("district", { required: true })} id='district' onChange={handleChangeUpazila}
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''>জেলা নির্বাচন করুন</option>
 							{
-								district.map((items, index)=>( 
+								district.map((items, index) => (
 									<option key={index} value={items?.name} className=''>{items?.name_bn}</option>
 								))
 							}
 						</select>
 					</div>
 					<div className="mt-4">
-					<label className="block mb-1 text-md font-bold text-primary_200">উপজেলা*</label>
-						<select  {...register("upazila")} id='upazila' 
-							className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						<label className="block mb-1 text-md font-bold text-primary_200">উপজেলা*</label>
+						<select  {...register("upazila", { required: true })} id='upazila'
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''>উপজেলা নির্বাচন করুন</option>
 							{
-								upazila.map((items, index)=>( 
+								upazila.map((items, index) => (
 									<option key={index} value={items?.name_bn} className=''>{items?.name_bn}</option>
 								))
 							}
@@ -189,28 +192,33 @@ function Register() {
 
 					<div className="mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">পাসওয়ার্ড*</label>
-						<input {...register("password1")} id='password1'
-							className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
-							type="password" placeholder="***********" />
+						<input {...register("password", { required: true, minLength:6 })} id='password'
+						placeholder={errors.password ? `${errors.password?.type ? 'কমপক্ষে ৬ নাম্বারের পাসওয়ার্ড লিখুন' :'পাসওয়ার্ড লিখুন'}` : '***********'}
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+							type="password"  />
 					</div>
 					<div className="mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">একই পাসওয়ার্ড*</label>
-						<input {...register("password2")} id='password2'
-							className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						<input id='confirm_password'
+							{...register("confirm_password", {
+								required: true,
+								validate: (value) => value === watch("password") || "পাসওয়ার্ড মিলে নি"
+							})}
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							type="password" placeholder="***********" />
 					</div>
-					<div className="mt-4 col-span-2">
 
+					{/* </div> */}
+					
+					<div className={errors.confirm_password ? 'h-2 inline-flex text-primary_100 font-bold':'h-2 invisible'}>{errors.confirm_password && errors.confirm_password.message}</div>
+
+					<div className="mt-4 col-span-2">
 						{/* <p className="text-primary_200 text-xs italic py-2">পাসওয়ার্ড ভুলে গেছেন?  <span className='text-primary_300 font-bold underline'>রিসেট করুন</span></p> */}
-						<button className="w-full h-14 items-center bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100">
+						<button className="w-full h-10 flex justify-center items-center bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100">
 							সাবমিট
 						</button>
 						<p className="text-primary_200 text-xs italic py-2 text-center">ইতিমধ্যে একাউন্ট আছে? <span className='text-primary_300 font-bold underline'>লগইন</span></p>
 					</div>
-					{/* </div> */}
-					{errors.phoneNumber && <span className="text-red-500">This field is required</span>}
-					{errors.password1 && <span className="text-red-500">This field is required</span>}
-					{errors.password1?.type === "minLength" && <span className="text-red-500">This field is required to be at least 6 characters</span>}
 				</form>
 			</div>
 		</div >
