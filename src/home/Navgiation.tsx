@@ -1,5 +1,6 @@
 import React from 'react'
 import bloodBankLogo from '../assets/blood bank logo.svg'
+import { Link } from 'react-router'
 
 function Navgiation() {
 	return (
@@ -11,7 +12,7 @@ function Navgiation() {
 			</a>
 
 			<ul className='flex gap-10 items-center w-1/4 font-bold text-lg text-primary_300  [&>li:hover]:text-primary_100 [&>li:hover]:underline'>
-				<li>হোম</li>
+				<Link to=''>হোম</Link>
 				<li>ভোলান্টিযারিং</li>
 				<li>যোগাযোগ</li>
 			</ul>

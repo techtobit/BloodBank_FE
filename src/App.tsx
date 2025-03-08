@@ -10,10 +10,10 @@ function App() {
   return (
     <section className='relative'>
     <Navgiation/>
-    <HeroPage/>
-    <DonnarList/>
+    {/* <HeroPage/> */}
+    {/* <DonnarList/> */}
     <Routes>
-      {/* <Route path="/" element={<HeroPage />} /> */}
+      <Route path="/" element={<HeroPage />} />
       <Route path="/register" element={<Register />} />
     </Routes>
     </section>
