@@ -10,7 +10,7 @@ function App() {
 
   return (
     <section className='relative'>
-    <Navgiation/>
+    {/* <Navgiation/> */}
 
     <Routes>
       <Route path="/" element={<HeroPage />} />
