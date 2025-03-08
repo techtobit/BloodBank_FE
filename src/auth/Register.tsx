@@ -80,7 +80,7 @@ function Register() {
 	return (
 
 		<div
-			className="h-screen w-full netural_300 grid grid-cols-1 md:grid-cols-2 place-items-center">
+			className="h-screen w-full bg-netural_300 grid grid-cols-1 md:grid-cols-2 place-items-center">
 			<div className='reletive'>
 				<img src={roundShape} alt="roundShape" className='absolute left-[1%] bottom-0' />
 				<img src={donar} alt="donar_blob" className='absolute w-[550px] left-[-2%] bottom-[13%]' />
