@@ -4,7 +4,7 @@ import appStore from '../assets/app_store.svg';
 
 function Footer() {
 	return (
-		<>
+		<footer>
 		<div className='w-full bg-secondary_300 grid grid-cols-3 justify-items-center gap-10 p-10'>
 			<div>
 				<h4 className='text-base font-bold text-primary_300 pb-2'>যোগাযোগ</h4>
@@ -28,7 +28,7 @@ function Footer() {
 			<a href="https://ashrafuddin.vercel.app/" target='_blank'>তৈরী করেছেন - <span className='underline'>আশরাফ উদ্দীন</span>  | </a>
 			<p className=''> &copy; কপিরাইট ২০২৫ | All Rights Reserved</p>
 		</div>
-		</>
+		</footer>
 	)
 }
 
