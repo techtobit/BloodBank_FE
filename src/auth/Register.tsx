@@ -134,7 +134,7 @@ function Register() {
 							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''>রক্তের গ্রুপ নির্বাচন করুন</option>
-							<option value="A+" className=''>A+ (এ পজেটিভ)</option>
+							<option value="A+ (এ পজেটিভ)" className=''>A+ (এ পজেটিভ)</option>
 							<option value="A-">A- (এ নেগেটিভ)</option>
 							<option value="B+">B+ (বি পজেটিভ)</option>
 							<option value="B-">B- (বি নেগেটিভ)</option>

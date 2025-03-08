@@ -11,10 +11,13 @@ function App() {
   return (
     <section className='relative'>
     <Navgiation/>
+
     <Routes>
       <Route path="/" element={<HeroPage />} />
+      {/* <Route path="/" element={<DonnarList />} /> */}
       <Route path="/register" element={<Register />} />
     </Routes>
+    <DonnarList/>
     <Footer/>
     </section>
   )
