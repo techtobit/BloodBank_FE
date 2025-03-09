@@ -131,21 +131,23 @@ function DonnarList() {
 				</div>
 			</div>
 			<hr className="border-primary_300 dark:border-primary_300"></hr>
-			<div className='grid grid-cols-4 px-4 justify-center items-center'>
-			{
-				donars.map((donar, index) => (
-					<div key={index} className='flex w-82 h-30 mt-10  bg-white/65 gap-4 justify-center items-center rounded-lg shadow-lg  '>
-						<img className='rounded-lg' src={donar.avatar} alt="" />
-						<div>
-							<p className='flex items-center gap-2 '><BiDroplet /> <span className='bg-primary_200 text-netural_300 px-2'>{donar.blood_group}</span></p>
-							<h4 className='flex items-center gap-2'><BiSolidUser /> {donar.name}</h4>
-							<p className='flex items-center gap-2 text-xm font-extralight'><BiSolidLocationPlus />{donar.address}</p>
-							<p className='flex items-center gap-2'><BiDonateHeart /> {donar.donation_count} বার রক্ত দান</p>
-							<p className='flex items-center gap-2'><BiSolidPhone /> {donar.phone}</p>
+			<div className='grid grid-cols-4 mt-10 px-5 gap-4 justify-items-center items-center'>
+				{
+					donars.map((donar, index) => (
+						<div key={index} className='flex w-75 h-30  bg-white/65 justify-evenly items-center rounded-lg shadow-lg  '>
+							<div>
+								<img className='rounded-lg ' src={donar.avatar} alt="" />
+							</div>
+							<div>
+								<p className='flex items-center gap-2 '><BiDroplet /> <span className='bg-primary_200 text-netural_300 px-2'>{donar.blood_group}</span></p>
+								<h4 className='flex items-center gap-2'><BiSolidUser /> {donar.name}</h4>
+								<p className='flex items-center gap-2 text-xs font-extralight'><BiSolidLocationPlus />{donar.address}</p>
+								<p className='flex items-center gap-2 text-sm'><BiDonateHeart /> {donar.donation_count} বার রক্ত দান</p>
+								<p className='flex items-center gap-2 text-sm'><BiSolidPhone /> {donar.phone}</p>
+							</div>
 						</div>
-					</div>
-				))
-			}
+					))
+				}
 			</div>
 		</section>
 	)

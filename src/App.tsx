@@ -9,7 +9,7 @@ import Footer from './home/Footer'
 function App() {
 
   return (
-    <section className='relative'>
+    <section className=''>
     {/* <Navgiation/> */}
 
     <Routes>
