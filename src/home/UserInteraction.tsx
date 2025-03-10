@@ -7,7 +7,9 @@ function UserInteraction() {
 	const [isActiveBtn, setIsActiveBtn] = useState<boolean>(true)
 	const [checkedBox, setCheckedBox] = useState<string | null>(null);
 
-
+ 	const onSubmit = (data: Inputs) => {
+		console.log(data);
+	}
 
 
 	return (
@@ -20,7 +22,7 @@ function UserInteraction() {
 				isActiveBtn ?
 				<div className='bg-netural_300/30 rounded-lg p-10'>
 				<h4 className='text-2xl font-bold text-primary_300'>দাতা/গ্রহিতাকে রিপোর্ট  করুন</h4>
-				<form className="grid grid-cols-1 gap-5 items-center justify-center">
+				<form  onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-5 items-center justify-center">
 					<div className='pt-2'>
 						<label className="text-primary_300 flex items-center gap-2">
 							<input
@@ -30,7 +32,7 @@ function UserInteraction() {
 								checked={checkedBox === "donar"}
 								{...register('report_to_donar', {
 									required: true,
-									onChange: () => setCheckedBox(checkedBox === "donar" ? null : "donar")
+									onChange: () => setCheckedBox(checkedBox === "donar" ? null : "donar"),
 								})}
 								disabled={checkedBox === "seeker"}
 								className="accent-primary_100 hover:accent-netural_100 disabled:text-gray-600 disabled:cursor-not-allowed"
@@ -46,7 +48,7 @@ function UserInteraction() {
 								checked={checkedBox === "seeker"}
 								{...register('report_to_seeker', {
 									required: true,
-									onChange: () => setCheckedBox(checkedBox === "seeker" ? null : "seeker")
+									onChange: () => setCheckedBox(checkedBox === "seeker" ? null : "seeker"),
 								})}
 								disabled={checkedBox === "donar"}
 								className="accent-primary_100 hover:accent-netural_100 disabled:text-gray-600 disabled:cursor-not-allowed"
@@ -76,12 +78,18 @@ function UserInteraction() {
 						maxLength={11}
 						id="phone_number"
 					/>
+
+
+					<div className='overflow-y-auto h-20'>
 					<textarea
 						id='report_subject'
-						{...register("full_name", { required: true, maxLength: 110 })}
-						placeholder={errors.full_name ? 'এই ঘরটি পূরণ করেনি' : 'বিষয়'}
-						className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md p-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						maxLength={150}
+						{...register("report_subject", { required: true, maxLength: 110 })}
+						placeholder={errors.report_subject ? 'এই ঘরটি পূরণ করেনি' : 'বিষয়'}
+						className="w-full h-18 bg-netural_100 placeholder:text-gray  text-primary_100 text-lg font-bold border border-primary_300 rounded-md p-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					/>
+					</div>
+					{(errors.report_to_donar && errors.report_to_seeker) && <p className='text-black bg-yellow-500 text-xs'>চেক বক্স পূরণ করেনি</p>}
 					<button className="w-full h-14 flex justify-center items-center bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100">
 						সাবমিট
 					</button>
