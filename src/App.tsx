@@ -5,6 +5,7 @@ import HeroPage from './home/HeroPage'
 import Navgiation from './home/Navgiation'
 import DonnarList from './home/DonnarList'
 import Footer from './home/Footer'
+import UserInteraction from './home/UserInteraction'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       {/* <Route path="/" element={<DonnarList />} /> */}
       <Route path="/register" element={<Register />} />
     </Routes>
+    <UserInteraction/>
     <DonnarList/>
     <Footer/>
     </section>
