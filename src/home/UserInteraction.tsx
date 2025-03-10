@@ -85,7 +85,7 @@ function UserInteraction() {
 						id='report_subject'
 						maxLength={150}
 						{...register("report_subject", { required: true, maxLength: 110 })}
-						placeholder={errors.report_subject ? 'এই ঘরটি পূরণ করেনি' : 'বিষয়'}
+						placeholder={errors.report_subject ? 'এই ঘরটি পূরণ করেনি' : 'রিপোর্টের কারন'}
 						className="w-full h-18 bg-netural_100 placeholder:text-gray  text-primary_100 text-lg font-bold border border-primary_300 rounded-md p-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					/>
 					</div>
