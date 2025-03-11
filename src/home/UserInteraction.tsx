@@ -13,7 +13,7 @@ function UserInteraction() {
 
 
 	return (
-		<div className='w-full h-screen bg-secondary_300 grid grid-cols-1 md:grid-cols-2 justify-center justify-items-center items-center gap-4'>
+		<div className='w-full min-h-screen bg-secondary_300 grid grid-cols-1 md:grid-cols-2 justify-center justify-items-center items-center gap-4'>
 			<div className='flex flex-col justify-center items-center gap-4'>
 				<button onClick={() => setIsActiveBtn(true)} className={`w-80 h-20 text-xl font-bold border rounded-lg hover:bg-primary_100 hover:text-netural_300 ${isActiveBtn ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300"} `}>রিপোর্ট করুন</button>
 				<button onClick={() => setIsActiveBtn(false)} className={`w-80 h-20 text-xl font-bold border rounded-lg hover:bg-primary_100 hover:text-netural_300 ${isActiveBtn ? "bg-netural_100 text-primary_300" : " text-netural_100 bg-primary_300 "} `}>মাতামত দিন</button>
