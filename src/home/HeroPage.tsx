@@ -10,7 +10,7 @@ function HeroPage() {
 
 				<a href="#" className='flex items-center'>
 					<img src={bloodBankLogo} className='w-[60%]' alt="blood bank logo" />
-					<p className='text-lg/5 w-4 text-primary_300 font-bold'>ব্লাড ব্যাংক</p>
+					<p className='!text-lg/5 w-4 text-primary_300 font-bold'>ব্লাড ব্যাংক</p>
 				</a>
 
 				<ul className='flex gap-10 items-center w-1/4 font-bold text-lg text-primary_300'>
