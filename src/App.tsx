@@ -1,24 +1,19 @@
 import { Route, Routes } from 'react-router'
 import './App.css'
 import Register from './auth/Register'
-import HeroPage from './home/HeroPage'
-import DonnarList from './home/DonnarList'
-import Footer from './home/Footer'
-import UserInteraction from './home/UserInteraction'
 import Login from './auth/Login'
+import Outlet from './home/Outlet'
+import Footer from './home/Footer'
 
 function App() {
 
   return (
     <section className=''>
       <Routes>
-        <Route path="/" element={<HeroPage />} />
-        {/* <Route path="/" element={<DonnarList />} /> */}
+        <Route index element={<Outlet/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
-      <DonnarList />
-      <UserInteraction />
       <Footer />
     </section>
   )
