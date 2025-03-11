@@ -10,17 +10,15 @@ function App() {
 
   return (
     <section className=''>
-
+      <Register />
       <Routes>
         <Route path="/" element={<HeroPage />} />
         {/* <Route path="/" element={<DonnarList />} /> */}
-        <Route path="/register" element={<Register />} />
+        {/* <Route path="/" element={<UserInteraction />} /> */}
+        {/* <Route path="/register" element={<Register />} /> */}
       </Routes>
       <DonnarList />
       <UserInteraction />
-      <Routes>
-        <Route path="/register" element={<Register />} />
-      </Routes>
       <Footer />
     </section>
   )

@@ -96,16 +96,15 @@ function Register() {
 			</div>
 			<div className='w-full z-10 bg-white/30 backdrop-invert backdrop-opacity-10 rounded-lg px-5 md:px-8 py-5 md:m-0 mr-0 md:mr-[15%]  '>
 
-				<h1 className='text-2xl md:text-5xl font-[800] text-primary_300 text-center my-5'>রেজিস্টেশন করুন</h1>
+				<h1 className='font-[800] text-primary_300 text-center my-5'>রেজিস্টেশন করুন</h1>
 				<form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1  md:grid-cols-2 gap-2 items-center justify-center">
-					{/* <div className="w-full max-w-sm min-w-[200px] mt-4"> */}
 					<div className="md:mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">নাম*</label>
 						<input 
 							id='full_name'
 							{...register("full_name", { required: true, maxLength: 30 })}
 							placeholder={errors.full_name ? 'এই ঘরটি পূরণ করেনি' : 'সম্পূর্ন নাম লিখুন'}
-							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							type="text"  />
 					</div>
 					<div className="relative md:mt-4">
@@ -121,7 +120,7 @@ function Register() {
 							{...register('phoneNumber', { required: true, minLength: 11, maxLength: 11 })}
 							placeholder={errors.phoneNumber ? '১১ সংখ্যার নাম্বর লিখেনি' : '01886627127'}
 							type="tel"
-							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-22 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-22  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							pattern="[0-9]*"
 							inputMode="numeric"
 							maxLength={11}
@@ -131,7 +130,7 @@ function Register() {
 					<div className="md:mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200 ">রক্তের গ্রুপ*</label>
 						<select {...register("blood_group")} id='blood_group'
-							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''>রক্তের গ্রুপ নির্বাচন করুন</option>
 							<option value="A+ (এ পজেটিভ)" className=''>A+ (এ পজেটিভ)</option>
@@ -148,7 +147,7 @@ function Register() {
 					<div className="md:mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
 						<select {...register("division", { required: true })} id='division' onChange={handleChangeDistrict}
-							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''  >বিভাগ নির্বাচন করুন</option>
 							<option value="dhaka">ঢাকা</option>
@@ -165,7 +164,7 @@ function Register() {
 					<div className="md:mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">জেলা*</label>
 						<select  {...register("district", { required: true })} id='district' onChange={handleChangeUpazila}
-							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''>জেলা নির্বাচন করুন</option>
 							{
@@ -178,7 +177,7 @@ function Register() {
 					<div className="md:mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">উপজেলা*</label>
 						<select  {...register("upazila", { required: true })} id='upazila'
-							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''>উপজেলা নির্বাচন করুন</option>
 							{
@@ -193,7 +192,7 @@ function Register() {
 						<label className="block mb-1 text-md font-bold text-primary_200">পাসওয়ার্ড*</label>
 						<input {...register("password", { required: true, minLength:6 })} id='password'
 						placeholder={errors.password ? `${errors.password?.type ? 'কমপক্ষে ৬ নাম্বারের পাসওয়ার্ড লিখুন' :'পাসওয়ার্ড লিখুন'}` : '***********'}
-							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							type="password"  />
 					</div>
 					<div className="md:mt-4">
@@ -203,17 +202,14 @@ function Register() {
 								required: true,
 								validate: (value) => value === watch("password") || "পাসওয়ার্ড মিলে নি"
 							})}
-							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							type="password" placeholder="***********" />
 					</div>
-
-					{/* </div> */}
 					
-					<div className={errors.confirm_password ? 'h-2 inline-flex text-primary_100 font-bold':'h-2 invisible'}>{errors.confirm_password && errors.confirm_password.message}</div>
+					<div className={errors.confirm_password ? 'col-span-1 md:col-span-2 pl-2 inline-flex text-primary_100 bg-yellow-500 font-bold':'invisible'}>{errors.confirm_password && errors.confirm_password.message}</div>
 
 					<div className="mt-4 col-span-1 md:col-span-2">
-						{/* <p className="text-primary_200 text-xs italic py-2">পাসওয়ার্ড ভুলে গেছেন?  <span className='text-primary_300 font-bold underline'>রিসেট করুন</span></p> */}
-						<button className="w-full h-10 flex justify-center items-center bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100">
+						<button className="w-full h-10 flex justify-center items-center bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100">
 							সাবমিট
 						</button>
 						<p className="text-primary_200 text-xs italic py-2 text-center">ইতিমধ্যে একাউন্ট আছে? <span className='text-primary_300 font-bold underline'>লগইন</span></p>

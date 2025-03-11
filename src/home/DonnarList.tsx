@@ -139,11 +139,11 @@ function DonnarList() {
 								<img className='rounded-lg ' src={donar.avatar} alt="" />
 							</div>
 							<div>
-								<p className='flex items-center gap-2 '><BiDroplet /> <span className='bg-primary_200 text-netural_300 px-2'>{donar.blood_group}</span></p>
-								<h4 className='flex items-center gap-2'><BiSolidUser /> {donar.name}</h4>
+								<p className='font-semibold flex items-center gap-2 '><BiDroplet /> <span className='bg-primary_200 text-netural_300 px-2'>{donar.blood_group}</span></p>
+								<h5 className='font-semibold flex items-center gap-2'><BiSolidUser /> {donar.name}</h5>
 								<p className='flex items-center gap-2 text-xs font-extralight'><BiSolidLocationPlus />{donar.address}</p>
 								<p className='flex items-center gap-2 text-sm'><BiDonateHeart /> {donar.donation_count} বার রক্ত দান</p>
-								<p className='flex items-center gap-2 text-sm'><BiSolidPhone /> {donar.phone}</p>
+								<p className='flex items-center gap-2 text-sm'><BiSolidPhone /> <a href={`tel:${donar.phone}`}>{donar.phone}</a></p>
 							</div>
 						</div>
 					))
