@@ -72,7 +72,7 @@ function DonnarList() {
 				<div className="">
 					<label className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
 					<select {...register("division", { required: true })} id='division' onChange={handleChangeDistrict}
-						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					>
 						<option value="" disabled selected className=''  >বিভাগ নির্বাচন করুন</option>
 						<option value="dhaka">ঢাকা</option>
@@ -89,7 +89,7 @@ function DonnarList() {
 				<div className="">
 					<label className="block mb-1 text-md font-bold text-primary_200">জেলা*</label>
 					<select  {...register("district", { required: true })} id='district' onChange={handleChangeUpazila}
-						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					>
 						<option value="" disabled selected className=''>জেলা নির্বাচন করুন</option>
 						{
@@ -102,7 +102,7 @@ function DonnarList() {
 				<div className="">
 					<label className="block mb-1 text-md font-bold text-primary_200">উপজেলা*</label>
 					<select  {...register("upazila", { required: true })} id='upazila'
-						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					>
 						<option value="" disabled selected className=''>উপজেলা নির্বাচন করুন</option>
 						{
@@ -115,7 +115,7 @@ function DonnarList() {
 				<div className="">
 					<label className="block mb-1 text-md font-bold text-primary_200 ">রক্তের গ্রুপ*</label>
 					<select {...register("blood_group")} id='blood_group'
-						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					>
 						<option value="" disabled selected className=''>রক্তের গ্রুপ নির্বাচন করুন</option>
 						<option value="A+ (এ পজেটিভ)" className=''>A+ (এ পজেটিভ)</option>
