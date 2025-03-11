@@ -5,7 +5,7 @@ import bloodBankLogo from '../assets/blood bank logo.svg'
 
 function HeroPage() {
 	return (
-		<section className='w-full h-screen bg-netural_300 '>
+		<section className='w-full min-h-screen bg-netural_300 '>
 			<nav className='absolute w-full flex pl-14 pt-10 gap-30 items-center bg-transparent z-10'>
 
 				<a href="#" className='flex items-center'>

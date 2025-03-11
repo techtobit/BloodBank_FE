@@ -8,8 +8,8 @@ export default function Outlet() {
 	return (
 		<>
 			<HeroPage/>
-			<DonnarList/>
-			<UserInteraction/>
+			{/* <DonnarList/> */}
+			{/* <UserInteraction/> */}
 		</>
 	)
 }
