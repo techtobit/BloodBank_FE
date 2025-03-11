@@ -11,6 +11,7 @@ import plus from '../assets/svg/plus.svg';
 import uShape from '../assets/svg/uShape.svg';
 import lShape from '../assets/svg/lShape.svg';
 import { useState } from 'react';
+import { Link } from 'react-router';
 
 
 
@@ -208,11 +209,11 @@ function Register() {
 					
 					<div className={errors.confirm_password ? 'col-span-1 md:col-span-2 pl-2 inline-flex text-primary_100 bg-yellow-500 font-bold':'invisible'}>{errors.confirm_password && errors.confirm_password.message}</div>
 
-					<div className="mt-4 col-span-1 md:col-span-2">
-						<button className="w-full h-10 flex justify-center items-center bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100">
+					<div className="mt-4 col-span-1 md:col-span-2 text-center">
+						<button className="w-full h-10 flex justify-center items-center bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md transition duration-300 ease focus:outline-none focus:border-primary_100">
 							সাবমিট
 						</button>
-						<p className="text-primary_200 text-xs italic py-2 text-center">ইতিমধ্যে একাউন্ট আছে? <span className='text-primary_300 font-bold underline'>লগইন</span></p>
+						<Link to='/login' className="text-primary_200 text-xs italic ">ইতিমধ্যে একাউন্ট আছে? <span className='text-primary_300 font-bold underline'>লগইন</span></Link>
 					</div>
 				</form>
 			</div>
