@@ -7,8 +7,8 @@ import UserInteraction from './UserInteraction'
 export default function Outlet() {
 	return (
 		<>
-			{/* <HeroPage/> */}
-			{/* <DonnarList/> */}
+			<HeroPage/>
+			<DonnarList/>
 			<UserInteraction/>
 		</>
 	)

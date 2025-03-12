@@ -18,7 +18,7 @@ function Footer() {
 				<p>রক্ত গৃহিতা হিসাবে</p>
 				<p>ডেবলপার টিম মেম্ব‌‌‌ার হিসাবে</p>
 			</div>
-			<div className='hidden md:flex'>
+			<div className='hidden md:flex flex-col'>
 				<h5 className='font-bold text-primary_300 pb-2'>অন্যান প্ল্যাটফর্ম </h5>
 				<img src={appStore} alt="app store" className='w-34' />
 				<img src={playStore} alt="play store" className='w-34' />

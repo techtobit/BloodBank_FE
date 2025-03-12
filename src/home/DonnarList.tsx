@@ -66,9 +66,9 @@ function DonnarList() {
 				backgroundPosition: 'center',
 				opacity: 1.5
 			}}
-			className='w-full h-screen bg-netural_300'>
+			className='w-full min-h-screen bg-netural_300'>
 			{/* <h2 className='text-3xl text-center py-4 font-bold text-primary_200'>রক্তদাতাদের তালিকা</h2> */}
-			<div className='flex gap-4 py-10 items-center justify-center'>
+			<div className='grid grid-cols-2 md:grid-cols-4  gap-4 p-10 items-center justify-center'>
 				<div className="">
 					<label className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
 					<select {...register("division", { required: true })} id='division' onChange={handleChangeDistrict}
@@ -131,7 +131,7 @@ function DonnarList() {
 				</div>
 			</div>
 			<hr className="border-primary_300 dark:border-primary_300"></hr>
-			<div className='grid grid-cols-4 mt-10 px-5 gap-4 justify-items-center items-center'>
+			<div className='grid grid-cols-1 md:grid-cols-4 p-10 gap-4 justify-items-center items-center'>
 				{
 					donars.map((donar, index) => (
 						<div key={index} className='flex w-75 h-30  bg-white/65 justify-evenly items-center rounded-lg shadow-lg  '>
