@@ -19,7 +19,7 @@ function DonnarList() {
 	const [donars, setDonars] = useState<string[]>([])
 
 	useEffect(() => {
-		fetch('./data.json')
+		fetch('./data1.json')
 			.then(response => response.json())
 			.then(data => {
 				setDonars(data)
@@ -107,7 +107,7 @@ function DonnarList() {
 						<option value="" disabled selected className=''>উপজেলা নির্বাচন করুন</option>
 						{
 							upazila.map((items, index) => (
-								<option key={index} value={items?.name_bn} className=''>{items?.name_bn}</option>
+								<option key={index} value={items?.name} className=''>{items?.name_bn}</option>
 							))
 						}
 					</select>
@@ -140,10 +140,10 @@ function DonnarList() {
 							</div>
 							<div>
 								<p className='font-semibold flex items-center gap-2 '><BiDroplet /> <span className='bg-primary_200 text-netural_300 px-2'>{donar.blood_group}</span></p>
-								<h5 className='font-semibold flex items-center gap-2'><BiSolidUser /> {donar.name}</h5>
-								<p className='flex items-center gap-2 text-xs font-extralight'><BiSolidLocationPlus />{donar.address}</p>
-								<p className='flex items-center gap-2 text-sm'><BiDonateHeart /> {donar.donation_count} বার রক্ত দান</p>
-								<p className='flex items-center gap-2 text-sm'><BiSolidPhone /> <a href={`tel:${donar.phone}`}>{donar.phone}</a></p>
+								<h5 className='font-semibold flex items-center gap-2'><BiSolidUser /> {donar.full_name}</h5>
+								<p className='flex items-center gap-2 text-xs font-extralight'><BiSolidLocationPlus />{donar.division}</p>
+								{/* <p className='flex items-center gap-2 text-sm'><BiDonateHeart /> {donar.donation_count} বার রক্ত দান</p> */}
+								<p className='flex items-center gap-2 text-sm'><BiSolidPhone /> <a href={`tel:${donar.phone_number}`}>{donar.phone_number}</a></p>
 							</div>
 						</div>
 					))

@@ -66,8 +66,9 @@ function Register() {
 
 
 	const onSubmit: SubmitHandler<Inputs> = data => {
-		console.log(data)
-		axios.post('http://127.0.0.1:8000/user/register/', data)
+		const {confirm_password, ...rest } = data;
+		console.log(rest)
+		axios.post('http://127.0.0.1:8000/register/', rest)
 			.then(response => {
 				console.log(response.data);
 
@@ -183,7 +184,7 @@ function Register() {
 							<option value="" disabled selected className=''>উপজেলা নির্বাচন করুন</option>
 							{
 								upazila.map((items, index) => (
-									<option key={index} value={items?.name_bn} className=''>{items?.name_bn}</option>
+									<option key={index} value={items?.name} className=''>{items?.name_bn}</option>
 								))
 							}
 						</select>
