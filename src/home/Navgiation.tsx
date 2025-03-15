@@ -2,7 +2,7 @@ import React from 'react'
 import bloodBankLogo from '../assets/blood bank logo.svg'
 import { Link } from 'react-router'
 
-function Navgiation() {
+function Navgiation():React.ReactElement {
 	return (
 		<nav className='fixed w-full flex pl-14 pt-10 gap-30 items-center bg-transparent z-10'>
 			

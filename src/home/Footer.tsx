@@ -2,7 +2,7 @@ import React from 'react'
 import playStore from '../assets/play_store.svg';
 import appStore from '../assets/app_store.svg';
 
-function Footer() {
+function Footer():React.ReactElement {
 	return (
 		<footer>
 		<div className='w-full bg-secondary_100 grid grid-cols-1 md:grid-cols-3 justify-items-center gap-10 p-10'>

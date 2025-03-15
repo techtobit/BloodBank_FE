@@ -1,13 +1,14 @@
 
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
+import {ReportType, FeedbackType} from '../utils/type'
 
-function UserInteraction() {
-	const { register, watch, handleSubmit, formState: { errors } } = useForm<Inputs>();
+function UserInteraction():React.ReactElement {
+	const { register, handleSubmit, formState: { errors } } = useForm<any[]>();
 	const [isActiveBtn, setIsActiveBtn] = useState<boolean>(true)
 	const [checkedBox, setCheckedBox] = useState<string | null>(null);
 
-	const onSubmit = (data: Inputs) => {
+	const onSubmit = (data: FeedbackType) => {
 		console.log(data);
 	}
 

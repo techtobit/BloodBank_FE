@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import heroBlob from '../assets/bloodTube.svg'
 import bloodBankLogo from '../assets/blood bank logo.svg'
 
-function HeroPage() {
+function HeroPage():React.ReactElement {
 	return (
 		<section className='w-full min-h-screen bg-netural_300 '>
 			<div className='grid grid-cols-1 md:grid-cols-2 '>

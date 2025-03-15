@@ -1,3 +1,4 @@
+import { Rep } from './type';
 type BaseInputType = {
 	phone_number: number,
 	password: string,
@@ -37,5 +38,19 @@ type BaseGeoType ={
 export type DivisionType = BaseGeoType
 export type DistrictType = BaseGeoType
 export type UpazilaType = BaseGeoType
+
+
+export type FeedbackType = {
+	feedbacker_name: string,
+	feedback_subject: string,
+	feedback_details: string,
+}
+export type ReportType = {
+	report_to_donar: boolean,
+	report_to_seeker: boolean,
+	own_phone_number: number,
+	reporting_phone_number: number,
+	reporting_details: string
+}
 
 

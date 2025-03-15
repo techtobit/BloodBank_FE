@@ -4,7 +4,7 @@ import DonnarList from './DonnarList'
 import UserInteraction from './UserInteraction'
 
 
-export default function Outlet() {
+export default function Outlet():React.ReactElement {
 	return (
 		<>
 			<HeroPage/>
