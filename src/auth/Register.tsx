@@ -184,7 +184,7 @@ function Register() {
 							<option value="" disabled selected className=''>উপজেলা নির্বাচন করুন</option>
 							{
 								upazila.map((items, index) => (
-									<option key={index} value={items?.name} className=''>{items?.name_bn}</option>
+									<option key={index} value={items?.name}>{items?.name_bn}</option>
 								))
 							}
 						</select>
