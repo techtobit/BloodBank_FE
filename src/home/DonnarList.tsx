@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { BiDroplet, BiSolidUser, BiSolidLocationPlus, BiDonateHeart, BiSolidPhone } from "react-icons/bi";
+import { BiDroplet, BiSolidUser, BiSolidLocationPlus, BiSolidPhone } from "react-icons/bi";
 import donnarBgImg from '../assets/map_hands.svg'
-import avatar from '../assets/person.png'
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { DonarSearchType, DonarType, DistrictType,UpazilaType } from '../utils/type';
 
-interface Inputs {
-	division: string;
-	district: string;
-	upazila: string;
-	blood_group: string;
-}
 
 function DonnarList() {
-	const { register, watch, handleSubmit, formState: { errors } } = useForm<Inputs>();
-	const [district, setDistrict] = useState<string[]>([])
-	const [upazila, setUpazila] = useState<string[]>([])
-	const [donars, setDonars] = useState<string[]>([])
+	const { register, watch, handleSubmit, formState: { errors } } = useForm< DonarSearchType>();
+	const [district, setDistrict] = useState<DistrictType[]>([])
+	const [upazila, setUpazila] = useState<UpazilaType[]>([])
+	const [donars, setDonars] = useState<DonarType[]>([])
 
 	useEffect(() => {
 		fetch('./data1.json')
