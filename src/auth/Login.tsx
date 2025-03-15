@@ -44,8 +44,8 @@ function Login():React.ReactElement {
 							</div>
 						</div>
 						<input
-							{...register('phoneNumber', { required: true, minLength: 11, maxLength: 11 })}
-							placeholder={errors.phoneNumber ? '১১ সংখ্যার নাম্বর লিখেনি' : '01886627127'}
+							{...register('phone_number', { required: true, minLength: 11, maxLength: 11 })}
+							placeholder={errors.phone_number ? '১১ সংখ্যার নাম্বর লিখেনি' : '01886627127'}
 							type="tel"
 							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-22  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							pattern="[0-9]*"

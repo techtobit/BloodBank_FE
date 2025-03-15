@@ -1,5 +1,5 @@
 type BaseInputType = {
-	phoneNumber: number,
+	phone_number: number,
 	password: string,
 }
 
