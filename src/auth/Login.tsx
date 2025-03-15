@@ -1,7 +1,5 @@
 import React from 'react'
 import Flag_of_Bangladesh from '../assets/Flag_of_Bangladesh.svg';
-import { useForm } from 'react-hook-form';
-import donar from '../assets/donar.svg';
 import roundShape from '../assets/svg/round.svg';
 import leaf from '../assets/svg/leaf.svg';
 import leaf70deg from '../assets/svg/leaf70deg.svg';
@@ -11,10 +9,14 @@ import plus from '../assets/svg/plus.svg';
 import uShape from '../assets/svg/uShape.svg';
 import lShape from '../assets/svg/lShape.svg';
 import { Link } from 'react-router';
+import { useForm } from 'react-hook-form';
+import { LogInInputType } from '../utils/type';
 
-function Login() {
-	const { register, watch, handleSubmit, formState: { errors } } = useForm<Inputs>();
-	const onSubmit = (data: any) => { }
+function Login():React.ReactElement {
+	const { register, handleSubmit, formState: { errors } } = useForm<LogInInputType>();
+	const onSubmit = (data:LogInInputType) => {
+		console.log(data);
+	}
 	return (
 		<div className='w-full h-screen bg-netural_300 flex justify-center items-center'>
 			<div className='reletive'>

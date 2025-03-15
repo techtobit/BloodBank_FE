@@ -12,26 +12,14 @@ import uShape from '../assets/svg/uShape.svg';
 import lShape from '../assets/svg/lShape.svg';
 import { useState } from 'react';
 import { Link } from 'react-router';
-
-
-
-type Inputs = {
-	full_name: string,
-	phoneNumber: number,
-	blood_group: string,
-	division: string,
-	district: string,
-	upazila: string,
-	password: string,
-	confirm_password: string
-}
+import { RegisterInputType, DistrictType, UpazilaType } from '../utils/type';
 
 
 function Register() {
 
-	const { register, watch, handleSubmit, formState: { errors } } = useForm<Inputs>();
-	const [district, setDistrict] = useState<string[]>([])
-	const [upazila, setUpazila] = useState<string[]>([])
+	const { register, watch, handleSubmit, formState: { errors } } = useForm< RegisterInputType>();
+	const [district, setDistrict] = useState<DistrictType[]>([])
+	const [upazila, setUpazila] = useState<UpazilaType[]>([])
 
 
 	function getDistrict(v: string) {
@@ -65,8 +53,7 @@ function Register() {
 
 
 
-	const onSubmit: SubmitHandler<Inputs> = data => {
-		const {confirm_password, ...rest } = data;
+	const onSubmit: SubmitHandler< RegisterInputType> = ({ confirm_password: _, ...rest})=> {
 		console.log(rest)
 		axios.post('http://127.0.0.1:8000/register/', rest)
 			.then(response => {
