@@ -3,14 +3,24 @@ import { BiDroplet, BiSolidUser, BiSolidLocationPlus, BiSolidPhone } from "react
 import donnarBgImg from '../assets/map_hands.svg'
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { DonarSearchType, DonarType, DistrictType,UpazilaType } from '../utils/type';
+import { DonarSearchType, DonarType, DistrictType, UpazilaType } from '../utils/type';
+import useGeoDetails from '../hook/useGeoDetails';
 
 
 function DonnarList() {
-	const { register, watch, handleSubmit, formState: { errors } } = useForm< DonarSearchType>();
-	const [district, setDistrict] = useState<DistrictType[]>([])
-	const [upazila, setUpazila] = useState<UpazilaType[]>([])
+	const { register, watch, handleSubmit, formState: { errors } } = useForm<DonarSearchType>();
+	const [districtName, setDistrictName] = useState<string>()
+	const [upazilaName, setUpazilaName] = useState<string>()
 	const [donars, setDonars] = useState<DonarType[]>([])
+
+	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const value = e.target.value;
+		const name = e.target.name;
+		setDistrictName(name);
+		setUpazilaName(value)
+
+	}
+	const [district, upazila] = useGeoDetails(districtName, upazilaName)
 
 	useEffect(() => {
 		fetch('./data1.json')
@@ -20,31 +30,6 @@ function DonnarList() {
 			})
 	}, [])
 
-
-
-
-	function getGeoDetails(v: string, name:string ) {
-		axios.get(`https://bdapi.editboxpro.com/api/${name}/${v}`)
-			.then(response => {
-				if (name==='districts'){
-					setDistrict(response.data);
-				}
-				else if (name==='upazilas'){
-					setUpazila(response.data);
-				}
-			})
-			.catch(error => {
-				console.error('There was an error!', error);
-			});
-	}
-
-
-	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const value = e.target.value;
-		const name = e.target.name;
-		getGeoDetails(value, name) ;
-		
-	}
 
 	return (
 		<section
