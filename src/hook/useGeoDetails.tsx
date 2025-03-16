@@ -1,14 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { DistrictType, UpazilaType } from '../utils/type';
-
+const GEO_BASE_URL = import.meta.env.VITE_API_GEO_URL;
 
 const useGeoDetails = (setFindUnder: string | undefined, searchQuery: string|undefined) => {
 	const [district, setDistrict] = useState<DistrictType[]>([])
 	const [upazila, setUpazila] = useState<UpazilaType[]>([])
-
-	const GEO_BASE_URL = import.meta.env.VITE_API_GEO_URL;
-	
 
 	useEffect(() => {
 		axios.get(`${GEO_BASE_URL}${setFindUnder}/${searchQuery}`)

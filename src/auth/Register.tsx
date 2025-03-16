@@ -19,22 +19,17 @@ import useGeoDetails from '../hook/useGeoDetails';
 function Register() {
 
 	const { register, watch, handleSubmit, formState: { errors } } = useForm<RegisterInputType>();
-	const [districtName, setDistrictName] = useState<string>()
-	const [upazilaName, setUpazilaName] = useState<string>()
+	const [findUnder, setFindUnder] = useState<string>()
+	const [searchQuery, setSearchQuery] = useState<string>()
+
 	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const id = e.target.id;
 		const value = e.target.value;
-		const name = e.target.id;
-		setDistrictName(name);
-		setUpazilaName(value)
-
+		setFindUnder(id)
+		setSearchQuery(value)
 	}
-	const [district, upazila] = useGeoDetails(districtName, upazilaName)
 
-
-
-
-
-
+	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
 
 	const onSubmit: SubmitHandler<RegisterInputType> = ({ confirm_password: _, ...rest }) => {
@@ -101,7 +96,7 @@ function Register() {
 						/>
 					</div>
 					<div className="md:mt-4">
-						<label className="block mb-1 text-md font-bold text-primary_200 ">রক্তের গ্রুপ*</label>
+						<label htmlFor='blood_group' className="block mb-1 text-md font-bold text-primary_200 ">রক্তের গ্রুপ*</label>
 						<select {...register("blood_group")} id='blood_group'
 							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
@@ -118,8 +113,8 @@ function Register() {
 						</select>
 					</div>
 					<div className="md:mt-4">
-						<label className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
-						<select {...register("division", { required: true })} id='division' onChange={handleChangeDistrict}
+						<label htmlFor='division' className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
+						<select {...register("division", { required: true })} name='division' id='districts' onChange={handleSelectAddress}
 							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''  >বিভাগ নির্বাচন করুন</option>
@@ -135,8 +130,8 @@ function Register() {
 						</select>
 					</div>
 					<div className="md:mt-4">
-						<label className="block mb-1 text-md font-bold text-primary_200">জেলা*</label>
-						<select  {...register("district", { required: true })} id='district' onChange={handleChangeUpazila}
+						<label htmlFor='district' className="block mb-1 text-md font-bold text-primary_200">জেলা*</label>
+						<select  {...register("district", { required: true })} name='district' id='upazilas' onChange={handleSelectAddress}
 							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''>জেলা নির্বাচন করুন</option>
@@ -149,7 +144,7 @@ function Register() {
 					</div>
 					<div className="md:mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">উপজেলা*</label>
-						<select  {...register("upazila", { required: true })} id='upazila'
+						<select  {...register("upazila", { required: true })} name='upazila'
 							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''>উপজেলা নির্বাচন করুন</option>
