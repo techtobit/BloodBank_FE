@@ -1,14 +1,14 @@
 
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
-import {ReportType, FeedbackType} from '../utils/type'
+import {UserInteractionType} from '../utils/type'
 
 function UserInteraction():React.ReactElement {
-	const { register, handleSubmit, formState: { errors } } = useForm<any[]>();
+	const { register, handleSubmit, formState: { errors } } = useForm<UserInteractionType>();
 	const [isActiveBtn, setIsActiveBtn] = useState<boolean>(true)
 	const [checkedBox, setCheckedBox] = useState<string | null>(null);
 
-	const onSubmit = (data: FeedbackType) => {
+	const onSubmit = (data: UserInteractionType) => {
 		console.log(data);
 	}
 
@@ -61,8 +61,8 @@ function UserInteraction():React.ReactElement {
 							<p className='bg-yellow-400 text-priamry_300 text-xs'>বিপোর্টের ভিত্তিতে দাতার/গ্রহিতার একউন্ট সাময়িক বা স্থায়ি ভাবে বন্ধ কার হবে।</p>
 
 							<input
-								{...register('own_phoneNumber', { required: true, minLength: 11, maxLength: 11 })}
-								placeholder={errors.phoneNumber ? '১১ সংখ্যার নাম্বর লিখেনি' : 'নিজের মোবাইল নাম্বার লিখুন'}
+								{...register('own_phone_number', { required: true, minLength: 11, maxLength: 11 })}
+								placeholder={errors.own_phone_number ? '১১ সংখ্যার নাম্বর লিখেনি' : 'নিজের মোবাইল নাম্বার লিখুন'}
 								type="tel"
 								className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md p-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								pattern="[0-9]*"
@@ -71,23 +71,23 @@ function UserInteraction():React.ReactElement {
 								id="own_phone_number"
 							/>
 							<input
-								{...register('phoneNumber', { required: true, minLength: 11, maxLength: 11 })}
-								placeholder={errors.phoneNumber ? '১১ সংখ্যার নাম্বর লিখেনি' : 'রিপোর্ট করা মোবাইল নাম্বার লিখুন'}
+								{...register('reporting_phone_number', { required: true, minLength: 11, maxLength: 11 })}
+								placeholder={errors.reporting_phone_number ? '১১ সংখ্যার নাম্বর লিখেনি' : 'রিপোর্ট করা মোবাইল নাম্বার লিখুন'}
 								type="tel"
 								className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md p-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								pattern="[0-9]*"
 								inputMode="numeric"
 								maxLength={11}
-								id="phone_number"
+								id="reporting_phone_number"
 							/>
 
 
 							<div className='overflow-y-auto h-20'>
 								<textarea
-									id='feedback_details'
+									id='reporting_details'
 									maxLength={150}
-									{...register("feedback_details", { required: true, maxLength: 110 })}
-									placeholder={errors.feedback_details ? 'এই ঘরটি পূরণ করেনি' : 'রিপোর্টের কারন'}
+									{...register("reporting_details", { required: true, maxLength: 110 })}
+									placeholder={errors.reporting_details ? 'এই ঘরটি পূরণ করেনি' : 'রিপোর্টের কারন'}
 									className="w-full h-18 bg-netural_100 placeholder:text-gray  text-primary_100 text-lg font-bold border border-primary_300 rounded-md p-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								/>
 							</div>
