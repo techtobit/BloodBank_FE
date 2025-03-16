@@ -12,48 +12,32 @@ import uShape from '../assets/svg/uShape.svg';
 import lShape from '../assets/svg/lShape.svg';
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { RegisterInputType, DistrictType, UpazilaType } from '../utils/type';
+import { RegisterInputType } from '../utils/type';
+import useGeoDetails from '../hook/useGeoDetails';
 
 
 function Register() {
 
-	const { register, watch, handleSubmit, formState: { errors } } = useForm< RegisterInputType>();
-	const [district, setDistrict] = useState<DistrictType[]>([])
-	const [upazila, setUpazila] = useState<UpazilaType[]>([])
+	const { register, watch, handleSubmit, formState: { errors } } = useForm<RegisterInputType>();
+	const [districtName, setDistrictName] = useState<string>()
+	const [upazilaName, setUpazilaName] = useState<string>()
+	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const value = e.target.value;
+		const name = e.target.id;
+		setDistrictName(name);
+		setUpazilaName(value)
 
-
-	function getDistrict(v: string) {
-		axios.get(`https://bdapi.editboxpro.com/api/districts/${v}`)
-			.then(response => {
-				setDistrict(response.data);
-			})
-			.catch(error => {
-				console.error('There was an error!', error);
-			});
 	}
-	function getUpazilas(v: string) {
-		axios.get(`https://bdapi.editboxpro.com/api/upazilas/${v}`)
-			.then(response => {
-				setUpazila(response.data);
-			})
-			.catch(error => {
-				console.error('There was an error!', error);
-			});
-	}
-
-
-	const handleChangeDistrict = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const v = e.target.value;
-		getDistrict(v);
-	}
-	const handleChangeUpazila = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const v = e.target.value;
-		getUpazilas(v);
-	}
+	const [district, upazila] = useGeoDetails(districtName, upazilaName)
 
 
 
-	const onSubmit: SubmitHandler< RegisterInputType> = ({ confirm_password: _, ...rest})=> {
+
+
+
+
+
+	const onSubmit: SubmitHandler<RegisterInputType> = ({ confirm_password: _, ...rest }) => {
 		console.log(rest)
 		axios.post('http://127.0.0.1:8000/register/', rest)
 			.then(response => {
@@ -89,12 +73,12 @@ function Register() {
 				<form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1  md:grid-cols-2 gap-2 items-center justify-center">
 					<div className="md:mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">নাম*</label>
-						<input 
+						<input
 							id='full_name'
 							{...register("full_name", { required: true, maxLength: 30 })}
 							placeholder={errors.full_name ? 'এই ঘরটি পূরণ করেনি' : 'সম্পূর্ন নাম লিখুন'}
 							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
-							type="text"  />
+							type="text" />
 					</div>
 					<div className="relative md:mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">মোবাইল নাম্বার*</label>
@@ -105,7 +89,7 @@ function Register() {
 								<div className="h-6 border-sm border-l border-primary_100 "></div>
 							</div>
 						</div>
-						<input 
+						<input
 							{...register('phone_number', { required: true, minLength: 11, maxLength: 11 })}
 							placeholder={errors.phone_number ? '১১ সংখ্যার নাম্বর লিখেনি' : '01886627127'}
 							type="tel"
@@ -179,10 +163,10 @@ function Register() {
 
 					<div className="md:mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">পাসওয়ার্ড*</label>
-						<input {...register("password", { required: true, minLength:6 })} id='password'
-						placeholder={errors.password ? `${errors.password?.type ? 'কমপক্ষে ৬ নাম্বারের পাসওয়ার্ড লিখুন' :'পাসওয়ার্ড লিখুন'}` : '***********'}
+						<input {...register("password", { required: true, minLength: 6 })} id='password'
+							placeholder={errors.password ? `${errors.password?.type ? 'কমপক্ষে ৬ নাম্বারের পাসওয়ার্ড লিখুন' : 'পাসওয়ার্ড লিখুন'}` : '***********'}
 							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
-							type="password"  />
+							type="password" />
 					</div>
 					<div className="md:mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">একই পাসওয়ার্ড*</label>
@@ -194,8 +178,8 @@ function Register() {
 							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							type="password" placeholder="***********" />
 					</div>
-					
-					<div className={errors.confirm_password ? 'col-span-1 md:col-span-2 pl-2 inline-flex text-primary_100 bg-yellow-500 font-bold':'invisible'}>{errors.confirm_password && errors.confirm_password.message}</div>
+
+					<div className={errors.confirm_password ? 'col-span-1 md:col-span-2 pl-2 inline-flex text-primary_100 bg-yellow-500 font-bold' : 'invisible'}>{errors.confirm_password && errors.confirm_password.message}</div>
 
 					<div className="mt-4 col-span-1 md:col-span-2 text-center">
 						<button className="w-full h-10 flex justify-center items-center bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md transition duration-300 ease focus:outline-none focus:border-primary_100">

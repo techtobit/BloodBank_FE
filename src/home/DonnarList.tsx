@@ -9,18 +9,18 @@ import useGeoDetails from '../hook/useGeoDetails';
 
 function DonnarList() {
 	const { register, watch, handleSubmit, formState: { errors } } = useForm<DonarSearchType>();
-	const [districtName, setDistrictName] = useState<string>()
-	const [upazilaName, setUpazilaName] = useState<string>()
+	const [findUnder, setFindUnder] = useState<string>()
+	const [searchQuery, setSearchQuery] = useState<string>()
 	const [donars, setDonars] = useState<DonarType[]>([])
 
 	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const id = e.target.id;
 		const value = e.target.value;
-		const name = e.target.name;
-		setDistrictName(name);
-		setUpazilaName(value)
-
+		setFindUnder(id)
+		setSearchQuery(value)
 	}
-	const [district, upazila] = useGeoDetails(districtName, upazilaName)
+	
+	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
 	useEffect(() => {
 		fetch('./data1.json')
@@ -44,7 +44,7 @@ function DonnarList() {
 			<div className='grid grid-cols-2 md:grid-cols-4  gap-4 p-10 items-center justify-center'>
 				<div className="">
 					<label htmlFor='division' className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
-					<select {...register("division", { required: true })} id='division' name='districts' onChange={handleSelectAddress}
+					<select {...register("division", { required: true })} name='division' id='districts' onChange={handleSelectAddress}
 						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					>
 						<option value="" disabled selected className=''  >বিভাগ নির্বাচন করুন</option>
@@ -61,7 +61,7 @@ function DonnarList() {
 				</div>
 				<div className="">
 					<label className="block mb-1 text-md font-bold text-primary_200">জেলা*</label>
-					<select  {...register("district", { required: true })} id='district' name='upazilas' onChange={handleSelectAddress}
+					<select  {...register("district", { required: true })} name='district' id='upazilas' onChange={handleSelectAddress}
 						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					>
 						<option value="" disabled selected className=''>জেলা নির্বাচন করুন</option>

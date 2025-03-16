@@ -2,26 +2,28 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { DistrictType, UpazilaType } from '../utils/type';
 
-const useGeoDetails = (name: string, value: string) => {
-	console.log(name, value);
 
+const useGeoDetails = (setFindUnder: string | undefined, searchQuery: string|undefined) => {
 	const [district, setDistrict] = useState<DistrictType[]>([])
 	const [upazila, setUpazila] = useState<UpazilaType[]>([])
 
+	const GEO_BASE_URL = import.meta.env.VITE_API_GEO_URL;
+	
+
 	useEffect(() => {
-		axios.get(`https://bdapi.editboxpro.com/api/${name}/${value}`)
+		axios.get(`${GEO_BASE_URL}${setFindUnder}/${searchQuery}`)
 			.then(response => {
-				if (name === 'districts') {
+				if (setFindUnder === 'districts') {
 					setDistrict(response.data);
 				}
-				else if (name === 'upazilas') {
+				else if (setFindUnder === 'upazilas') {
 					setUpazila(response.data);
 				}
 			})
 			.catch(error => {
 				console.error('There was an error!', error);
 			});
-	}, [name, value])
+	}, [setFindUnder, searchQuery])
 
 	return [district, upazila]
 }
