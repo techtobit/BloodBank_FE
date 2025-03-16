@@ -23,19 +23,15 @@ function DonnarList() {
 
 
 
-	function getDistrict(v: string) {
-		axios.get(`https://bdapi.editboxpro.com/api/districts/${v}`)
+	function getGeoDetails(v: string, name:string ) {
+		axios.get(`https://bdapi.editboxpro.com/api/${name}/${v}`)
 			.then(response => {
-				setDistrict(response.data);
-			})
-			.catch(error => {
-				console.error('There was an error!', error);
-			});
-	}
-	function getUpazilas(v: string) {
-		axios.get(`https://bdapi.editboxpro.com/api/upazilas/${v}`)
-			.then(response => {
-				setUpazila(response.data);
+				if (name==='districts'){
+					setDistrict(response.data);
+				}
+				else if (name==='upazilas'){
+					setUpazila(response.data);
+				}
 			})
 			.catch(error => {
 				console.error('There was an error!', error);
@@ -43,13 +39,11 @@ function DonnarList() {
 	}
 
 
-	const handleChangeDistrict = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const v = e.target.value;
-		getDistrict(v);
-	}
-	const handleChangeUpazila = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const v = e.target.value;
-		getUpazilas(v);
+	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const value = e.target.value;
+		const name = e.target.name;
+		getGeoDetails(value, name) ;
+		
 	}
 
 	return (
@@ -64,8 +58,8 @@ function DonnarList() {
 			{/* <h2 className='text-3xl text-center py-4 font-bold text-primary_200'>রক্তদাতাদের তালিকা</h2> */}
 			<div className='grid grid-cols-2 md:grid-cols-4  gap-4 p-10 items-center justify-center'>
 				<div className="">
-					<label className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
-					<select {...register("division", { required: true })} id='division' onChange={handleChangeDistrict}
+					<label htmlFor='division' className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
+					<select {...register("division", { required: true })} id='division' name='districts' onChange={handleSelectAddress}
 						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					>
 						<option value="" disabled selected className=''  >বিভাগ নির্বাচন করুন</option>
@@ -82,7 +76,7 @@ function DonnarList() {
 				</div>
 				<div className="">
 					<label className="block mb-1 text-md font-bold text-primary_200">জেলা*</label>
-					<select  {...register("district", { required: true })} id='district' onChange={handleChangeUpazila}
+					<select  {...register("district", { required: true })} id='district' name='upazilas' onChange={handleSelectAddress}
 						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					>
 						<option value="" disabled selected className=''>জেলা নির্বাচন করুন</option>
