@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { BiDroplet, BiSolidUser, BiSolidLocationPlus, BiSolidPhone } from "react-icons/bi";
 import donnarBgImg from '../assets/map_hands.svg'
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { DonarSearchType, DonarType, DistrictType, UpazilaType } from '../utils/type';
+import { DonarSearchType, DonarType } from '../utils/type';
 import useGeoDetails from '../hook/useGeoDetails';
 
 
@@ -19,7 +18,7 @@ function DonnarList() {
 		setFindUnder(id)
 		setSearchQuery(value)
 	}
-	
+
 	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
 	useEffect(() => {
@@ -29,6 +28,10 @@ function DonnarList() {
 				setDonars(data)
 			})
 	}, [])
+
+	const onSubmit=()=>{
+		donars.filter()
+	}
 
 
 	return (
@@ -41,7 +44,7 @@ function DonnarList() {
 			}}
 			className='w-full min-h-screen bg-netural_300'>
 			{/* <h2 className='text-3xl text-center py-4 font-bold text-primary_200'>রক্তদাতাদের তালিকা</h2> */}
-			<div className='grid grid-cols-2 md:grid-cols-4  gap-4 p-10 items-center justify-center'>
+			<form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-2 md:grid-cols-5  gap-4 p-10 items-center justify-center'>
 				<div className="">
 					<label htmlFor='division' className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
 					<select {...register("division", { required: true })} name='division' id='districts' onChange={handleSelectAddress}
@@ -99,10 +102,14 @@ function DonnarList() {
 						<option value="AB-">AB- (এবি নেগেটিভ)</option>
 						<option value="O+">O+ (ও পজেটিভ)</option>
 						<option value="O-">O- (ও নেগেটিভ)</option>
-
 					</select>
 				</div>
-			</div>
+
+				<button className="w-full h-10 cursor-pointer flex justify-center items-center mt-7 bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md transition duration-300 ease focus:outline-none focus:border-primary_100">
+					দাতা খুজেন
+				</button>
+
+			</form>
 			<hr className="border-primary_300 dark:border-primary_300"></hr>
 			<div className='grid grid-cols-1 md:grid-cols-4 p-10 gap-4 justify-items-center items-center'>
 				{
