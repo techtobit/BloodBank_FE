@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { RegisterInputType } from '../utils/type';
 import useGeoDetails from '../hook/useGeoDetails';
+import { toast } from 'react-toastify';
 
 
 function Register() {
@@ -33,22 +34,41 @@ function Register() {
 
 
 	const onSubmit: SubmitHandler<RegisterInputType> = ({ confirm_password: _, ...rest }) => {
-		console.log(rest)
 		axios.post('http://127.0.0.1:8000/register/', rest)
 			.then(response => {
-				console.log(response.data);
-
+				toast.success(response.data.message);
 			})
-			.catch(error => {
-				console.error('There was an error!', error);
-			});
+			.catch(function (error) {
+				if (error.response) {
+					if (error.response.data.phone_number) {
+						toast.error('মোবাইল নাম্বারটি দিয়ে ইতিমধ্যে একউন্ট তৈরি হয়েছে!');
+					}
+					else if(error.response.status==500){
+						toast.error('সারর্ভার সমস্যার কারণে একউন্ট তৈরিতে ব্যর্থ')
+					}
+					else if(error.response.status==400){
+						toast.error('ইন্টানেট সমস্যার কারণে একউন্ট তৈরিতে ব্যর্থ ')
+					}
+				}
+				else if (error.code === "ERR_NETWORK") {
+					toast.error('ইন্টানেট সংযোগ বিচিন্ন')
+				}
+				else if (error.request) {
+					console.log(error.request);
+				}
+				else {
+					console.log('Error', error.message);
+				}
+				console.log(error.config);
+			})
+
 	}
 
 
 	return (
 
 		<div
-			className="h-screen w-full bg-netural_300 grid grid-cols-1 md:grid-cols-2 place-items-center">
+			className="min-h-screen w-full bg-netural_300 grid grid-cols-1 md:grid-cols-2 place-items-center">
 			<div className='reletive'>
 				<img src={roundShape} alt="roundShape" className='absolute left-[1%] bottom-0' />
 				<img src={donar} alt="donar_blob" className='absolute w-[550px] left-[-2%] bottom-[13%]' />

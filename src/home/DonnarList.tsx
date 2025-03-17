@@ -7,7 +7,7 @@ import useGeoDetails from '../hook/useGeoDetails';
 
 
 function DonnarList() {
-	const { register, watch, handleSubmit, formState: { errors } } = useForm<DonarSearchType>();
+	const { register,  handleSubmit, formState: { errors } } = useForm<DonarSearchType>();
 	const [findUnder, setFindUnder] = useState<string>()
 	const [searchQuery, setSearchQuery] = useState<string>()
 	const [donars, setDonars] = useState<DonarType[]>([])
@@ -29,8 +29,8 @@ function DonnarList() {
 			})
 	}, [])
 
-	const onSubmit=()=>{
-		donars.filter()
+	const onSubmit=(e:any)=>{
+		console.log(e);
 	}
 
 
