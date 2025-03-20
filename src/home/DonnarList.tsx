@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { DonarSearchType, DonarType } from '../utils/type';
 import useGeoDetails from '../hook/useGeoDetails';
 import { Link } from 'react-router';
+import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 const AVATAR_BASE_URL = import.meta.env.VITE_API_AVATAR_URL;
@@ -63,9 +64,9 @@ function DonnarList() {
 	}
 
 	const handleReset = () => {
-    reset();
+		reset();
 		fetchDonars()
-  };
+	};
 
 	return (
 		<section
@@ -141,7 +142,7 @@ function DonnarList() {
 					</select>
 				</div>
 
-				<button  className="w-full h-10 cursor-pointer flex justify-center items-center mt-7 bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md transition duration-300 ease focus:outline-none focus:border-primary_100">
+				<button className="w-full h-10 cursor-pointer flex justify-center items-center mt-7 bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md transition duration-300 ease focus:outline-none focus:border-primary_100">
 					দাতা খুজেন
 				</button>
 				{(errors.division || errors.district) && <p className='col-span-1 md:col-span-2 pl-2 inline-flex  text-balck bg-yellow-500'>বিভাগ ও জেলা নির্বাচন আবশ্যক !</p>}
@@ -175,27 +176,29 @@ function DonnarList() {
 				)
 			}
 
-			{
-				countPages > 1 && (
-					<div className='flex justify-center items-center gap-2'>
-						<button
-							disabled={currentPage <= 1}
-							className={`bg-primary_300 text-netural_300 p-2 font-bold rounded-md ${currentPage <= 1 ? "cursor-not-allowed opacity-50" : "hover:bg-primary_100"} `} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
-						<div className='flex gap-4'>
-							{
-								[...Array(countPages)].map((_, index) => (
-									<button key={index} className='flex items-center px-[20px] py-[8px] bg-primary_300 text-netural_300 font-bold hover:bg-primary_100 rounded-md'
-										onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
-								))
-							}
+			<div className='bottom-0'>
+				{
+					countPages > 1 && (
+						<div className='flex justify-center items-center gap-2'>
+							<button
+								disabled={currentPage <= 1}
+								className={`flex items-center bg-primary_100 text-netural_300 px-5 py-2 font-bold rounded-md ${currentPage <= 1 ? "cursor-not-allowed opacity-50" : "hover:bg-primary_100"} `} onClick={() => setCurrentPage(currentPage - 1)}><BiLeftArrow/> পূর্ববর্তী</button>
+							<div className='flex gap-4'>
+								{
+									[...Array(countPages)].map((_, index) => (
+										<button key={index} className={`flex items-center px-[20px] py-[8px] font-bold  rounded-md ${currentPage === index+1  ? "bg-primary_300 text-netural_300" : "bg-primary_100 text-netural_300 hover:bg-primary_200"}`}
+											onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
+									))
+								}
+							</div>
+							<button
+								disabled={currentPage >= countPages}
+								className={`flex items-center bg-primary_100 text-netural_300 p-2 font-bold rounded-md ${currentPage >= countPages ? "cursor-not-allowed opacity-50" : "hover:bg-primary_100"} `}
+								onClick={() => setCurrentPage(currentPage + 1)}>পরবর্তী  <BiRightArrow/></button>
 						</div>
-						<button
-							disabled={currentPage >= countPages}
-							className={`bg-primary_300 text-netural_300 p-2 font-bold rounded-md ${currentPage >= countPages ? "cursor-not-allowed opacity-50" : "hover:bg-primary_100"} `}
-							onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
-					</div>
-				)
-			}
+					)
+				}
+			</div>
 		</section>
 	)
 }
