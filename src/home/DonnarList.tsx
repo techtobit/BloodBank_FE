@@ -26,22 +26,64 @@ function DonnarList() {
 
 	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
-	useEffect(() => {
-		fetch(`${BASE_API_URL}donars/?page=${[currentPage]}`)
-			.then(response => response.json())
-			.then(data => {
 
-				setCoutPages(data.count / 12)
-				setDonars(data.results)
-			})
+	// useEffect(() => {
+	// 	const url = `${BASE_API_URL}donars/?page=${[currentPage]}`
+	// 	fetch(url)
+	// 		.then(response => response.json())
+	// 		.then(data => {
+	// 			console.log(data);
+	// 			setCoutPages(data?.count / 12)
+	// 			setDonars(data.results)
+	// 		})
+	// }, [currentPage])
+
+	// const onSubmit = (e: any) => {
+	// 	console.log(e)
+	// 	const url = `${BASE_API_URL}donars/?division=${e.division}&district=${e.district}&upazila=${encodeURIComponent(e?.upazila)}&blood_group=${encodeURIComponent(e.blood_group)}`
+	// 	console.log(url)
+	// 	fetch(url)
+	// 		.then(response => response.json())
+	// 		.then(data => {
+	// 			console.log(data);
+	// 			setDonars(data.results)
+	// 			setActionFilter(true)
+	// 		})
+	// }
+
+	const fetchDonars = async (params = {}) => {
+		const url = new URL(`${BASE_API_URL}donars/`);
+		url.searchParams.append('page', currentPage.toString());
+
+		Object.entries(params).forEach(([key, value]) => {
+			if (value) url.searchParams.append(key, encodeURIComponent(value));
+		})
+
+		try {
+			const response = await fetch(url.toString());
+			const data = await response.json();
+			setDonars(data.results)
+			setCoutPages(data?.count / 12)
+		}
+		catch (error) {
+			console.error('There was an error!', error);
+		}
+
+	}
+
+	useEffect(() => {
+		fetchDonars()
 	}, [currentPage])
 
 	const onSubmit = (e: any) => {
-		console.log(e);
+		console.log(e)
+		fetchDonars({
+			division: e.division,
+			district: e.district,
+			upazila: e.upazila,
+			blood_group: e.blood_group,
+		})
 	}
-
-	console.log(currentPage);
-
 
 	return (
 		<section
@@ -60,14 +102,14 @@ function DonnarList() {
 						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					>
 						<option value="" disabled selected className=''  >বিভাগ নির্বাচন করুন</option>
-						<option value="dhaka">ঢাকা</option>
-						<option value="chittagong">চট্টগ্রাম</option>
-						<option value="barisal" className=''>বরিশাল</option>
-						<option value="khulna">খুলনা</option>
-						<option value="mymensingh">ময়মনসিংহ</option>
-						<option value="rajshahi">রাজশাহী</option>
-						<option value="rangpur">রংপুর</option>
-						<option value="sylhet">সিলেট</option>
+						<option value="Dhaka">ঢাকা</option>
+						<option value="Chittagong">চট্টগ্রাম</option>
+						<option value="Barisal" className=''>বরিশাল</option>
+						<option value="Khulna">খুলনা</option>
+						<option value="Mymensingh">ময়মনসিংহ</option>
+						<option value="Rajshahi">রাজশাহী</option>
+						<option value="Rangpur">রংপুর</option>
+						<option value="Sylhet">সিলেট</option>
 
 					</select>
 				</div>
@@ -86,7 +128,7 @@ function DonnarList() {
 				</div>
 				<div className="">
 					<label className="block mb-1 text-md font-bold text-primary_200">উপজেলা*</label>
-					<select  {...register("upazila", { required: true })} id='upazila'
+					<select  {...register("upazila", { required: false })} id='upazila'
 						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					>
 						<option value="" disabled selected className=''>উপজেলা নির্বাচন করুন</option>

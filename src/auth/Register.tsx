@@ -44,10 +44,10 @@ function Register() {
 					if (error.response.data.phone_number) {
 						toast.error('মোবাইল নাম্বারটি দিয়ে ইতিমধ্যে একউন্ট তৈরি হয়েছে!');
 					}
-					else if(error.response.status==500){
+					else if (error.response.status == 500) {
 						toast.error('সারর্ভার সমস্যার কারণে একউন্ট তৈরিতে ব্যর্থ')
 					}
-					else if(error.response.status==400){
+					else if (error.response.status == 400) {
 						toast.error('ইন্টানেট সমস্যার কারণে একউন্ট তৈরিতে ব্যর্থ ')
 					}
 				}
@@ -139,14 +139,14 @@ function Register() {
 							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						>
 							<option value="" disabled selected className=''  >বিভাগ নির্বাচন করুন</option>
-							<option value="dhaka">ঢাকা</option>
-							<option value="chittagong">চট্টগ্রাম</option>
-							<option value="barisal" className=''>বরিশাল</option>
-							<option value="khulna">খুলনা</option>
-							<option value="mymensingh">ময়মনসিংহ</option>
-							<option value="rajshahi">রাজশাহী</option>
-							<option value="rangpur">রংপুর</option>
-							<option value="sylhet">সিলেট</option>
+							<option value="Dhaka">ঢাকা</option>
+							<option value="Chittagong">চট্টগ্রাম</option>
+							<option value="Barisal" className=''>বরিশাল</option>
+							<option value="Khulna">খুলনা</option>
+							<option value="Mymensingh">ময়মনসিংহ</option>
+							<option value="Rajshahi">রাজশাহী</option>
+							<option value="Rangpur">রংপুর</option>
+							<option value="Sylhet">সিলেট</option>
 
 						</select>
 					</div>
