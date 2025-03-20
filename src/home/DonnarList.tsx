@@ -4,13 +4,14 @@ import donnarBgImg from '../assets/map_hands.svg'
 import { useForm } from 'react-hook-form';
 import { DonarSearchType, DonarType } from '../utils/type';
 import useGeoDetails from '../hook/useGeoDetails';
+import { Link } from 'react-router';
 
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 const AVATAR_BASE_URL = import.meta.env.VITE_API_AVATAR_URL;
 
 
 function DonnarList() {
-	const { register, handleSubmit, formState: { errors } } = useForm<DonarSearchType>();
+	const { register, handleSubmit, reset, formState: { errors } } = useForm<DonarSearchType>();
 	const [findUnder, setFindUnder] = useState<string>()
 	const [searchQuery, setSearchQuery] = useState<string>()
 	const [donars, setDonars] = useState<DonarType[]>([])
@@ -25,31 +26,6 @@ function DonnarList() {
 	}
 
 	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
-
-
-	// useEffect(() => {
-	// 	const url = `${BASE_API_URL}donars/?page=${[currentPage]}`
-	// 	fetch(url)
-	// 		.then(response => response.json())
-	// 		.then(data => {
-	// 			console.log(data);
-	// 			setCoutPages(data?.count / 12)
-	// 			setDonars(data.results)
-	// 		})
-	// }, [currentPage])
-
-	// const onSubmit = (e: any) => {
-	// 	console.log(e)
-	// 	const url = `${BASE_API_URL}donars/?division=${e.division}&district=${e.district}&upazila=${encodeURIComponent(e?.upazila)}&blood_group=${encodeURIComponent(e.blood_group)}`
-	// 	console.log(url)
-	// 	fetch(url)
-	// 		.then(response => response.json())
-	// 		.then(data => {
-	// 			console.log(data);
-	// 			setDonars(data.results)
-	// 			setActionFilter(true)
-	// 		})
-	// }
 
 	const fetchDonars = async (params = {}) => {
 		const url = new URL(`${BASE_API_URL}donars/`);
@@ -83,8 +59,13 @@ function DonnarList() {
 			district: e.district,
 			upazila: e.upazila,
 			blood_group: e.blood_group,
-		})
+		});
 	}
+
+	const handleReset = () => {
+    reset();
+		fetchDonars()
+  };
 
 	return (
 		<section
@@ -95,7 +76,7 @@ function DonnarList() {
 				opacity: 1.5
 			}}
 			className='w-full min-h-screen bg-netural_300'>
-			{/* <h2 className='text-3xl text-center py-4 font-bold text-primary_200'>রক্তদাতাদের তালিকা</h2> */}
+
 			<form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-2 md:grid-cols-5  gap-4 p-10 items-center justify-center'>
 				<div className="">
 					<label htmlFor='division' className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
@@ -160,7 +141,7 @@ function DonnarList() {
 					</select>
 				</div>
 
-				<button className="w-full h-10 cursor-pointer flex justify-center items-center mt-7 bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md transition duration-300 ease focus:outline-none focus:border-primary_100">
+				<button  className="w-full h-10 cursor-pointer flex justify-center items-center mt-7 bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md transition duration-300 ease focus:outline-none focus:border-primary_100">
 					দাতা খুজেন
 				</button>
 				{(errors.division || errors.district) && <p className='col-span-1 md:col-span-2 pl-2 inline-flex  text-balck bg-yellow-500'>বিভাগ ও জেলা নির্বাচন আবশ্যক !</p>}
@@ -184,6 +165,16 @@ function DonnarList() {
 					))
 				}
 			</div>
+			{
+				donars.length === 0 && (
+					<div className='flex flex-col justify-center items-center gap-4'>
+						<div className='w-95 bg-yellow-500 text-black text-center text-sm md:text-lg font-bold border rounded-md px-5 py-2'>কোন রক্তদাতা পাওয়া যায়নি</div>
+						<Link to='/register' className='w-95 bg-primary_300 text-netural_300 text-center text-sm md:text-lg font-bold border hover:bg-primary_100 rounded-md px-5 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100'>রক্ত দানকারী হিসাবে যোগদিন</Link>
+						<button onClick={handleReset} className='w-95 bg-yellow-500 text-black text-center text-sm md:text-lg font-bold border rounded-md px-5 py-2'>ফিল্টার বাতিল</button>
+					</div>
+				)
+			}
+
 			{
 				countPages > 1 && (
 					<div className='flex justify-center items-center gap-2'>
