@@ -34,7 +34,7 @@ function Register() {
 
 
 	const onSubmit: SubmitHandler<RegisterInputType> = ({ confirm_password: _, ...rest }) => {
-		axios.post('http://127.0.0.1:8000/register/', rest)
+		axios.post('http://127.0.0.1:8000/api/v0.1/register/', rest)
 			.then(response => {
 				toast.success(response.data.message);
 			})
@@ -179,7 +179,7 @@ function Register() {
 					<div className="md:mt-4">
 						<label className="block mb-1 text-md font-bold text-primary_200">পাসওয়ার্ড*</label>
 						<input {...register("password", { required: true, minLength: 6 })} id='password'
-							placeholder={errors.password ? `${errors.password?.type ? 'কমপক্ষে ৬ নাম্বারের পাসওয়ার্ড লিখুন' : 'পাসওয়ার্ড লিখুন'}` : '***********'}
+							placeholder={errors.password ? `${errors.password?.type ? 'কমপক্ষে ৬ নাম্বারের পাসওয়ার্ড লিখুন' : 'পাসওয়ার্ড লিখুন'}` : 'কমপক্ষে ৬ নাম্বারের পাসওয়ার্ড লিখুন'}
 							className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							type="password" />
 					</div>

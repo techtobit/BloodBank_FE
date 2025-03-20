@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BiDroplet, BiSolidUser, BiSolidLocationPlus, BiSolidPhone } from "react-icons/bi";
+import { BiDroplet, BiSolidUser, BiSolidLocationPlus, BiSolidPhone, BiDonateHeart } from "react-icons/bi";
 import donnarBgImg from '../assets/map_hands.svg'
 import { useForm } from 'react-hook-form';
 import { DonarSearchType, DonarType } from '../utils/type';
@@ -7,10 +7,12 @@ import useGeoDetails from '../hook/useGeoDetails';
 
 
 function DonnarList() {
-	const { register,  handleSubmit, formState: { errors } } = useForm<DonarSearchType>();
+	const { register, handleSubmit, formState: { errors } } = useForm<DonarSearchType>();
 	const [findUnder, setFindUnder] = useState<string>()
 	const [searchQuery, setSearchQuery] = useState<string>()
 	const [donars, setDonars] = useState<DonarType[]>([])
+	const [pages, setPages] = useState<number>(2)
+	const [countPages, setCoutPages] = useState<number>(null)
 
 	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const id = e.target.id;
@@ -22,16 +24,20 @@ function DonnarList() {
 	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
 	useEffect(() => {
-		fetch('./data1.json')
+		fetch(`http://127.0.0.1:8000/api/v0.1/donars/?page=${[pages]}`)
 			.then(response => response.json())
 			.then(data => {
-				setDonars(data)
-			})
-	}, [])
 
-	const onSubmit=(e:any)=>{
+				setCoutPages(data.count / 12)
+				setDonars(data.results)
+			})
+	}, [pages])
+
+	const onSubmit = (e: any) => {
 		console.log(e);
 	}
+
+	console.log(countPages);
 
 
 	return (
@@ -113,22 +119,37 @@ function DonnarList() {
 			<hr className="border-primary_300 dark:border-primary_300"></hr>
 			<div className='grid grid-cols-1 md:grid-cols-4 p-10 gap-4 justify-items-center items-center'>
 				{
-					donars.map((donar, index) => (
+					donars?.map((donar, index) => (
 						<div key={index} className='flex w-75 h-30  bg-white/65 justify-evenly items-center rounded-lg shadow-lg  '>
 							<div>
-								<img className='rounded-lg ' src={donar.avatar} alt="" />
+								<img className='rounded-lg ' src={`https://ui-avatars.com/api/?name=${donar.full_name}&background=random`} alt="" />
 							</div>
 							<div>
 								<p className='font-semibold flex items-center gap-2 '><BiDroplet /> <span className='bg-primary_200 text-netural_300 px-2'>{donar.blood_group}</span></p>
 								<h5 className='font-semibold flex items-center gap-2'><BiSolidUser /> {donar.full_name}</h5>
-								<p className='flex items-center gap-2 text-xs font-extralight'><BiSolidLocationPlus />{donar.division}</p>
-								{/* <p className='flex items-center gap-2 text-sm'><BiDonateHeart /> {donar.donation_count} বার রক্ত দান</p> */}
+								<p className='flex items-center gap-2 text-xs font-extralight'><BiSolidLocationPlus />{donar.division}, {donar.district}, {donar.upazila}</p>
+								<p className='flex items-center gap-2 text-sm'><BiDonateHeart /> {donar.total_donation} বার রক্ত দান</p>
 								<p className='flex items-center gap-2 text-sm'><BiSolidPhone /> <a href={`tel:${donar.phone_number}`}>{donar.phone_number}</a></p>
 							</div>
 						</div>
 					))
 				}
 			</div>
+			{
+				pages > 1 && (
+					<div className='flex justify-center items-center gap-2'>
+						<button className='bg-primary_300 text-netural_300 p-2 rounded-md' onClick={() => setPages(pages - 1)}>Previous</button>
+						<div>
+							{
+								[...Array(countPages)].map((_, index) => (
+									<button key={index} className='bg-primary_300 text-netural_300 p-2 rounded-md' onClick={() => setPages(index + 1)}>{index + 1}</button>
+								))
+							}
+						</div>
+						<button className='bg-primary_300 text-netural_300 p-2 rounded-md' onClick={() => setPages(pages + 1)}>Next</button>
+					</div>
+				)
+			}
 		</section>
 	)
 }
