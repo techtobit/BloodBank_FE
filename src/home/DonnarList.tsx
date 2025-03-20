@@ -11,8 +11,8 @@ function DonnarList() {
 	const [findUnder, setFindUnder] = useState<string>()
 	const [searchQuery, setSearchQuery] = useState<string>()
 	const [donars, setDonars] = useState<DonarType[]>([])
-	const [pages, setPages] = useState<number>(2)
-	const [countPages, setCoutPages] = useState<number>(null)
+	const [currentPage, setCurrentPage] = useState<number>(1)
+	const [countPages, setCoutPages] = useState<number>(0)
 
 	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const id = e.target.id;
@@ -24,20 +24,20 @@ function DonnarList() {
 	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:8000/api/v0.1/donars/?page=${[pages]}`)
+		fetch(`http://127.0.0.1:8000/api/v0.1/donars/?page=${[currentPage]}`)
 			.then(response => response.json())
 			.then(data => {
 
 				setCoutPages(data.count / 12)
 				setDonars(data.results)
 			})
-	}, [pages])
+	}, [currentPage])
 
 	const onSubmit = (e: any) => {
 		console.log(e);
 	}
 
-	console.log(countPages);
+	console.log(currentPage);
 
 
 	return (
@@ -136,17 +136,23 @@ function DonnarList() {
 				}
 			</div>
 			{
-				pages > 1 && (
+				countPages > 1 && (
 					<div className='flex justify-center items-center gap-2'>
-						<button className='bg-primary_300 text-netural_300 p-2 rounded-md' onClick={() => setPages(pages - 1)}>Previous</button>
-						<div>
+						<button
+							disabled={currentPage <= 1}
+							className={`bg-primary_300 text-netural_300 p-2 font-bold rounded-md ${currentPage <= 1 ? "cursor-not-allowed opacity-50" : "hover:bg-primary_100"} `} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
+						<div className='flex gap-4'>
 							{
 								[...Array(countPages)].map((_, index) => (
-									<button key={index} className='bg-primary_300 text-netural_300 p-2 rounded-md' onClick={() => setPages(index + 1)}>{index + 1}</button>
+									<button key={index} className='flex items-center px-[20px] py-[8px] bg-primary_300 text-netural_300 font-bold hover:bg-primary_100 rounded-md'
+										onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
 								))
 							}
 						</div>
-						<button className='bg-primary_300 text-netural_300 p-2 rounded-md' onClick={() => setPages(pages + 1)}>Next</button>
+						<button
+							disabled={currentPage >= countPages}
+							className={`bg-primary_300 text-netural_300 p-2 font-bold rounded-md ${currentPage >= countPages ? "cursor-not-allowed opacity-50" : "hover:bg-primary_100"} `}
+							onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
 					</div>
 				)
 			}
