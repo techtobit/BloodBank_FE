@@ -16,6 +16,7 @@ import { RegisterInputType } from '../utils/type';
 import useGeoDetails from '../hook/useGeoDetails';
 import { toast } from 'react-toastify';
 
+const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Register() {
 
@@ -34,7 +35,7 @@ function Register() {
 
 
 	const onSubmit: SubmitHandler<RegisterInputType> = ({ confirm_password: _, ...rest }) => {
-		axios.post('http://127.0.0.1:8000/api/v0.1/register/', rest)
+		axios.post(`${BASE_API_URL}register/`, rest)
 			.then(response => {
 				toast.success(response.data.message);
 			})

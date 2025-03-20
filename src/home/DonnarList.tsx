@@ -5,6 +5,9 @@ import { useForm } from 'react-hook-form';
 import { DonarSearchType, DonarType } from '../utils/type';
 import useGeoDetails from '../hook/useGeoDetails';
 
+const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
+const AVATAR_BASE_URL = import.meta.env.VITE_API_AVATAR_URL;
+
 
 function DonnarList() {
 	const { register, handleSubmit, formState: { errors } } = useForm<DonarSearchType>();
@@ -24,7 +27,7 @@ function DonnarList() {
 	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:8000/api/v0.1/donars/?page=${[currentPage]}`)
+		fetch(`${BASE_API_URL}donars/?page=${[currentPage]}`)
 			.then(response => response.json())
 			.then(data => {
 
@@ -122,7 +125,7 @@ function DonnarList() {
 					donars?.map((donar, index) => (
 						<div key={index} className='flex w-75 h-30  bg-white/65 justify-evenly items-center rounded-lg shadow-lg  '>
 							<div>
-								<img className='rounded-lg ' src={`https://ui-avatars.com/api/?name=${donar.full_name}&background=random`} alt="" />
+								<img className='rounded-lg ' src={`${AVATAR_BASE_URL}?name=${donar.full_name}&background=random`} alt="" />
 							</div>
 							<div>
 								<p className='font-semibold flex items-center gap-2 '><BiDroplet /> <span className='bg-primary_200 text-netural_300 px-2'>{donar.blood_group}</span></p>
