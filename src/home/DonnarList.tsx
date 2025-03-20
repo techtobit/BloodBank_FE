@@ -56,7 +56,9 @@ function DonnarList() {
 		url.searchParams.append('page', currentPage.toString());
 
 		Object.entries(params).forEach(([key, value]) => {
-			if (value) url.searchParams.append(key, encodeURIComponent(value));
+			if (value && (typeof value === 'string' || typeof value === 'number')) {
+				url.searchParams.append(key, encodeURIComponent(value.toString()));
+			}
 		})
 
 		try {
@@ -75,8 +77,7 @@ function DonnarList() {
 		fetchDonars()
 	}, [currentPage])
 
-	const onSubmit = (e: any) => {
-		console.log(e)
+	const onSubmit = (e: DonarSearchType) => {
 		fetchDonars({
 			division: e.division,
 			district: e.district,
@@ -98,7 +99,11 @@ function DonnarList() {
 			<form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-2 md:grid-cols-5  gap-4 p-10 items-center justify-center'>
 				<div className="">
 					<label htmlFor='division' className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
-					<select {...register("division", { required: true })} name='division' id='districts' onChange={handleSelectAddress}
+					<select {...register("division",
+						{
+							required: true,
+							validate: (value) => value !== 'বিভাগ নির্বাচন করুন'
+						})} name='division' id='districts' onChange={handleSelectAddress}
 						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					>
 						<option value="" disabled selected className=''  >বিভাগ নির্বাচন করুন</option>
@@ -110,7 +115,6 @@ function DonnarList() {
 						<option value="Rajshahi">রাজশাহী</option>
 						<option value="Rangpur">রংপুর</option>
 						<option value="Sylhet">সিলেট</option>
-
 					</select>
 				</div>
 				<div className="">
@@ -159,7 +163,7 @@ function DonnarList() {
 				<button className="w-full h-10 cursor-pointer flex justify-center items-center mt-7 bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md transition duration-300 ease focus:outline-none focus:border-primary_100">
 					দাতা খুজেন
 				</button>
-
+				{(errors.division || errors.district) && <p className='col-span-1 md:col-span-2 pl-2 inline-flex  text-balck bg-yellow-500'>বিভাগ ও জেলা নির্বাচন আবশ্যক !</p>}
 			</form>
 			<hr className="border-primary_300 dark:border-primary_300"></hr>
 			<div className='grid grid-cols-1 md:grid-cols-4 p-10 gap-4 justify-items-center items-center'>
