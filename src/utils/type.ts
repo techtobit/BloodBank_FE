@@ -40,10 +40,12 @@ export type DistrictType = BaseGeoType
 export type UpazilaType = BaseGeoType
 
 
-export type UserInteractionType = {
+export type FeedbackType = {
 	feedbacker_name: string,
 	feedback_subject: string,
 	feedback_details: string,
+}
+export type ReportType = {
 	report_to_donar: boolean,
 	report_to_seeker: boolean,
 	own_phone_number: number,
