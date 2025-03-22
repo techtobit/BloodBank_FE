@@ -11,11 +11,29 @@ import lShape from '../assets/svg/lShape.svg';
 import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { LogInInputType } from '../utils/type';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Login():React.ReactElement {
-	const { register, handleSubmit, formState: { errors } } = useForm<LogInInputType>();
+
+	const { register, reset, handleSubmit, formState: { errors } } = useForm<LogInInputType>();
+	
 	const onSubmit = (data:LogInInputType) => {
-		console.log(data);
+		const url = `${BASE_API_URL}login/`;
+		axios.post(url, data)
+		.then(response => {
+			console.log(response.data);
+			
+			localStorage.setItem('token', response.data.token);
+			localStorage.setItem('user_id', response.data.user_id);
+			toast.success('লগইন সফল হয়েছে');
+			reset();
+		})
+		.catch(function (error) {
+			toast.error(error.response.data.error);
+			console.log(error.config);
+		})
 	}
 	return (
 		<div className='w-full h-screen bg-netural_300 flex justify-center items-center'>
