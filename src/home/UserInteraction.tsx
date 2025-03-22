@@ -8,7 +8,7 @@ const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 import { toast } from 'react-toastify';
 
 function UserInteraction(): React.ReactElement {
-	const { register, handleSubmit, formState: { errors } } = useForm<ReportType>();
+	const { register, reset, handleSubmit, formState: { errors } } = useForm<ReportType>();
 	const [isActiveBtn, setIsActiveBtn] = useState<boolean>(true)
 	const [checkedBox, setCheckedBox] = useState<string | null>(null);
 
@@ -17,6 +17,7 @@ function UserInteraction(): React.ReactElement {
 		axios.post(`${BASE_API_URL}report/`, data)
 		.then(response => {
 			toast.success(response.data.message);
+			reset();
 		})
 		.catch(function (error) {
 			toast.error('ব্যর্থ হয়েছে! আবার চেষ্টা করুন');

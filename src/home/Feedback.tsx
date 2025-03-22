@@ -6,12 +6,13 @@ import { toast } from 'react-toastify';
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function Feedback():React.ReactElement {
-		const { register, handleSubmit, formState: { errors } } = useForm<FeedbackType>();
+		const { register, reset, handleSubmit, formState: { errors } } = useForm<FeedbackType>();
 		const onSubmitFeedback = (data:FeedbackType) => {
 			const url = `${BASE_API_URL}feedback/`;
 			axios.post(url, data)
 			.then(response => {
 				toast.success(response.data.message);
+				reset();
 			})
 			.catch(function (error) {
 				toast.error('ব্যর্থ হয়েছে! আবার চেষ্টা করুন');

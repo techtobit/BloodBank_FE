@@ -34,3 +34,49 @@
 	// 			setActionFilter(true)
 	// 		})
 	// }
+
+
+
+
+
+		// const fetchDonars = async (params = {}) => {
+	// 	const url = new URL(`${BASE_API_URL}donars/`);
+	// 	if(filterActive===true){
+
+	// 		Object.entries(params).forEach(([key, value]) => {
+	// 			url.searchParams.append(key, encodeURIComponent(value.toString()));
+	// 		})
+	// 	}else{
+	// 		url.searchParams.append('page', currentPage.toString());
+	// 	}
+
+	// 	console.log(url.toString())
+
+
+	// 	try {
+	// 		const response = await fetch(url.toString());
+	// 		const data = await response.json();
+	// 		setDonars(data.results)
+	// 		setCoutPages(Math.ceil(data?.count / 12))
+	// 		setFilterActive(false)
+	// 	}
+	// 	catch (error) {
+	// 		console.error('There was an error!', error);
+	// 	}
+
+	// }
+
+	// useEffect(() => {
+	// 	fetchDonars()
+	// }, [currentPage])
+
+	// const onSubmit = (e: DonarSearchType) => {
+	// 	setFilterActive(true)
+	// 	fetchDonars({
+	// 		division: e.division,
+	// 		district: e.district,
+	// 		upazila: e.upazila ? e.upazila : '',
+	// 		blood_group: e.blood_group ? e.blood_group : '',
+	// 	});
+
+	// }

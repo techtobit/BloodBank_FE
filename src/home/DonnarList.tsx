@@ -30,47 +30,7 @@ function DonnarList() {
 
 	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
-	// const fetchDonars = async (params = {}) => {
-	// 	const url = new URL(`${BASE_API_URL}donars/`);
-	// 	if(filterActive===true){
 
-	// 		Object.entries(params).forEach(([key, value]) => {
-	// 			url.searchParams.append(key, encodeURIComponent(value.toString()));
-	// 		})
-	// 	}else{
-	// 		url.searchParams.append('page', currentPage.toString());
-	// 	}
-
-	// 	console.log(url.toString())
-
-
-	// 	try {
-	// 		const response = await fetch(url.toString());
-	// 		const data = await response.json();
-	// 		setDonars(data.results)
-	// 		setCoutPages(Math.ceil(data?.count / 12))
-	// 		setFilterActive(false)
-	// 	}
-	// 	catch (error) {
-	// 		console.error('There was an error!', error);
-	// 	}
-
-	// }
-
-	// useEffect(() => {
-	// 	fetchDonars()
-	// }, [currentPage])
-
-	// const onSubmit = (e: DonarSearchType) => {
-	// 	setFilterActive(true)
-	// 	fetchDonars({
-	// 		division: e.division,
-	// 		district: e.district,
-	// 		upazila: e.upazila ? e.upazila : '',
-	// 		blood_group: e.blood_group ? e.blood_group : '',
-	// 	});
-
-	// }
 
 	const fetchDonars = async (filterUrl: string = "") => {
 		try {
@@ -112,7 +72,7 @@ function DonnarList() {
 				backgroundPosition: 'center',
 				opacity: 1.5
 			}}
-			className='w-full min-h-screen bg-netural_300'>
+			className='w-full min-h-screen relative bg-netural_300'>
 
 			<form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-2 md:grid-cols-5  gap-4 p-10 items-center justify-center'>
 				<div className="">
@@ -183,6 +143,7 @@ function DonnarList() {
 				</button>
 				{(errors.division || errors.district) && <p className='col-span-1 md:col-span-2 pl-2 inline-flex  text-balck bg-yellow-500'>বিভাগ ও জেলা নির্বাচন আবশ্যক !</p>}
 			</form>
+			
 			<hr className="border-primary_300 dark:border-primary_300"></hr>
 			<div className='grid grid-cols-1 md:grid-cols-4 p-10 gap-4 justify-items-center items-center'>
 				{
@@ -212,7 +173,7 @@ function DonnarList() {
 				)
 			}
 
-			<div className='bottom-0'>
+			<div className=''>
 				{
 					countPages > 1 && (
 						<div className='flex justify-center items-center gap-2'>
