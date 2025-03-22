@@ -6,6 +6,7 @@ import { DonarSearchType, DonarType } from '../utils/type';
 import useGeoDetails from '../hook/useGeoDetails';
 import { Link } from 'react-router';
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
+import axios from 'axios';
 
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 const AVATAR_BASE_URL = import.meta.env.VITE_API_AVATAR_URL;
@@ -18,6 +19,7 @@ function DonnarList() {
 	const [donars, setDonars] = useState<DonarType[]>([])
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [countPages, setCoutPages] = useState<number>(0)
+	// const [filterActive, setFilterActive] = useState<boolean>(false)
 
 	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const id = e.target.id;
@@ -28,44 +30,78 @@ function DonnarList() {
 
 	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
-	const fetchDonars = async (params = {}) => {
-		const url = new URL(`${BASE_API_URL}donars/`);
-		url.searchParams.append('page', currentPage.toString());
+	// const fetchDonars = async (params = {}) => {
+	// 	const url = new URL(`${BASE_API_URL}donars/`);
+	// 	if(filterActive===true){
 
-		Object.entries(params).forEach(([key, value]) => {
-			if (value && (typeof value === 'string' || typeof value === 'number')) {
-				url.searchParams.append(key, encodeURIComponent(value.toString()));
-			}
-		})
+	// 		Object.entries(params).forEach(([key, value]) => {
+	// 			url.searchParams.append(key, encodeURIComponent(value.toString()));
+	// 		})
+	// 	}else{
+	// 		url.searchParams.append('page', currentPage.toString());
+	// 	}
 
+	// 	console.log(url.toString())
+
+
+	// 	try {
+	// 		const response = await fetch(url.toString());
+	// 		const data = await response.json();
+	// 		setDonars(data.results)
+	// 		setCoutPages(Math.ceil(data?.count / 12))
+	// 		setFilterActive(false)
+	// 	}
+	// 	catch (error) {
+	// 		console.error('There was an error!', error);
+	// 	}
+
+	// }
+
+	// useEffect(() => {
+	// 	fetchDonars()
+	// }, [currentPage])
+
+	// const onSubmit = (e: DonarSearchType) => {
+	// 	setFilterActive(true)
+	// 	fetchDonars({
+	// 		division: e.division,
+	// 		district: e.district,
+	// 		upazila: e.upazila ? e.upazila : '',
+	// 		blood_group: e.blood_group ? e.blood_group : '',
+	// 	});
+
+	// }
+
+	const fetchDonars = async (filterUrl: string = "") => {
 		try {
-			const response = await fetch(url.toString());
-			const data = await response.json();
+			let queryUrl=null;
+			if(filterUrl){
+				queryUrl=filterUrl
+			}else{
+				queryUrl=`${BASE_API_URL}donars/?page=${[currentPage]}`
+			}
+			const response = await axios.get(queryUrl)
+			const data = response.data;
+			setCoutPages(Math.ceil(data?.count / 12))
 			setDonars(data.results)
-			setCoutPages(data?.count / 12)
 		}
 		catch (error) {
 			console.error('There was an error!', error);
 		}
-
 	}
 
 	useEffect(() => {
-		fetchDonars()
-	}, [currentPage])
+			fetchDonars("")
+		}, [currentPage])
 
-	const onSubmit = (e: DonarSearchType) => {
-		fetchDonars({
-			division: e.division,
-			district: e.district,
-			upazila: e.upazila,
-			blood_group: e.blood_group,
-		});
+	const onSubmit = async(e: any) => {
+		const filterUrl = `${BASE_API_URL}donars/?division=${e.division}&district=${e.district}&upazila=${e?.upazila}&blood_group=${encodeURIComponent(e?.blood_group)}`
+		fetchDonars(filterUrl)
 	}
 
 	const handleReset = () => {
 		reset();
-		fetchDonars()
+		fetchDonars('')
 	};
 
 	return (
@@ -182,11 +218,11 @@ function DonnarList() {
 						<div className='flex justify-center items-center gap-2'>
 							<button
 								disabled={currentPage <= 1}
-								className={`flex items-center bg-primary_100 text-netural_300 px-5 py-2 font-bold rounded-md ${currentPage <= 1 ? "cursor-not-allowed opacity-50" : "hover:bg-primary_100"} `} onClick={() => setCurrentPage(currentPage - 1)}><BiLeftArrow/> পূর্ববর্তী</button>
+								className={`flex items-center bg-primary_100 text-netural_300 px-5 py-2 font-bold rounded-md ${currentPage <= 1 ? "cursor-not-allowed opacity-50" : "hover:bg-primary_100"} `} onClick={() => setCurrentPage(currentPage - 1)}><BiLeftArrow /> পূর্ববর্তী</button>
 							<div className='flex gap-4'>
 								{
 									[...Array(countPages)].map((_, index) => (
-										<button key={index} className={`flex items-center px-[20px] py-[8px] font-bold  rounded-md ${currentPage === index+1  ? "bg-primary_300 text-netural_300" : "bg-primary_100 text-netural_300 hover:bg-primary_200"}`}
+										<button key={index} className={`flex items-center px-[20px] py-[8px] font-bold  rounded-md ${currentPage === index + 1 ? "bg-primary_300 text-netural_300" : "bg-primary_100 text-netural_300 hover:bg-primary_200"}`}
 											onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
 									))
 								}
@@ -194,7 +230,7 @@ function DonnarList() {
 							<button
 								disabled={currentPage >= countPages}
 								className={`flex items-center bg-primary_100 text-netural_300 p-2 font-bold rounded-md ${currentPage >= countPages ? "cursor-not-allowed opacity-50" : "hover:bg-primary_100"} `}
-								onClick={() => setCurrentPage(currentPage + 1)}>পরবর্তী  <BiRightArrow/></button>
+								onClick={() => setCurrentPage(currentPage + 1)}>পরবর্তী  <BiRightArrow /></button>
 						</div>
 					)
 				}
