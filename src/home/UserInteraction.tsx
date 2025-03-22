@@ -13,7 +13,8 @@ function UserInteraction(): React.ReactElement {
 	const [checkedBox, setCheckedBox] = useState<string | null>(null);
 
 	const onSubmit = (data: ReportType) => {
-		axios.post(`http://127.0.0.1:8000/api/v0.1/report/`, data)
+		console.log(data)
+		axios.post(`${BASE_API_URL}report/`, data)
 		.then(response => {
 			toast.success(response.data.message);
 		})

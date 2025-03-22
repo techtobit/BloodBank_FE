@@ -2,6 +2,7 @@
 type BaseInputType = {
 	phone_number: number,
 	password: string,
+	created_at: Date,
 }
 
 type GeoAddressType = {

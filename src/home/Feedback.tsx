@@ -3,11 +3,12 @@ import {FeedbackType} from '../utils/type'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function Feedback():React.ReactElement {
 		const { register, handleSubmit, formState: { errors } } = useForm<FeedbackType>();
 		const onSubmitFeedback = (data:FeedbackType) => {
-			const url = 'http://127.0.0.1:8000/api/v0.1/feedback/'
+			const url = `${BASE_API_URL}feedback/`;
 			axios.post(url, data)
 			.then(response => {
 				toast.success(response.data.message);
