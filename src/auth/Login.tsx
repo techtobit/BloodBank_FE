@@ -23,8 +23,6 @@ function Login():React.ReactElement {
 		const url = `${BASE_API_URL}login/`;
 		axios.post(url, data)
 		.then(response => {
-			console.log(response.data);
-			
 			localStorage.setItem('token', response.data.token);
 			localStorage.setItem('user_id', response.data.user_id);
 			toast.success('লগইন সফল হয়েছে');
