@@ -5,6 +5,8 @@ import Register from './auth/Register'
 import Login from './auth/Login'
 import Outlet from './home/Outlet'
 import Footer from './home/Footer'
+import ProtectedRoute from './auth/ProtectedRoute'
+import UserProfile from './auth/UserProfile'
 
 function App() {
 
@@ -12,8 +14,9 @@ function App() {
     <section className=''>
       <Routes>
         <Route index element={<Outlet />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path='/profile' element={<ProtectedRoute><UserProfile/></ProtectedRoute>}/>
       </Routes>
       <Footer />
       <ToastContainer

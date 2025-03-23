@@ -8,7 +8,7 @@ import fill_Plus from '../assets/svg/Fill_Plus.svg';
 import plus from '../assets/svg/plus.svg';
 import uShape from '../assets/svg/uShape.svg';
 import lShape from '../assets/svg/lShape.svg';
-import { Link } from 'react-router';
+import { Link, redirect, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { LogInInputType } from '../utils/type';
 import axios from 'axios';
@@ -16,8 +16,8 @@ import { toast } from 'react-toastify';
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Login():React.ReactElement {
-
 	const { register, reset, handleSubmit, formState: { errors } } = useForm<LogInInputType>();
+	const navigate= useNavigate()
 	
 	const onSubmit = (data:LogInInputType) => {
 		const url = `${BASE_API_URL}login/`;
@@ -26,6 +26,7 @@ function Login():React.ReactElement {
 			localStorage.setItem('token', response.data.token);
 			localStorage.setItem('user_id', response.data.user_id);
 			toast.success('লগইন সফল হয়েছে');
+			navigate('/profile');
 			reset();
 		})
 		.catch(function (error) {
