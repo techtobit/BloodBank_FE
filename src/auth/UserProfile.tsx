@@ -137,7 +137,7 @@ function UserProfile(): React.ReactElement {
 						defaultValue={user?.total_donation}
 						{...register("total_donation", { required: true, maxLength: 30 })}
 						placeholder={errors.total_donation ? 'এই ঘরটি পূরণ করেনি' : ' '}
-						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						className="w-full h-10 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						type="number" />
 				</div>
 				<div className="md:mt-4">
@@ -149,7 +149,7 @@ function UserProfile(): React.ReactElement {
 						value={(user?.last_donation_date) ? user?.last_donation_date : 'রক্তদান দেননি'}
 						{...register("last_donation_date")}
 						placeholder={errors.last_donation_date ? 'এই ঘরটি পূরণ করেনি' : ' '}
-						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						className="w-full h-10 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						type="text" />
 				</div>
 				<div className="md:mt-4">
@@ -199,27 +199,27 @@ function UserProfile(): React.ReactElement {
 					<label className="block mb-1 text-md font-bold text-primary_200">শেষ লগইন</label>
 					<input
 						id='last_login'
-						disabled={!isEditAtctive}
+						disabled
 						defaultValue={user?.last_login}
 						{...register("last_login", { required: true, maxLength: 30 })}
 						placeholder={errors.last_login ? 'এই ঘরটি পূরণ করেনি' : ''}
-						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						className="w-full h-10 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						type="text" />
 				</div>
 				<div className="md:mt-4">
 					<label className="block mb-1 text-md font-bold text-primary_200">একাউন্ট তৈরি হয়েছে</label>
 					<input
 						id='created_at'
-						disabled={!isEditAtctive}
+						disabled
 						defaultValue={user?.created_at}
 						{...register("created_at", { required: true, maxLength: 30 })}
 						placeholder={errors.created_at ? 'এই ঘরটি পূরণ করেনি' : ''}
-						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						className="w-full h-10 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						type="text" />
 				</div>
 
-				<button className={isEditAtctive ? 'col-span-1 md:col-span-2 bg-primary_200 text-netural_200 font-bold h-10 rounded-md hover:bg-primary_300' : 'col-span-1 md:col-span-2 bg-netural_300 text-primary_100 border border-primary_300 font-bold h-10 rounded-md hover:bg-primary_300 hover:text-netural_300 '} 
-				onClick={() => setIsEditAtctive(!isEditAtctive)}>{isEditAtctive ? 'Save' : 'Update Profile'}
+				<button className={isEditAtctive ? 'col-span-1 md:col-span-2 bg-primary_200 text-netural_200 font-bold h-10 rounded-md hover:bg-primary_100' : 'col-span-1 md:col-span-2 bg-primary_300 text-netural_300 border border-primary_300 font-bold h-10 rounded-md hover:bg-primary_100 hover:text-secondary_100'} 
+				onClick={() => setIsEditAtctive(!isEditAtctive)}>{isEditAtctive ? 'সেইভ করুন' : 'প্রোফাইল আপডেট করুন'}
 					
 				</button>
 			</form>
