@@ -8,7 +8,7 @@ import fill_Plus from '../assets/svg/Fill_Plus.svg';
 import plus from '../assets/svg/plus.svg';
 import uShape from '../assets/svg/uShape.svg';
 import lShape from '../assets/svg/lShape.svg';
-import { Link, redirect, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { LogInInputType } from '../utils/type';
 import axios from 'axios';
