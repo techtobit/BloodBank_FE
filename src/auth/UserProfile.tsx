@@ -11,17 +11,17 @@ function UserProfile(): React.ReactElement {
 	const [isEditAtctive, setIsEditAtctive] = React.useState<boolean>(false);
 	const { register, handleSubmit, formState: { errors } } = useForm();
 
-		const [findUnder, setFindUnder] = useState<string>()
-		const [searchQuery, setSearchQuery] = useState<string>()
-	
-		const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
-			const id = e.target.id;
-			const value = e.target.value;
-			setFindUnder(id)
-			setSearchQuery(value)
-		}
-	
-		const [district, upazila] = useGeoDetails(findUnder, searchQuery)
+	const [findUnder, setFindUnder] = useState<string>()
+	const [searchQuery, setSearchQuery] = useState<string>()
+
+	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const id = e.target.id;
+		const value = e.target.value;
+		setFindUnder(id)
+		setSearchQuery(value)
+	}
+
+	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
 	React.useEffect(() => {
 		const token = localStorage.getItem('token');
@@ -71,8 +71,14 @@ function UserProfile(): React.ReactElement {
 
 
 	return (
-		<div className='w-full h-screen bg-netural_300 flex justify-center items-center'>
-			<form onSubmit={handleSubmit(onSubmit)} className="w-full gird grid-cols-2 bg-netural_100 p-4 rounded-md">
+		<div className='w-full h-screen flex flex-col bg-netural_300 flex justify-center items-center'>
+			<div className='w-4/6 h-25 flex justify-center bg-primary_200 opacity-70  font-bold text-lg '>
+			</div>
+				<img className='w-25 top-5 absolute bg-netural_100 rounded-full border-primary_300 border-4'
+					src="https://api.dicebear.com/9.x/avataaars/svg?seed=Jude"
+					alt="avatar" />
+
+			<form onSubmit={handleSubmit(onSubmit)} className="w-4/6 grid grid-cols-2 gap-3 bg-netural_100 p-4 ">
 				<div className="md:mt-4">
 					<label className="block mb-1 text-md font-bold text-primary_200">নাম*</label>
 					<input
@@ -80,7 +86,7 @@ function UserProfile(): React.ReactElement {
 						disabled={!isEditAtctive}
 						defaultValue={user?.full_name}
 						{...register("full_name", { required: true, maxLength: 30 })}
-						placeholder={errors.full_name ? 'এই ঘরটি পূরণ করেনি' : 'সম্পূর্ন নাম লিখুন'}
+						placeholder={errors.full_name ? 'এই ঘরটি পূরণ করেনি' : ''}
 						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 						type="text" />
 				</div>
@@ -111,7 +117,7 @@ function UserProfile(): React.ReactElement {
 					<select disabled={!isEditAtctive} {...register("blood_group")} id='blood_group'
 						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
 					>
-						<option defaultValue={user?.blood_group}  selected className=''>{user?.blood_group}</option>
+						<option defaultValue={user?.blood_group} selected className=''>{user?.blood_group}</option>
 						<option value="A+" className=''>A+ (এ পজেটিভ)</option>
 						<option value="A-">A- (এ নেগেটিভ)</option>
 						<option value="B+">B+ (বি পজেটিভ)</option>
@@ -122,6 +128,29 @@ function UserProfile(): React.ReactElement {
 						<option value="O-">O- (ও নেগেটিভ)</option>
 
 					</select>
+				</div>
+				<div className="md:mt-4">
+					<label className="block mb-1 text-md font-bold text-primary_200">মোট রক্তদান</label>
+					<input
+						id='total_donation'
+						disabled
+						defaultValue={user?.total_donation}
+						{...register("total_donation", { required: true, maxLength: 30 })}
+						placeholder={errors.total_donation ? 'এই ঘরটি পূরণ করেনি' : ' '}
+						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						type="number" />
+				</div>
+				<div className="md:mt-4">
+					<label className="block mb-1 text-md font-bold text-primary_200">শেষ রক্তদান</label>
+					<input
+						id='last_donation_date'
+						disabled
+						defaultValue={user?.last_donation_date}
+						value={(user?.last_donation_date) ? user?.last_donation_date : 'রক্তদান দেননি'}
+						{...register("last_donation_date")}
+						placeholder={errors.last_donation_date ? 'এই ঘরটি পূরণ করেনি' : ' '}
+						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						type="text" />
 				</div>
 				<div className="md:mt-4">
 					<label htmlFor='division' className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
@@ -166,11 +195,33 @@ function UserProfile(): React.ReactElement {
 						}
 					</select>
 				</div>
+				<div className="md:mt-4">
+					<label className="block mb-1 text-md font-bold text-primary_200">শেষ লগইন</label>
+					<input
+						id='last_login'
+						disabled={!isEditAtctive}
+						defaultValue={user?.last_login}
+						{...register("last_login", { required: true, maxLength: 30 })}
+						placeholder={errors.last_login ? 'এই ঘরটি পূরণ করেনি' : ''}
+						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						type="text" />
+				</div>
+				<div className="md:mt-4">
+					<label className="block mb-1 text-md font-bold text-primary_200">একাউন্ট তৈরি হয়েছে</label>
+					<input
+						id='created_at'
+						disabled={!isEditAtctive}
+						defaultValue={user?.created_at}
+						{...register("created_at", { required: true, maxLength: 30 })}
+						placeholder={errors.created_at ? 'এই ঘরটি পূরণ করেনি' : ''}
+						className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3  transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+						type="text" />
+				</div>
 
-
-				<div className={errors.confirm_password ? 'col-span-1 md:col-span-2 pl-2 inline-flex text-primary_100 bg-yellow-500 font-bold' : 'invisible'}>{errors.confirm_password && errors.confirm_password.message}</div>
-
-				<button onClick={() => setIsEditAtctive(!isEditAtctive)}>{isEditAtctive ? 'Edi' : 'Edit'}</button>
+				<button className={isEditAtctive ? 'col-span-1 md:col-span-2 bg-primary_200 text-netural_200 font-bold h-10 rounded-md hover:bg-primary_300' : 'col-span-1 md:col-span-2 bg-netural_300 text-primary_100 border border-primary_300 font-bold h-10 rounded-md hover:bg-primary_300 hover:text-netural_300 '} 
+				onClick={() => setIsEditAtctive(!isEditAtctive)}>{isEditAtctive ? 'Save' : 'Update Profile'}
+					
+				</button>
 			</form>
 		</div>
 	)
