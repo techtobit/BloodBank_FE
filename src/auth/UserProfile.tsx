@@ -4,9 +4,13 @@ import Input from '../shared/Input';
 import Flag_of_Bangladesh from '../assets/Flag_of_Bangladesh.svg';
 import { useForm } from 'react-hook-form';
 import useGeoDetails from '../hook/useGeoDetails';
-import BackgroundAsset from '../shared/BackgroundAsset';
 import Tooltip from '../shared/Tooltip';
 import { useNavigate } from 'react-router';
+import backgroundAssets from '../assets/backgroundAssets.svg'
+
+
+
+
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 
 function UserProfile(): React.ReactElement {
@@ -80,8 +84,14 @@ function UserProfile(): React.ReactElement {
 
 
 	return (
-		<>
-			<BackgroundAsset />
+		<section className='w-full min-h-screens'
+		style={{
+						backgroundImage: `url(${backgroundAssets})`,
+						backgroundSize: 'cover',
+						backgroundPosition: 'center',
+						opacity: 1.5
+					}}
+		>
 			<div className='w-full h-screens flex items-center relative'>
 				<div className='w-1/5 h-[80vh] flex flex-col p-4 ml-4 bg-secondary_300/30 backdrop-invert backdrop-opacity-10 rounded-md shadow-lg border-r border-primary_300'>
 					<div className='w-full flex flex-col items-center justify-center gap-2'>
@@ -249,7 +259,7 @@ function UserProfile(): React.ReactElement {
 					</form>
 				</div>
 			</div>
-		</>
+		</section>
 	)
 }
 export default UserProfile;
