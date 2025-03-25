@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import useGeoDetails from '../hook/useGeoDetails';
 import BackgroundAsset from '../shared/BackgroundAsset';
 import Tooltip from '../shared/Tooltip';
+import { useNavigate } from 'react-router';
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 
 function UserProfile(): React.ReactElement {
@@ -69,6 +70,12 @@ function UserProfile(): React.ReactElement {
 	}
 
 
+	const navigate= useNavigate()
+	const handleLogOut =()=>{
+		localStorage.removeItem('token')
+		localStorage.removeItem('user_id')
+		navigate('', {replace: true})
+	}
 
 
 
@@ -84,8 +91,9 @@ function UserProfile(): React.ReactElement {
 						<p className='text-md font-bold text-primary_200 text-center'>স্বাগতম {user?.full_name}</p>
 					</div>
 					<ul className='pt-6 flex flex-col gap-4'>
-						<li onClick={() => setIsActiveBtn(true)} className={`w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 ${isActiveBtn ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}>প্রোফাইল</li>
-						<li onClick={() => setIsActiveBtn(false)} className={`w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 ${!(isActiveBtn) ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}>Profile</li>
+						<li onClick={() => setIsActiveBtn(true)} className={`w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${isActiveBtn ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}>প্রোফাইল</li>
+						<li onClick={() => setIsActiveBtn(false)} className={`w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${!(isActiveBtn) ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}>ডাটা জমা</li>
+						<button onClick={handleLogOut} className={`w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300 cursor-pointer`}>লগ আউট</button>
 					</ul>
 				</div>
 
@@ -96,7 +104,7 @@ function UserProfile(): React.ReactElement {
 
 					<form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-2 mt-2 bg-white/30 backdrop-invert backdrop-opacity-10 px-10 py-2 rounded-md shadow-lg">
 						<div className="">
-							<label className="block mb-2 text-md font-bold text-primary_200">নাম*</label>
+							<label className="block  text-md font-bold text-primary_200">নাম*</label>
 							<input
 								id='full_name'
 								disabled={!isEditAtctive}
@@ -107,7 +115,7 @@ function UserProfile(): React.ReactElement {
 								type="text" />
 						</div>
 						<div className="relative ">
-							<label className="block mb-2 text-md font-bold text-primary_200">মোবাইল নাম্বার*</label>
+							<label className="block  text-md font-bold text-primary_200">মোবাইল নাম্বার*</label>
 							<div className="absolute top-10 left-0 flex items-center pl-3">
 								<div className="h-full gap-2 text-sm flex items-center bg-netural_100 text-slate-700">
 									<img src={Flag_of_Bangladesh} alt="Flag_of_Bangladesh" className="w-6 h-4" />
@@ -129,7 +137,7 @@ function UserProfile(): React.ReactElement {
 							/>
 						</div>
 						<div className="md:mt-4">
-							<label htmlFor='blood_group' className="block mb-2 text-md font-bold text-primary_200 ">রক্তের গ্রুপ*</label>
+							<label htmlFor='blood_group' className="block  text-md font-bold text-primary_200 ">রক্তের গ্রুপ*</label>
 							<select disabled={!isEditAtctive} {...register("blood_group")} id='blood_group'
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							>
@@ -146,7 +154,7 @@ function UserProfile(): React.ReactElement {
 							</select>
 						</div>
 						<div className="md:mt-4 group relative">
-							<label className="block mb-2 text-md font-bold text-primary_200">মোট রক্তদান</label>
+							<label className="block  text-md font-bold text-primary_200">মোট রক্তদান</label>
 							<input
 								id='total_donation'
 								disabled
@@ -158,7 +166,7 @@ function UserProfile(): React.ReactElement {
 							<Tooltip children={'এডিট কারা যাবে না'} />
 						</div>
 						<div className="md:mt-4">
-							<label className="block mb-2 text-md font-bold text-primary_200">শেষ রক্তদান</label>
+							<label className="block  text-md font-bold text-primary_200">শেষ রক্তদান</label>
 							<input
 								id='last_donation_date'
 								disabled
@@ -170,7 +178,7 @@ function UserProfile(): React.ReactElement {
 								type="text" />
 						</div>
 						<div className="md:mt-4">
-							<label htmlFor='division' className="block mb-2 text-md font-bold text-primary_200 ">বিভাগ*</label>
+							<label htmlFor='division' className="block  text-md font-bold text-primary_200 ">বিভাগ*</label>
 							<select disabled={!isEditAtctive} {...register("division", { required: true })} name='division' id='districts' onChange={handleSelectAddress}
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							>
@@ -187,7 +195,7 @@ function UserProfile(): React.ReactElement {
 							</select>
 						</div>
 						<div className="md:mt-4">
-							<label htmlFor='district' className="block mb-2 text-md font-bold text-primary_200">জেলা*</label>
+							<label htmlFor='district' className="block  text-md font-bold text-primary_200">জেলা*</label>
 							<select disabled={!isEditAtctive} {...register("district", { required: true })} name='district' id='upazilas' onChange={handleSelectAddress}
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							>
@@ -200,7 +208,7 @@ function UserProfile(): React.ReactElement {
 							</select>
 						</div>
 						<div className="md:mt-4">
-							<label className="block mb-2 text-md font-bold text-primary_200">উপজেলা*</label>
+							<label className="block  text-md font-bold text-primary_200">উপজেলা*</label>
 							<select disabled={!isEditAtctive} {...register("upazila", { required: true })} name='upazila'
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							>
@@ -213,7 +221,7 @@ function UserProfile(): React.ReactElement {
 							</select>
 						</div>
 						<div className="md:mt-4">
-							<label className="block mb-2 text-md font-bold text-primary_200">শেষ লগইন</label>
+							<label className="block  text-md font-bold text-primary_200">শেষ লগইন</label>
 							<input
 								id='last_login'
 								disabled
@@ -224,7 +232,7 @@ function UserProfile(): React.ReactElement {
 								type="text" />
 						</div>
 						<div className="md:mt-4">
-							<label className="block mb-2 text-md font-bold text-primary_200">একাউন্ট তৈরি হয়েছে</label>
+							<label className="block  text-md font-bold text-primary_200">একাউন্ট তৈরি হয়েছে</label>
 							<input
 								id='created_at'
 								disabled
@@ -235,7 +243,7 @@ function UserProfile(): React.ReactElement {
 								type="text" />
 						</div>
 
-						<button className={`mt-6 col-span-2 h-12 rounded-md font-bold transition-all duration-300 ${isEditAtctive ? 'bg-primary_200 text-netural_200 hover:bg-primary_100' : 'bg-primary_300 text-netural_300 border border-primary_300 hover:bg-primary_100 hover:text-secondary_100'}`}
+						<button className={`mt-6 col-span-2 h-12 rounded-md font-bold transition-all duration-300 cursor-pointer ${isEditAtctive ? 'bg-primary_200 text-netural_200 hover:bg-primary_100' : 'bg-primary_300 text-netural_300 border border-primary_300 hover:bg-primary_100 hover:text-secondary_100'}`}
 							onClick={() => setIsEditAtctive(!isEditAtctive)}>{isEditAtctive ? 'সেইভ করুন' : 'প্রোফাইল আপডেট করুন'}
 						</button>
 					</form>
