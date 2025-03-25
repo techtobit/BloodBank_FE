@@ -23,6 +23,8 @@ type UserProfileType = Omit<RegisterInputType,  'password' | 'confirm_password'>
 	last_donation: Date,
 	total_donation: number,
 	last_donation_date: Date | null,
+	last_login: Date,
+	created_at: Date,
 	is_active: boolean
 }
 

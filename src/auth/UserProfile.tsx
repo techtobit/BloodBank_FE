@@ -1,20 +1,23 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Flag_of_Bangladesh from '../assets/Flag_of_Bangladesh.svg';
 import { useForm } from 'react-hook-form';
 import useGeoDetails from '../hook/useGeoDetails';
 import Tooltip from '../shared/Tooltip';
 import { useNavigate } from 'react-router';
 import backgroundAssets from '../assets/backgroundAssets.svg'
+import { DonarType } from '../utils/type'
+import { toast } from 'react-toastify';
+import Loading from '../utils/loading/Loading';
 
 
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 
 function UserProfile(): React.ReactElement {
-	const [user, setUser] = React.useState<any>([]);
+	const [user, setUser] = useState<DonarType | null>(null);
 	const [isActiveBtn, setIsActiveBtn] = useState<boolean>(true)
 	const [isEditAtctive, setIsEditAtctive] = React.useState<boolean>(false);
-	const { register, handleSubmit, formState: { errors } } = useForm();
+	const { register, handleSubmit, formState: { errors } } = useForm<DonarType>();
 	const [findUnder, setFindUnder] = useState<string>()
 	const [searchQuery, setSearchQuery] = useState<string>()
 
@@ -27,7 +30,7 @@ function UserProfile(): React.ReactElement {
 
 	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const token = localStorage.getItem('token');
 		const userId = localStorage.getItem('user_id');
 		if (token) {
@@ -38,7 +41,6 @@ function UserProfile(): React.ReactElement {
 				}
 			})
 				.then(response => {
-					console.log(response.data);
 					setUser(response.data);
 				})
 				.catch(function (error) {
@@ -49,20 +51,21 @@ function UserProfile(): React.ReactElement {
 
 
 
-	const onSubmit = (data: any) => {
+	const onSubmit = (data: DonarType) => {
 		console.log(data);
 		const token = localStorage.getItem('token');
 		const userId = localStorage.getItem('user_id');
 		const url = `${BASE_API_URL}profile/${userId}/`;
-		console.log(data);
+		console.log(url);
 		axios.put(url, data, {
 			headers: {
 				'Authorization': `Token ${token}`
 			}
 		})
 			.then(response => {
-				console.log(response.data);
+
 				setUser(response.data);
+				toast.success('তথ্য আপডেইট হয়েছে');
 				setIsEditAtctive(false);
 			})
 			.catch(function (error) {
@@ -71,23 +74,23 @@ function UserProfile(): React.ReactElement {
 	}
 
 
-	const navigate= useNavigate()
-	const handleLogOut =()=>{
+	const navigate = useNavigate()
+	const handleLogOut = () => {
 		localStorage.removeItem('token')
 		localStorage.removeItem('user_id')
-		navigate('', {replace: true})
+		navigate('', { replace: true })
 	}
 
 
 
 	return (
 		<section className='w-full min-h-screens'
-		style={{
-						backgroundImage: `url(${backgroundAssets})`,
-						backgroundSize: 'cover',
-						backgroundPosition: 'center',
-						opacity: 1.5
-					}}
+			style={{
+				backgroundImage: `url(${backgroundAssets})`,
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+				opacity: 1.5
+			}}
 		>
 			<div className='w-full h-screens flex items-center relative'>
 				<div className='w-1/5 h-[80vh] flex flex-col p-4 ml-4 bg-secondary_300/30 backdrop-invert backdrop-opacity-10 rounded-md shadow-lg border-r border-primary_300'>
@@ -110,7 +113,17 @@ function UserProfile(): React.ReactElement {
 						আপনার প্রোফাইল আপডেইট করুন
 					</div>
 
-					<form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-2 mt-2 bg-white/30 backdrop-invert backdrop-opacity-10 px-10 py-2 rounded-md shadow-lg">
+					<form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-2 mt-2 bg-white/30 backdrop-invert backdrop-opacity-10 relative px-10 py-2 rounded-md shadow-lg">
+
+					<div className='absolute top-50 left-95'>
+
+						{
+							!user ?
+								<Loading />
+								:
+								''
+						}
+						</div>
 						<div className="">
 							<label className="block  text-md font-bold text-primary_200">নাম*</label>
 							<input
@@ -178,13 +191,12 @@ function UserProfile(): React.ReactElement {
 							<input
 								id='last_donation_date'
 								disabled
-								defaultValue={user?.last_donation_date}
-								value={(user?.last_donation_date) ? user?.last_donation_date : 'রক্তদান দেননি'}
+								defaultValue={user?.last_donation_date ? user.last_donation_date.toString() : ''}
+								value={(user?.last_donation_date) ? new Date(user.last_donation_date).toISOString() : 'রক্তদান দেননি'}
 								{...register("last_donation_date")}
-								placeholder={errors.last_donation_date ? 'এই ঘরটি পূরণ করেনি' : ' '}
 								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								type="text" />
-								<Tooltip children={'এই টি এডিট কারা যাবে না । রক্ত দিলে "জমা ডাটা" বাটনে চাপ দিন'} />
+							<Tooltip children={'এই টি এডিট কারা যাবে না । রক্ত দিলে "জমা ডাটা" বাটনে চাপ দিন'} />
 						</div>
 						<div className="md:mt-4">
 							<label htmlFor='division' className="block  text-md font-bold text-primary_200 ">বিভাগ*</label>
@@ -234,7 +246,7 @@ function UserProfile(): React.ReactElement {
 							<input
 								id='last_login'
 								disabled
-								defaultValue={user?.last_login}
+								defaultValue={user?.last_login ? new Date(user.last_login).toISOString() : ''}
 								{...register("last_login", { required: true, maxLength: 30 })}
 								placeholder={errors.last_login ? 'এই ঘরটি পূরণ করেনি' : ''}
 								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
@@ -245,12 +257,12 @@ function UserProfile(): React.ReactElement {
 							<input
 								id='created_at'
 								disabled
-								defaultValue={user?.created_at}
+								defaultValue={user?.created_at ? new Date(user.created_at).toISOString() : ''}
 								{...register("created_at", { required: true, maxLength: 30 })}
 								placeholder={errors.created_at ? 'এই ঘরটি পূরণ করেনি' : ''}
 								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								type="text" />
-								<Tooltip children={'এই টি এডিট কারা যাবে না ।'} />
+							<Tooltip children={'এই টি এডিট কারা যাবে না ।'} />
 						</div>
 
 						<button className={`mt-6 col-span-2 h-12 rounded-md font-bold transition-all duration-300 cursor-pointer ${isEditAtctive ? 'bg-primary_200 text-netural_200 hover:bg-primary_100' : 'bg-primary_300 text-netural_300 border border-primary_300 hover:bg-primary_100 hover:text-secondary_100'}`}
