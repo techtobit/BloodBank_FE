@@ -7,6 +7,7 @@ import Outlet from './home/Outlet'
 import Footer from './home/Footer'
 import ProtectedRoute from './auth/ProtectedRoute'
 import UserProfile from './auth/UserProfile'
+import Error404 from './shared/Error404'
 
 function App() {
 
@@ -17,8 +18,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path='/profile' element={<ProtectedRoute><UserProfile/></ProtectedRoute>}/>
+        <Route path='*' element={<Error404/>}/>
       </Routes>
       <Footer />
+
       <ToastContainer
         position="top-center"
         autoClose={5000}
