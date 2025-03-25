@@ -7,6 +7,7 @@ import useGeoDetails from '../hook/useGeoDetails';
 import { Link } from 'react-router';
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import axios from 'axios';
+import Loading from '../utils/loading/Loading';
 
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 const AVATAR_BASE_URL = import.meta.env.VITE_API_AVATAR_URL;
@@ -19,7 +20,7 @@ function DonnarList() {
 	const [donars, setDonars] = useState<DonarType[]>([])
 	const [currentPage, setCurrentPage] = useState<number>(1)
 	const [countPages, setCoutPages] = useState<number>(0)
-	// const [filterActive, setFilterActive] = useState<boolean>(false)
+	const [isLoading, setIsLoading] = useState<boolean>(true)
 
 	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const id = e.target.id;
@@ -30,20 +31,30 @@ function DonnarList() {
 
 	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
+	if(donars.length==0){
+		setTimeout(() => {
+			setIsLoading(false)
+		}, 10000);
+	}
+
 
 
 	const fetchDonars = async (filterUrl: string = "") => {
 		try {
-			let queryUrl=null;
-			if(filterUrl){
-				queryUrl=filterUrl
-			}else{
-				queryUrl=`${BASE_API_URL}donars/?page=${[currentPage]}`
+			let queryUrl = null;
+			if (filterUrl) {
+				queryUrl = filterUrl
+			} else {
+				queryUrl = `${BASE_API_URL}donars/?page=${[currentPage]}`
 			}
 			const response = await axios.get(queryUrl)
-			const data = response.data;
-			setCoutPages(Math.ceil(data?.count / 12))
-			setDonars(data.results)
+			if (response.status >= 200 && response.status < 300) {
+				setIsLoading(false)
+				const data = response.data;
+				setCoutPages(Math.ceil(data?.count / 12))
+				setDonars(data.results)
+			}
+
 		}
 		catch (error) {
 			console.error('There was an error!', error);
@@ -51,10 +62,10 @@ function DonnarList() {
 	}
 
 	useEffect(() => {
-			fetchDonars("")
-		}, [currentPage])
+		fetchDonars("")
+	}, [currentPage])
 
-	const onSubmit = async(e: any) => {
+	const onSubmit = async (e: any) => {
 		const filterUrl = `${BASE_API_URL}donars/?division=${e.division}&district=${e.district}&upazila=${e?.upazila}&blood_group=${encodeURIComponent(e?.blood_group)}`
 		fetchDonars(filterUrl)
 	}
@@ -143,8 +154,9 @@ function DonnarList() {
 				</button>
 				{(errors.division || errors.district) && <p className='col-span-1 md:col-span-2 pl-2 inline-flex  text-balck bg-yellow-500'>বিভাগ ও জেলা নির্বাচন আবশ্যক !</p>}
 			</form>
-			
+
 			<hr className="border-primary_300 dark:border-primary_300"></hr>
+
 			<div className='grid grid-cols-1 md:grid-cols-4 p-10 gap-4 justify-items-center items-center'>
 				{
 					donars?.map((donar, index) => (
@@ -164,16 +176,19 @@ function DonnarList() {
 				}
 			</div>
 			{
-				donars.length === 0 && (
-					<div className='flex flex-col justify-center items-center gap-4'>
-						<div className='w-95 bg-yellow-500 text-black text-center text-sm md:text-lg font-bold border rounded-md px-5 py-2'>কোন রক্তদাতা পাওয়া যায়নি</div>
-						<Link to='/register' className='w-95 bg-primary_300 text-netural_300 text-center text-sm md:text-lg font-bold border hover:bg-primary_100 rounded-md px-5 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100'>রক্ত দানকারী হিসাবে যোগদিন</Link>
-						<button onClick={handleReset} className='w-95 bg-yellow-500 text-black text-center text-sm md:text-lg font-bold border rounded-md px-5 py-2'>ফিল্টার বাতিল</button>
-					</div>
-				)
+				isLoading ?
+					<Loading />
+					:
+					donars.length === 0  && (
+						<div className='flex flex-col justify-center items-center gap-4'>
+							<div className='w-95 bg-yellow-500 text-black text-center text-sm md:text-lg font-bold border rounded-md px-5 py-2'>কোন রক্তদাতা পাওয়া যায়নি</div>
+							<Link to='/register' className='w-95 bg-primary_300 text-netural_300 text-center text-sm md:text-lg font-bold border hover:bg-primary_100 rounded-md px-5 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100'>রক্ত দানকারী হিসাবে যোগদিন</Link>
+							<button onClick={handleReset} className='w-95 bg-yellow-500 text-black text-center text-sm md:text-lg font-bold border rounded-md px-5 py-2'>ফিল্টার বাতিল</button>
+						</div>
+					)
 			}
 
-			<div className=''>
+			<div className='pagenations'>
 				{
 					countPages > 1 && (
 						<div className='flex justify-center items-center gap-2'>

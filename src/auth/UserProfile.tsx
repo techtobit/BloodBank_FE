@@ -1,14 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import Input from '../shared/Input';
 import Flag_of_Bangladesh from '../assets/Flag_of_Bangladesh.svg';
 import { useForm } from 'react-hook-form';
 import useGeoDetails from '../hook/useGeoDetails';
 import Tooltip from '../shared/Tooltip';
 import { useNavigate } from 'react-router';
 import backgroundAssets from '../assets/backgroundAssets.svg'
-
-
 
 
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
@@ -96,7 +93,8 @@ function UserProfile(): React.ReactElement {
 				<div className='w-1/5 h-[80vh] flex flex-col p-4 ml-4 bg-secondary_300/30 backdrop-invert backdrop-opacity-10 rounded-md shadow-lg border-r border-primary_300'>
 					<div className='w-full flex flex-col items-center justify-center gap-2'>
 						<img className='w-20 h-20 bg-netural_100 rounded-full border-primary_300 border'
-							src="https://api.dicebear.com/9.x/avataaars/svg?seed=Jude"
+							// src="https://api.dicebear.com/9.x/micah/svg?seed=Amaya"
+							src="https://avatar.iran.liara.run/public/24"
 							alt="avatar" />
 						<p className='text-md font-bold text-primary_200 text-center'>স্বাগতম {user?.full_name}</p>
 					</div>
@@ -126,7 +124,7 @@ function UserProfile(): React.ReactElement {
 						</div>
 						<div className="relative ">
 							<label className="block  text-md font-bold text-primary_200">মোবাইল নাম্বার*</label>
-							<div className="absolute top-10 left-0 flex items-center pl-3">
+							<div className="absolute top-8 left-0 flex items-center pl-3">
 								<div className="h-full gap-2 text-sm flex items-center bg-netural_100 text-slate-700">
 									<img src={Flag_of_Bangladesh} alt="Flag_of_Bangladesh" className="w-6 h-4" />
 									<span className='text-lg font-bold text-primary_100'>+88</span>
@@ -173,9 +171,9 @@ function UserProfile(): React.ReactElement {
 								placeholder={errors.total_donation ? 'এই ঘরটি পূরণ করেনি' : ' '}
 								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								type="number" />
-							<Tooltip children={'এডিট কারা যাবে না'} />
+							<Tooltip children={'এই টি এডিট কারা যাবে না । রক্ত দিলে "জমা ডাটা" বাটনে চাপ দিন'} />
 						</div>
-						<div className="md:mt-4">
+						<div className="md:mt-4 group">
 							<label className="block  text-md font-bold text-primary_200">শেষ রক্তদান</label>
 							<input
 								id='last_donation_date'
@@ -186,6 +184,7 @@ function UserProfile(): React.ReactElement {
 								placeholder={errors.last_donation_date ? 'এই ঘরটি পূরণ করেনি' : ' '}
 								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								type="text" />
+								<Tooltip children={'এই টি এডিট কারা যাবে না । রক্ত দিলে "জমা ডাটা" বাটনে চাপ দিন'} />
 						</div>
 						<div className="md:mt-4">
 							<label htmlFor='division' className="block  text-md font-bold text-primary_200 ">বিভাগ*</label>
@@ -241,7 +240,7 @@ function UserProfile(): React.ReactElement {
 								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								type="text" />
 						</div>
-						<div className="md:mt-4">
+						<div className="md:mt-4 group">
 							<label className="block  text-md font-bold text-primary_200">একাউন্ট তৈরি হয়েছে</label>
 							<input
 								id='created_at'
@@ -251,6 +250,7 @@ function UserProfile(): React.ReactElement {
 								placeholder={errors.created_at ? 'এই ঘরটি পূরণ করেনি' : ''}
 								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								type="text" />
+								<Tooltip children={'এই টি এডিট কারা যাবে না ।'} />
 						</div>
 
 						<button className={`mt-6 col-span-2 h-12 rounded-md font-bold transition-all duration-300 cursor-pointer ${isEditAtctive ? 'bg-primary_200 text-netural_200 hover:bg-primary_100' : 'bg-primary_300 text-netural_300 border border-primary_300 hover:bg-primary_100 hover:text-secondary_100'}`}
