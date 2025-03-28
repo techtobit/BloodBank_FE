@@ -8,13 +8,15 @@ import Footer from './home/Footer'
 import ProtectedRoute from './auth/ProtectedRoute'
 import UserProfile from './auth/UserProfile'
 import Error404 from './shared/Error404'
+import Navgiation from './shared/Navgiation'
 
 function App() {
 
   return (
     <section className=''>
+        <Navgiation/>
       <Routes>
-        <Route index element={<Outlet />} />
+        <Route path='/' element={<Outlet />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path='/profile' element={<ProtectedRoute><UserProfile/></ProtectedRoute>}/>

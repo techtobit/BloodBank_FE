@@ -4,6 +4,10 @@ import { useNavigate } from "react-router";
 const ProtectedRoute = ({children}: {children:React.ReactNode}) => {
 	const navigate= useNavigate()
 	const isAuthenticated = Boolean(localStorage.getItem('token'));
-	return isAuthenticated ? <>{children}</> : navigate('/login', {replace: true});
+	if (!isAuthenticated) {
+    navigate('/login', {replace: true});
+    return <></>; 
+  }
+	return  <>{children}</>;
 }
 export default ProtectedRoute;

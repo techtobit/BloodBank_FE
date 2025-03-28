@@ -9,6 +9,7 @@ import backgroundAssets from '../assets/backgroundAssets.svg'
 import { DonarType } from '../utils/type'
 import { toast } from 'react-toastify';
 import Loading from '../utils/loading/Loading';
+import { BiSolidUser, BiSolidCloudUpload,  BiLogOut } from "react-icons/bi";
 
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
 const token = localStorage.getItem('token');
@@ -98,9 +99,9 @@ function UserProfile(): React.ReactElement {
 						<p className='text-md font-bold text-primary_200 text-center'>স্বাগতম {user?.full_name}</p>
 					</div>
 					<ul className='pt-6 flex flex-col gap-4'>
-						<li onClick={() => setIsActiveBtn(true)} className={`w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${isActiveBtn ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}>প্রোফাইল</li>
-						<li onClick={() => setIsActiveBtn(false)} className={`w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${!(isActiveBtn) ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}>ডাটা জমা</li>
-						<button onClick={handleLogOut} className={`w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300 cursor-pointer`}>লগ আউট</button>
+						<li onClick={() => setIsActiveBtn(true)} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${isActiveBtn ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}> <BiSolidUser/> প্রোফাইল</li>
+						<li onClick={() => setIsActiveBtn(false)} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${!(isActiveBtn) ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}><BiSolidCloudUpload/> ডাটা জমা</li>
+						<button onClick={handleLogOut} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300 cursor-pointer`}>< BiLogOut/> লগ আউট</button>
 					</ul>
 				</div>
 

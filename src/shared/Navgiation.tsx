@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 
 function Navgiation():React.ReactElement {
 	return (
-		<nav className='fixed w-full flex pl-14 pt-10 gap-30 items-center bg-transparent z-10'>
+		<nav className='w-full flex pl-14 pt-4 gap-30 items-center bg-netural_300 z-10'>
 			
 			<a href="#" className='flex items-center'>
 				<img src={bloodBankLogo} className='w-[60%]' alt="blood bank logo" />
