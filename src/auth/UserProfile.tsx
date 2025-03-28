@@ -10,17 +10,17 @@ import { DonarType } from '../utils/type'
 import { toast } from 'react-toastify';
 import Loading from '../utils/loading/Loading';
 
-
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
+const token = localStorage.getItem('token');
+const userId = localStorage.getItem('user_id');
 
 function UserProfile(): React.ReactElement {
 	const [user, setUser] = useState<DonarType | null>(null);
-	const [isActiveBtn, setIsActiveBtn] = useState<boolean>(true)
-	const [isEditAtctive, setIsEditAtctive] = React.useState<boolean>(false);
+	const [isActiveBtn, setIsActiveBtn] = useState<boolean>(false)
+	const [isEditAtctive, setIsEditAtctive] = React.useState<boolean>(true);
 	const { register, handleSubmit, formState: { errors } } = useForm<DonarType>();
 	const [findUnder, setFindUnder] = useState<string>()
 	const [searchQuery, setSearchQuery] = useState<string>()
-
 	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const id = e.target.id;
 		const value = e.target.value;
@@ -31,8 +31,6 @@ function UserProfile(): React.ReactElement {
 	const [district, upazila] = useGeoDetails(findUnder, searchQuery)
 
 	useEffect(() => {
-		const token = localStorage.getItem('token');
-		const userId = localStorage.getItem('user_id');
 		if (token) {
 			const url = `${BASE_API_URL}profile/${userId}/`;
 			axios.get(url, {
@@ -53,8 +51,6 @@ function UserProfile(): React.ReactElement {
 
 	const onSubmit = (data: DonarType) => {
 		console.log(data);
-		const token = localStorage.getItem('token');
-		const userId = localStorage.getItem('user_id');
 		const url = `${BASE_API_URL}profile/${userId}/`;
 		console.log(url);
 		axios.put(url, data, {
@@ -113,7 +109,10 @@ function UserProfile(): React.ReactElement {
 						আপনার প্রোফাইল আপডেইট করুন
 					</div>
 
-					<form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-2 mt-2 bg-white/30 backdrop-invert backdrop-opacity-10 relative px-10 py-2 rounded-md shadow-lg">
+					<form onSubmit={handleSubmit((data) => {
+						console.log("Form Submitted:", data); // Debug log
+						onSubmit(data); // Call your onSubmit function
+					})} className="grid grid-cols-2 gap-2 mt-2 bg-white/30 backdrop-invert backdrop-opacity-10 relative px-10 py-2 rounded-md shadow-lg">
 
 					<div className='absolute top-50 left-95'>
 
@@ -130,7 +129,7 @@ function UserProfile(): React.ReactElement {
 								id='full_name'
 								disabled={!isEditAtctive}
 								defaultValue={user?.full_name}
-								{...register("full_name", { required: true, maxLength: 30 })}
+								{...register("full_name", { required: false, maxLength: 30 })}
 								placeholder={errors.full_name ? 'এই ঘরটি পূরণ করেনি' : ''}
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								type="text" />
@@ -140,7 +139,7 @@ function UserProfile(): React.ReactElement {
 							<div className="absolute top-8 left-0 flex items-center pl-3">
 								<div className="h-full gap-2 text-sm flex items-center bg-netural_100 text-slate-700">
 									<img src={Flag_of_Bangladesh} alt="Flag_of_Bangladesh" className="w-6 h-4" />
-									<span className='text-lg font-bold text-primary_100'>+88</span>
+									<span className='text-lg fon required: false,t-bold text-primary_100'>+88</span>
 									<div className="h-6 border-l border-primary_100"></div>
 								</div>
 							</div>
@@ -148,7 +147,7 @@ function UserProfile(): React.ReactElement {
 								id='phone_number'
 								disabled={!isEditAtctive}
 								defaultValue={user?.phone_number}
-								{...register('phone_number', { required: true, minLength: 11, maxLength: 11 })}
+								{...register('phone_number', { required: false, minLength: 11, maxLength: 11 })}
 								placeholder={errors.phone_number ? '১১ সংখ্যার নাম্বর লিখেনি' : '01886627127'}
 								type="tel"
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pl-24 pr-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
@@ -180,8 +179,6 @@ function UserProfile(): React.ReactElement {
 								id='total_donation'
 								disabled
 								defaultValue={user?.total_donation}
-								{...register("total_donation", { required: true, maxLength: 30 })}
-								placeholder={errors.total_donation ? 'এই ঘরটি পূরণ করেনি' : ' '}
 								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								type="number" />
 							<Tooltip children={'এই টি এডিট কারা যাবে না । রক্ত দিলে "জমা ডাটা" বাটনে চাপ দিন'} />
@@ -191,16 +188,14 @@ function UserProfile(): React.ReactElement {
 							<input
 								id='last_donation_date'
 								disabled
-								defaultValue={user?.last_donation_date ? user.last_donation_date.toString() : ''}
-								value={(user?.last_donation_date) ? new Date(user.last_donation_date).toISOString() : 'রক্তদান দেননি'}
-								{...register("last_donation_date")}
+								defaultValue={user?.last_donation_date ? user.last_donation_date.toString() : 'রক্ত দেননি'}
 								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								type="text" />
 							<Tooltip children={'এই টি এডিট কারা যাবে না । রক্ত দিলে "জমা ডাটা" বাটনে চাপ দিন'} />
 						</div>
 						<div className="md:mt-4">
 							<label htmlFor='division' className="block  text-md font-bold text-primary_200 ">বিভাগ*</label>
-							<select disabled={!isEditAtctive} {...register("division", { required: true })} name='division' id='districts' onChange={handleSelectAddress}
+							<select disabled={!isEditAtctive} {...register("division", { required: false })} name='division' id='districts' onChange={handleSelectAddress}
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							>
 								<option defaultValue={user?.division} selected className=''  >{user?.division}</option>
@@ -217,7 +212,7 @@ function UserProfile(): React.ReactElement {
 						</div>
 						<div className="md:mt-4">
 							<label htmlFor='district' className="block  text-md font-bold text-primary_200">জেলা*</label>
-							<select disabled={!isEditAtctive} {...register("district", { required: true })} name='district' id='upazilas' onChange={handleSelectAddress}
+							<select disabled={!isEditAtctive} {...register("district", { required: false })} name='district' id='upazilas' onChange={handleSelectAddress}
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							>
 								<option defaultValue={user?.district} selected className=''>{user?.district}</option>
@@ -230,7 +225,7 @@ function UserProfile(): React.ReactElement {
 						</div>
 						<div className="md:mt-4">
 							<label className="block  text-md font-bold text-primary_200">উপজেলা*</label>
-							<select disabled={!isEditAtctive} {...register("upazila", { required: true })} name='upazila'
+							<select disabled={!isEditAtctive} {...register("upazila", { required: false})} name='upazila'
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							>
 								<option defaultValue={user?.upazila} selected className=''>{user?.upazila}</option>
@@ -247,8 +242,6 @@ function UserProfile(): React.ReactElement {
 								id='last_login'
 								disabled
 								defaultValue={user?.last_login ? new Date(user.last_login).toISOString() : ''}
-								{...register("last_login", { required: true, maxLength: 30 })}
-								placeholder={errors.last_login ? 'এই ঘরটি পূরণ করেনি' : ''}
 								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								type="text" />
 						</div>
@@ -258,8 +251,6 @@ function UserProfile(): React.ReactElement {
 								id='created_at'
 								disabled
 								defaultValue={user?.created_at ? new Date(user.created_at).toISOString() : ''}
-								{...register("created_at", { required: true, maxLength: 30 })}
-								placeholder={errors.created_at ? 'এই ঘরটি পূরণ করেনি' : ''}
 								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								type="text" />
 							<Tooltip children={'এই টি এডিট কারা যাবে না ।'} />
