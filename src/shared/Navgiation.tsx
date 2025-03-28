@@ -3,8 +3,8 @@ import bloodBankLogo from '../assets/blood bank logo.svg'
 import { Link } from 'react-router'
 
 
-const token = localStorage.getItem('token')
 function Navgiation(): React.ReactElement {
+	const token = localStorage.getItem('token')
 	return (
 		<nav className='w-full absolute flex  items-center justify-between px-10 pt-5 gap-10 md:gap-30 items-center bg-transparent z-10'>
 		<ul className='flex gap-10 items-center font-bold text-lg text-primary_300  [&>li:hover]:text-primary_100 [&>li:hover]:underline'>

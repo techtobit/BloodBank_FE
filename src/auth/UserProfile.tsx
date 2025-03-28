@@ -9,19 +9,23 @@ import backgroundAssets from '../assets/backgroundAssets.svg'
 import { DonarType } from '../utils/type'
 import { toast } from 'react-toastify';
 import Loading from '../utils/loading/Loading';
-import { BiSolidUser, BiSolidCloudUpload,  BiLogOut } from "react-icons/bi";
+import { BiHomeAlt, BiSolidUser, BiSolidCloudUpload, BiLogOut } from "react-icons/bi";
+import { Link } from 'react-router'
 
 const BASE_API_URL = import.meta.env.VITE_API_BASE_URL;
-const token = localStorage.getItem('token');
-const userId = localStorage.getItem('user_id');
+
 
 function UserProfile(): React.ReactElement {
+	const token = localStorage.getItem('token');
+	const userId = localStorage.getItem('user_id');
+	
 	const [user, setUser] = useState<DonarType | null>(null);
-	const [isActiveBtn, setIsActiveBtn] = useState<boolean>(false)
-	const [isEditAtctive, setIsEditAtctive] = React.useState<boolean>(true);
+	const [isActiveBtn, setIsActiveBtn] = useState<boolean>(true)
+	const [isEditAtctive, setIsEditAtctive] = React.useState<boolean>(false);
 	const { register, handleSubmit, formState: { errors } } = useForm<DonarType>();
 	const [findUnder, setFindUnder] = useState<string>()
 	const [searchQuery, setSearchQuery] = useState<string>()
+
 	const handleSelectAddress = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const id = e.target.id;
 		const value = e.target.value;
@@ -98,9 +102,10 @@ function UserProfile(): React.ReactElement {
 						<p className='text-md font-bold text-primary_200 text-center'>স্বাগতম {user?.full_name}</p>
 					</div>
 					<ul className='pt-6 flex flex-col gap-4'>
-						<li onClick={() => setIsActiveBtn(true)} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${isActiveBtn ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}> <BiSolidUser/> প্রোফাইল</li>
-						<li onClick={() => setIsActiveBtn(false)} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${!(isActiveBtn) ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}><BiSolidCloudUpload/> ডাটা জমা</li>
-						<button onClick={handleLogOut} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300 cursor-pointer`}>< BiLogOut/> লগ আউট</button>
+						<Link to='/' className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300 cursor-pointer`}>< BiHomeAlt /> হোমপেইজ</Link>
+						<li onClick={() => setIsActiveBtn(true)} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${isActiveBtn ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}> <BiSolidUser /> প্রোফাইল</li>
+						<li onClick={() => setIsActiveBtn(false)} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${!(isActiveBtn) ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}><BiSolidCloudUpload /> ডাটা জমা</li>
+						<button onClick={handleLogOut} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300 cursor-pointer`}>< BiLogOut /> লগ আউট</button>
 					</ul>
 				</div>
 
@@ -114,14 +119,14 @@ function UserProfile(): React.ReactElement {
 						onSubmit(data); // Call your onSubmit function
 					})} className="grid grid-cols-2 gap-2 mt-2 bg-white/30 backdrop-invert backdrop-opacity-10 relative px-10 py-2 rounded-md shadow-lg">
 
-					<div className='absolute top-50 left-95'>
+						<div className='absolute top-50 left-95'>
 
-						{
-							!user ?
-								<Loading />
-								:
-								''
-						}
+							{
+								!user ?
+									<Loading />
+									:
+									''
+							}
 						</div>
 						<div className="">
 							<label className="block  text-md font-bold text-primary_200">নাম*</label>
@@ -225,7 +230,7 @@ function UserProfile(): React.ReactElement {
 						</div>
 						<div className="md:mt-4">
 							<label className="block  text-md font-bold text-primary_200">উপজেলা*</label>
-							<select disabled={!isEditAtctive} {...register("upazila", { required: false})} name='upazila'
+							<select disabled={!isEditAtctive} {...register("upazila", { required: false })} name='upazila'
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 							>
 								<option defaultValue={user?.upazila} selected className=''>{user?.upazila}</option>
