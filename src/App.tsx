@@ -14,7 +14,7 @@ function App() {
 
   return (
     <section className=''>
-        <Navgiation/>
+        {/* <Navgiation/> */}
       <Routes>
         <Route path='/' element={<Outlet />} />
         <Route path="/register" element={<Register />} />

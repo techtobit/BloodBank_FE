@@ -93,7 +93,6 @@ function UserProfile(): React.ReactElement {
 				<div className='w-1/5 h-[80vh] flex flex-col p-4 ml-4 bg-secondary_300/30 backdrop-invert backdrop-opacity-10 rounded-md shadow-lg border-r border-primary_300'>
 					<div className='w-full flex flex-col items-center justify-center gap-2'>
 						<img className='w-20 h-20 bg-netural_100 rounded-full border-primary_300 border'
-							// src="https://api.dicebear.com/9.x/micah/svg?seed=Amaya"
 							src="https://avatar.iran.liara.run/public/24"
 							alt="avatar" />
 						<p className='text-md font-bold text-primary_200 text-center'>স্বাগতম {user?.full_name}</p>
