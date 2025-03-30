@@ -10,6 +10,7 @@ function HeroPage(): React.ReactElement {
 	return (
 		<section className='w-full h-screen bg-netural_300 '>
 			<div className='grid grid-cols-1 md:grid-cols-2 '>
+				<Nav/>
 				{/* <Navgiation /> */}
 				<div className='flex flex-col justify-center '>
 					<div className='flex flex-col justify-center items-start pl-4 md:pl-14 mt-15 '>
