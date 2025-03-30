@@ -3,13 +3,14 @@ import { Link } from 'react-router'
 import heroBlob from '../assets/bloodTube.svg'
 import bloodBankLogo from '../assets/blood bank logo.svg'
 import Navgiation from '../shared/Navgiation'
+import Nav from '../shared/Nav'
 const token = localStorage.getItem('token')
 
 function HeroPage(): React.ReactElement {
 	return (
 		<section className='w-full h-screen bg-netural_300 '>
 			<div className='grid grid-cols-1 md:grid-cols-2 '>
-				<Navgiation />
+				{/* <Navgiation /> */}
 				<div className='flex flex-col justify-center '>
 					<div className='flex flex-col justify-center items-start pl-4 md:pl-14 mt-15 '>
 						<h1 className='!text-5xl/18 md:!text-6xl/22  font-extrabold text-primary_300'>আপনার রক্ত, অন্য জনের

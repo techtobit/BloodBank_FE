@@ -9,11 +9,13 @@ import ProtectedRoute from './auth/ProtectedRoute'
 import UserProfile from './auth/UserProfile'
 import Error404 from './shared/Error404'
 import Navgiation from './shared/Navgiation'
+import Nav from './shared/Nav'
 
 function App() {
 
   return (
     <section className=''>
+      <Nav/>
         {/* <Navgiation/> */}
       <Routes>
         <Route path='/' element={<Outlet />} />
