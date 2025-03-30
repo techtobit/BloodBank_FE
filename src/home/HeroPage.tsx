@@ -1,10 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import heroBlob from '../assets/bloodTube.svg'
-import bloodBankLogo from '../assets/blood bank logo.svg'
-import Navgiation from '../shared/Navgiation'
 import Nav from '../shared/Nav'
-const token = localStorage.getItem('token')
 
 function HeroPage(): React.ReactElement {
 	return (
@@ -13,7 +10,7 @@ function HeroPage(): React.ReactElement {
 				<Nav/>
 				{/* <Navgiation /> */}
 				<div className='flex flex-col justify-center '>
-					<div className='flex flex-col justify-center md:items-start px-4 md:pl-14 my-[50%] md:mt-15  '>
+					<div className='flex flex-col justify-center md:items-start md:pl-14 my-[50%] md:mt-[30%] '>
 						<h1 className='!text-5xl/18 md:!text-6xl/22  font-extrabold text-primary_300'>আপনার রক্ত, অন্য জনের
 							বেছে থাকার আশা ।</h1>
 						<h2 className='!text-lg md:text-3xl tracking-wider mt-2 text-primary_100 line-clamp-30 underline'>কারও জীবনের দ্বিতীয় সুযোগ পাওয়ার কারণ হোন </h2>
