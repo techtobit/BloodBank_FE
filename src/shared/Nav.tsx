@@ -8,10 +8,10 @@ export default function Nav() {
 
   const navLinks = (
     <ul className="flex flex-col md:flex-row items-center md:ml-20 gap-2 md:gap-10 items-center font-bold text-lg text-primary_300  [&>li:hover]:text-primary_100 [&>li:hover]:underline">
-      <li><a className="md:p-4 py-3 px-0 block" href="#">AboutUs</a></li>
-      <li><a className="md:p-4 py-3 px-0 block" href="#">Treatments</a></li>
-      <li><a className="md:p-4 py-3 px-0 block" href="#">Blog</a></li>
-      <li><a className="md:p-4 py-3 px-0 block" href="#">Contact</a></li>
+      <li><a className="md:p-4 py-3 px-0 block" href="/">হোমপেজ</a></li>
+      <li><a className="md:p-4 py-3 px-0 block" href="#donars">রক্তদাতা</a></li>
+      <li><a className="md:p-4 py-3 px-0 block" href="#report"> রিপোর্ট/মাতামত</a></li>
+      <li><a className="md:p-4 py-3 px-0 block" href="#contact">যোগাযোগ</a></li>
     </ul>
   );
 
@@ -37,10 +37,10 @@ export default function Nav() {
 
   return (
     <header className="w-full absolute md:bg-transparent bg-netural_300 lg:px-16 px-4 py-2 flex flex-wrap items-center  shadow-md">
-      <div className="md:w-1/4 w-3/4 flex items-center gap-10">
+      <div className="flex items-center gap-10">
         <a href="/" className="cursor-pointer flex items-center gap-2">
           <img id="navLogo" src={bloodBankLogo} className="w-15 h-15" alt="blood bank logo" />
-          <span className="text-lg font-bold text-primary_300 underline-none">ব্লাড ব্যাংক</span>
+          <span className="md:w-1/4 w-3/4  text-lg font-bold text-primary_300 underline-none">ব্লাড ব্যাংক</span>
         </a>
         <nav className="hidden md:block">{navLinks}</nav>
       </div>

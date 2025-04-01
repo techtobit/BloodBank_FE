@@ -76,7 +76,7 @@ function DonnarList() {
 	};
 
 	return (
-		<section
+		<section id='donars'
 			style={{
 				backgroundImage: `url(${donnarBgImg})`,
 				backgroundSize: 'cover',
