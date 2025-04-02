@@ -50,7 +50,7 @@ function UserProfile(): React.ReactElement {
 					console.log(error);
 				})
 		}
-	}, [])
+	}, [token, userId])
 
 
 
@@ -109,7 +109,7 @@ function UserProfile(): React.ReactElement {
 					</ul>
 				</div>
 
-				<div className='px-10 w-full h-full'>
+				<div className='px-10 pt-2 pb-5 w-full h-full'>
 					<div className='h-20 bg-primary_300/80 flex items-center justify-center text-netural_300 font-bold text-lg rounded-md shadow-md'>
 						আপনার প্রোফাইল আপডেইট করুন
 					</div>
@@ -117,7 +117,7 @@ function UserProfile(): React.ReactElement {
 					<form onSubmit={handleSubmit((data) => {
 						console.log("Form Submitted:", data); // Debug log
 						onSubmit(data); // Call your onSubmit function
-					})} className="grid grid-cols-2 gap-2 mt-2 bg-white/30 backdrop-invert backdrop-opacity-10 relative px-10 py-2 rounded-md shadow-lg">
+					})} className="grid grid-cols-2 gap-2 mt-4 bg-white/30 backdrop-invert backdrop-opacity-10 relative px-10 py-5 rounded-md shadow-lg">
 
 						<div className='absolute top-50 left-95'>
 
@@ -161,7 +161,7 @@ function UserProfile(): React.ReactElement {
 								maxLength={11}
 							/>
 						</div>
-						<div className="md:mt-4">
+						<div className="md:mt-2">
 							<label htmlFor='blood_group' className="block  text-md font-bold text-primary_200 ">রক্তের গ্রুপ*</label>
 							<select disabled={!isEditAtctive} {...register("blood_group")} id='blood_group'
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
@@ -178,7 +178,7 @@ function UserProfile(): React.ReactElement {
 
 							</select>
 						</div>
-						<div className="md:mt-4 group relative">
+						<div className="md:mt-2 group relative">
 							<label className="block  text-md font-bold text-primary_200">মোট রক্তদান</label>
 							<input
 								id='total_donation'
@@ -188,7 +188,7 @@ function UserProfile(): React.ReactElement {
 								type="number" />
 							<Tooltip children={'এই টি এডিট কারা যাবে না । রক্ত দিলে "জমা ডাটা" বাটনে চাপ দিন'} />
 						</div>
-						<div className="md:mt-4 group">
+						<div className="md:mt-2 group">
 							<label className="block  text-md font-bold text-primary_200">শেষ রক্তদান</label>
 							<input
 								id='last_donation_date'
@@ -198,7 +198,7 @@ function UserProfile(): React.ReactElement {
 								type="text" />
 							<Tooltip children={'এই টি এডিট কারা যাবে না । রক্ত দিলে "জমা ডাটা" বাটনে চাপ দিন'} />
 						</div>
-						<div className="md:mt-4">
+						<div className="md:mt-2">
 							<label htmlFor='division' className="block  text-md font-bold text-primary_200 ">বিভাগ*</label>
 							<select disabled={!isEditAtctive} {...register("division", { required: false })} name='division' id='districts' onChange={handleSelectAddress}
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
@@ -215,7 +215,7 @@ function UserProfile(): React.ReactElement {
 
 							</select>
 						</div>
-						<div className="md:mt-4">
+						<div className="md:mt-2">
 							<label htmlFor='district' className="block  text-md font-bold text-primary_200">জেলা*</label>
 							<select disabled={!isEditAtctive} {...register("district", { required: false })} name='district' id='upazilas' onChange={handleSelectAddress}
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
@@ -228,7 +228,7 @@ function UserProfile(): React.ReactElement {
 								}
 							</select>
 						</div>
-						<div className="md:mt-4">
+						<div className="md:mt-2">
 							<label className="block  text-md font-bold text-primary_200">উপজেলা*</label>
 							<select disabled={!isEditAtctive} {...register("upazila", { required: false })} name='upazila'
 								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
@@ -241,7 +241,7 @@ function UserProfile(): React.ReactElement {
 								}
 							</select>
 						</div>
-						<div className="md:mt-4">
+						<div className="md:mt-2">
 							<label className="block  text-md font-bold text-primary_200">শেষ লগইন</label>
 							<input
 								id='last_login'
@@ -250,7 +250,7 @@ function UserProfile(): React.ReactElement {
 								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
 								type="text" />
 						</div>
-						<div className="md:mt-4 group">
+						<div className="md:mt-2 group">
 							<label className="block  text-md font-bold text-primary_200">একাউন্ট তৈরি হয়েছে</label>
 							<input
 								id='created_at'
