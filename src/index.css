@@ -8,15 +8,15 @@
 @theme {
   --font-display:   "Anek Bangla", sans-serif;
   --breakpoint-3xl: 120rem;
-  --color-primary_300: #DA0F0E;
-  --color-primary_200: #AF181C;
-	--color-primary_100: #7A1B22;
-	--color-secondary_300: #EDDBDB;
-	--color-secondary_200: #E3C7C7;
-	--color-secondary_100: #D9B3B3;
-	--color-netural_300: #F7F7F7;
-	--color-netural_200: #F3EEEE;
-	--color-netural_100: #D9D9D9;
+  --color-primary-300: #DA0F0E;
+  --color-primary-200: #AF181C;
+	--color-primary-100: #7A1B22;
+	--color-secondary-300: #EDDBDB;
+	--color-secondary-200: #E3C7C7;
+	--color-secondary-100: #D9B3B3;
+	--color-netural-300: #F7F7F7;
+	--color-netural-200: #F3EEEE;
+	--color-netural-100: #D9D9D9;
 
 }
 
@@ -48,7 +48,7 @@ p {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px --color-primary_100; 
+  box-shadow: inset 0 0 5px --color-primary-100; 
   border-radius: 10px;
 }
 

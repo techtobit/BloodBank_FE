@@ -28,19 +28,19 @@ function UserInteraction(): React.ReactElement {
 
 
 	return (
-		<div id='report' className='w-full min-h-screen bg-secondary_300 grid grid-cols-1 md:grid-cols-2 justify-center justify-items-center items-center gap-4'>
+		<div id='report' className='w-full min-h-screen bg-secondary-300 grid grid-cols-1 md:grid-cols-2 justify-center justify-items-center items-center gap-4'>
 			<div className='flex flex-col justify-center items-center gap-4'>
-				<button onClick={() => setIsActiveBtn(true)} className={`w-80 h-20 text-xl font-bold border rounded-lg hover:bg-primary_100 hover:text-netural_300 ${isActiveBtn ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300"} `}>রিপোর্ট করুন</button>
-				<button onClick={() => setIsActiveBtn(false)} className={`w-80 h-20 text-xl font-bold border rounded-lg hover:bg-primary_100 hover:text-netural_300 ${isActiveBtn ? "bg-netural_100 text-primary_300" : " text-netural_100 bg-primary_300 "} `}>মাতামত দিন</button>
+				<button onClick={() => setIsActiveBtn(true)} className={`w-80 h-20 text-xl font-bold border rounded-lg hover:bg-primary-100 hover:text-netural-300 ${isActiveBtn ? "text-netural-100 bg-primary-300" : "bg-netural-100 text-primary-300"} `}>রিপোর্ট করুন</button>
+				<button onClick={() => setIsActiveBtn(false)} className={`w-80 h-20 text-xl font-bold border rounded-lg hover:bg-primary-100 hover:text-netural-300 ${isActiveBtn ? "bg-netural-100 text-primary-300" : " text-netural-100 bg-primary-300 "} `}>মাতামত দিন</button>
 			</div>
 			{
 				isActiveBtn
 					?
-					<div className='bg-netural_300/30 rounded-lg px-4 md:px-4 py-10 md:py-0 md:p-10'>
-						<h4 className='text-2xl font-bold text-primary_300'>দাতা/গ্রহিতাকে রিপোর্ট  করুন</h4>
+					<div className='bg-netural-300/30 rounded-lg px-4 md:px-4 py-10 md:py-0 md:p-10'>
+						<h4 className='text-2xl font-bold text-primary-300'>দাতা/গ্রহিতাকে রিপোর্ট  করুন</h4>
 						<form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-5 items-center justify-center">
 							<div className='pt-2'>
-								<label className="text-primary_300 flex items-center gap-2">
+								<label className="text-primary-300 flex items-center gap-2">
 									<input
 										type="checkbox"
 										id="report_to_donar"
@@ -50,12 +50,12 @@ function UserInteraction(): React.ReactElement {
 											onChange: () => setCheckedBox(checkedBox === "donar" ? null : "donar"),
 										})}
 										disabled={checkedBox === "seeker"}
-										className="accent-primary_100 hover:accent-netural_100 disabled:text-gray-600 disabled:cursor-not-allowed"
+										className="accent-primary-100 hover:accent-netural-100 disabled:text-gray-600 disabled:cursor-not-allowed"
 									/>
 									দাতাকে রিপোর্ট করুন
 								</label>
 
-								<label className="text-primary_300 flex items-center gap-2">
+								<label className="text-primary-300 flex items-center gap-2">
 									<input
 										type="checkbox"
 										id="report_to_seeker"
@@ -65,7 +65,7 @@ function UserInteraction(): React.ReactElement {
 											onChange: () => setCheckedBox(checkedBox === "seeker" ? null : "seeker"),
 										})}
 										disabled={checkedBox === "donar"}
-										className="accent-primary_100 hover:accent-netural_100 disabled:text-gray-600 disabled:cursor-not-allowed"
+										className="accent-primary-100 hover:accent-netural-100 disabled:text-gray-600 disabled:cursor-not-allowed"
 									/>
 									গ্রহিতাকে রিপোর্ট করুন
 								</label>
@@ -76,7 +76,7 @@ function UserInteraction(): React.ReactElement {
 								{...register('own_phone_number', { required: true, minLength: 11, maxLength: 11 })}
 								placeholder={errors.own_phone_number ? '১১ সংখ্যার নাম্বর লিখেনি' : 'নিজের মোবাইল নাম্বার লিখুন'}
 								type="tel"
-								className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md p-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+								className="w-full h-14 bg-netural-100 placeholder:text-gray text-primary-100 text-lg font-bold border border-primary-300 rounded-md p-2 transition duration-300 ease focus:outline-none focus:border-primary-100 hover:border-primary-100"
 								pattern="[0-9]*"
 								inputMode="numeric"
 								maxLength={11}
@@ -86,7 +86,7 @@ function UserInteraction(): React.ReactElement {
 								{...register('reporting_phone_number', { required: true, minLength: 11, maxLength: 11 })}
 								placeholder={errors.reporting_phone_number ? '১১ সংখ্যার নাম্বর লিখেনি' : 'রিপোর্ট করা মোবাইল নাম্বার লিখুন'}
 								type="tel"
-								className="w-full h-14 bg-netural_100 placeholder:text-gray text-primary_100 text-lg font-bold border border-primary_300 rounded-md p-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+								className="w-full h-14 bg-netural-100 placeholder:text-gray text-primary-100 text-lg font-bold border border-primary-300 rounded-md p-2 transition duration-300 ease focus:outline-none focus:border-primary-100 hover:border-primary-100"
 								pattern="[0-9]*"
 								inputMode="numeric"
 								maxLength={11}
@@ -100,11 +100,11 @@ function UserInteraction(): React.ReactElement {
 									maxLength={150}
 									{...register("reporting_details", { required: true, maxLength: 110 })}
 									placeholder={errors.reporting_details ? 'এই ঘরটি পূরণ করেনি' : 'রিপোর্টের কারন'}
-									className="w-full h-18 bg-netural_100 placeholder:text-gray  text-primary_100 text-lg font-bold border border-primary_300 rounded-md p-2 transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+									className="w-full h-18 bg-netural-100 placeholder:text-gray  text-primary-100 text-lg font-bold border border-primary-300 rounded-md p-2 transition duration-300 ease focus:outline-none focus:border-primary-100 hover:border-primary-100"
 								/>
 							</div>
 							{(errors.report_to_donar && errors.report_to_seeker) && <p className='text-black bg-yellow-500 text-xs'>চেক বক্স পূরণ করেনি</p>}
-							<button className="w-full h-14 flex justify-center items-center bg-primary_300 text-netural_300 text-lg font-bold border hover:bg-primary_100 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100">
+							<button className="w-full h-14 flex justify-center items-center bg-primary-300 text-netural-300 text-lg font-bold border hover:bg-primary-100 rounded-md pr-3 pl-3 py-2 transition duration-300 ease focus:outline-none focus:border-primary-100">
 								সাবমিট
 							</button>
 

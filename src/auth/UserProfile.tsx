@@ -94,23 +94,23 @@ function UserProfile(): React.ReactElement {
 			}}
 		>
 			<div className='w-full h-screens flex items-center relative'>
-				<div className='w-1/5 h-[80vh] flex flex-col p-4 ml-4 bg-secondary_300/30 backdrop-invert backdrop-opacity-10 rounded-md shadow-lg border-r border-primary_300'>
+				<div className='w-1/5 h-[80vh] flex flex-col p-4 ml-4 bg-secondary-300/30 backdrop-invert backdrop-opacity-10 rounded-md shadow-lg border-r border-primary-300'>
 					<div className='w-full flex flex-col items-center justify-center gap-2'>
-						<img className='w-20 h-20 bg-netural_100 rounded-full border-primary_300 border'
+						<img className='w-20 h-20 bg-netural-100 rounded-full border-primary-300 border'
 							src="https://avatar.iran.liara.run/public/24"
 							alt="avatar" />
-						<p className='text-md font-bold text-primary_200 text-center'>স্বাগতম {user?.full_name}</p>
+						<p className='text-md font-bold text-primary-200 text-center'>স্বাগতম {user?.full_name}</p>
 					</div>
 					<ul className='pt-6 flex flex-col gap-4'>
-						<Link to='/' className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300 cursor-pointer`}>< BiHomeAlt /> হোমপেইজ</Link>
-						<li onClick={() => setIsActiveBtn(true)} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${isActiveBtn ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}> <BiSolidUser /> প্রোফাইল</li>
-						<li onClick={() => setIsActiveBtn(false)} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${!(isActiveBtn) ? "text-netural_100 bg-primary_300" : "bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300"}`}><BiSolidCloudUpload /> ডাটা জমা</li>
-						<button onClick={handleLogOut} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 bg-netural_100 text-primary_300 hover:bg-primary_100 hover:text-netural_300 cursor-pointer`}>< BiLogOut /> লগ আউট</button>
+						<Link to='/' className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 bg-netural-100 text-primary-300 hover:bg-primary-100 hover:text-netural-300 cursor-pointer`}>< BiHomeAlt /> হোমপেইজ</Link>
+						<li onClick={() => setIsActiveBtn(true)} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${isActiveBtn ? "text-netural-100 bg-primary-300" : "bg-netural-100 text-primary-300 hover:bg-primary-100 hover:text-netural-300"}`}> <BiSolidUser /> প্রোফাইল</li>
+						<li onClick={() => setIsActiveBtn(false)} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 cursor-pointer ${!(isActiveBtn) ? "text-netural-100 bg-primary-300" : "bg-netural-100 text-primary-300 hover:bg-primary-100 hover:text-netural-300"}`}><BiSolidCloudUpload /> ডাটা জমা</li>
+						<button onClick={handleLogOut} className={`flex items-center justify-center gap-2 w-full py-3 text-center text-md font-bold border rounded-lg transition-all duration-300 bg-netural-100 text-primary-300 hover:bg-primary-100 hover:text-netural-300 cursor-pointer`}>< BiLogOut /> লগ আউট</button>
 					</ul>
 				</div>
 
 				<div className='px-10 pt-2 pb-5 w-full h-full'>
-					<div className='h-20 bg-primary_300/80 flex items-center justify-center text-netural_300 font-bold text-lg rounded-md shadow-md'>
+					<div className='h-20 bg-primary-300/80 flex items-center justify-center text-netural-300 font-bold text-lg rounded-md shadow-md'>
 						আপনার প্রোফাইল আপডেইট করুন
 					</div>
 
@@ -129,23 +129,23 @@ function UserProfile(): React.ReactElement {
 							}
 						</div>
 						<div className="">
-							<label className="block  text-md font-bold text-primary_200">নাম*</label>
+							<label className="block  text-md font-bold text-primary-200">নাম*</label>
 							<input
 								id='full_name'
 								disabled={!isEditAtctive}
 								defaultValue={user?.full_name}
 								{...register("full_name", { required: false, maxLength: 30 })}
 								placeholder={errors.full_name ? 'এই ঘরটি পূরণ করেনি' : ''}
-								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
+								className="w-full h-12 bg-netural-100 placeholder:text-gray text-primary-100 text-base font-bold border border-primary-300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary-100 hover:border-primary-100"
 								type="text" />
 						</div>
 						<div className="relative ">
-							<label className="block  text-md font-bold text-primary_200">মোবাইল নাম্বার*</label>
+							<label className="block  text-md font-bold text-primary-200">মোবাইল নাম্বার*</label>
 							<div className="absolute top-8 left-0 flex items-center pl-3">
-								<div className="h-full gap-2 text-sm flex items-center bg-netural_100 text-slate-700">
+								<div className="h-full gap-2 text-sm flex items-center bg-netural-100 text-slate-700">
 									<img src={Flag_of_Bangladesh} alt="Flag_of_Bangladesh" className="w-6 h-4" />
-									<span className='text-lg fon required: false,t-bold text-primary_100'>+88</span>
-									<div className="h-6 border-l border-primary_100"></div>
+									<span className='text-lg fon required: false,t-bold text-primary-100'>+88</span>
+									<div className="h-6 border-l border-primary-100"></div>
 								</div>
 							</div>
 							<input
@@ -155,16 +155,16 @@ function UserProfile(): React.ReactElement {
 								{...register('phone_number', { required: false, minLength: 11, maxLength: 11 })}
 								placeholder={errors.phone_number ? '১১ সংখ্যার নাম্বর লিখেনি' : '01886627127'}
 								type="tel"
-								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pl-24 pr-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
+								className="w-full h-12 bg-netural-100 placeholder:text-gray text-primary-100 text-base font-bold border border-primary-300 rounded-md pl-24 pr-4 transition duration-300 focus:outline-none focus:border-primary-100 hover:border-primary-100"
 								pattern="[0-9]*"
 								inputMode="numeric"
 								maxLength={11}
 							/>
 						</div>
 						<div className="md:mt-2">
-							<label htmlFor='blood_group' className="block  text-md font-bold text-primary_200 ">রক্তের গ্রুপ*</label>
+							<label htmlFor='blood_group' className="block  text-md font-bold text-primary-200 ">রক্তের গ্রুপ*</label>
 							<select disabled={!isEditAtctive} {...register("blood_group")} id='blood_group'
-								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
+								className="w-full h-12 bg-netural-100 placeholder:text-gray text-primary-100 text-base font-bold border border-primary-300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary-100 hover:border-primary-100"
 							>
 								<option defaultValue={user?.blood_group} selected className=''>{user?.blood_group}</option>
 								<option value="A+" className=''>A+ (এ পজেটিভ)</option>
@@ -179,29 +179,29 @@ function UserProfile(): React.ReactElement {
 							</select>
 						</div>
 						<div className="md:mt-2 group relative">
-							<label className="block  text-md font-bold text-primary_200">মোট রক্তদান</label>
+							<label className="block  text-md font-bold text-primary-200">মোট রক্তদান</label>
 							<input
 								id='total_donation'
 								disabled
 								defaultValue={user?.total_donation}
-								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
+								className="w-full h-12 bg-netural-200 placeholder:text-gray text-primary-100 text-base font-bold border border-primary-300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary-100 hover:border-primary-100"
 								type="number" />
 							<Tooltip children={'এই টি এডিট কারা যাবে না । রক্ত দিলে "জমা ডাটা" বাটনে চাপ দিন'} />
 						</div>
 						<div className="md:mt-2 group">
-							<label className="block  text-md font-bold text-primary_200">শেষ রক্তদান</label>
+							<label className="block  text-md font-bold text-primary-200">শেষ রক্তদান</label>
 							<input
 								id='last_donation_date'
 								disabled
 								defaultValue={user?.last_donation_date ? user.last_donation_date.toString() : 'রক্ত দেননি'}
-								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
+								className="w-full h-12 bg-netural-200 placeholder:text-gray text-primary-100 text-base font-bold border border-primary-300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary-100 hover:border-primary-100"
 								type="text" />
 							<Tooltip children={'এই টি এডিট কারা যাবে না । রক্ত দিলে "জমা ডাটা" বাটনে চাপ দিন'} />
 						</div>
 						<div className="md:mt-2">
-							<label htmlFor='division' className="block  text-md font-bold text-primary_200 ">বিভাগ*</label>
+							<label htmlFor='division' className="block  text-md font-bold text-primary-200 ">বিভাগ*</label>
 							<select disabled={!isEditAtctive} {...register("division", { required: false })} name='division' id='districts' onChange={handleSelectAddress}
-								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
+								className="w-full h-12 bg-netural-100 placeholder:text-gray text-primary-100 text-base font-bold border border-primary-300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary-100 hover:border-primary-100"
 							>
 								<option defaultValue={user?.division} selected className=''  >{user?.division}</option>
 								<option value="Dhaka">ঢাকা</option>
@@ -216,9 +216,9 @@ function UserProfile(): React.ReactElement {
 							</select>
 						</div>
 						<div className="md:mt-2">
-							<label htmlFor='district' className="block  text-md font-bold text-primary_200">জেলা*</label>
+							<label htmlFor='district' className="block  text-md font-bold text-primary-200">জেলা*</label>
 							<select disabled={!isEditAtctive} {...register("district", { required: false })} name='district' id='upazilas' onChange={handleSelectAddress}
-								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
+								className="w-full h-12 bg-netural-100 placeholder:text-gray text-primary-100 text-base font-bold border border-primary-300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary-100 hover:border-primary-100"
 							>
 								<option defaultValue={user?.district} selected className=''>{user?.district}</option>
 								{
@@ -229,9 +229,9 @@ function UserProfile(): React.ReactElement {
 							</select>
 						</div>
 						<div className="md:mt-2">
-							<label className="block  text-md font-bold text-primary_200">উপজেলা*</label>
+							<label className="block  text-md font-bold text-primary-200">উপজেলা*</label>
 							<select disabled={!isEditAtctive} {...register("upazila", { required: false })} name='upazila'
-								className="w-full h-12 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
+								className="w-full h-12 bg-netural-100 placeholder:text-gray text-primary-100 text-base font-bold border border-primary-300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary-100 hover:border-primary-100"
 							>
 								<option defaultValue={user?.upazila} selected className=''>{user?.upazila}</option>
 								{
@@ -242,26 +242,26 @@ function UserProfile(): React.ReactElement {
 							</select>
 						</div>
 						<div className="md:mt-2">
-							<label className="block  text-md font-bold text-primary_200">শেষ লগইন</label>
+							<label className="block  text-md font-bold text-primary-200">শেষ লগইন</label>
 							<input
 								id='last_login'
 								disabled
 								defaultValue={user?.last_login ? new Date(user.last_login).toISOString() : ''}
-								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
+								className="w-full h-12 bg-netural-200 placeholder:text-gray text-primary-100 text-base font-bold border border-primary-300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary-100 hover:border-primary-100"
 								type="text" />
 						</div>
 						<div className="md:mt-2 group">
-							<label className="block  text-md font-bold text-primary_200">একাউন্ট তৈরি হয়েছে</label>
+							<label className="block  text-md font-bold text-primary-200">একাউন্ট তৈরি হয়েছে</label>
 							<input
 								id='created_at'
 								disabled
 								defaultValue={user?.created_at ? new Date(user.created_at).toISOString() : ''}
-								className="w-full h-12 bg-netural_200 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary_100 hover:border-primary_100"
+								className="w-full h-12 bg-netural-200 placeholder:text-gray text-primary-100 text-base font-bold border border-primary-300 rounded-md px-4 transition duration-300 focus:outline-none focus:border-primary-100 hover:border-primary-100"
 								type="text" />
 							<Tooltip children={'এই টি এডিট কারা যাবে না ।'} />
 						</div>
 
-						<button className={`mt-6 col-span-2 h-12 rounded-md font-bold transition-all duration-300 cursor-pointer ${isEditAtctive ? 'bg-primary_200 text-netural_200 hover:bg-primary_100' : 'bg-primary_300 text-netural_300 border border-primary_300 hover:bg-primary_100 hover:text-secondary_100'}`}
+						<button className={`mt-6 col-span-2 h-12 rounded-md font-bold transition-all duration-300 cursor-pointer ${isEditAtctive ? 'bg-primary-200 text-netural-200 hover:bg-primary-100' : 'bg-primary-300 text-netural-300 border border-primary-300 hover:bg-primary-100 hover:text-secondary-100'}`}
 							onClick={() => setIsEditAtctive(!isEditAtctive)}>{isEditAtctive ? 'সেইভ করুন' : 'প্রোফাইল আপডেট করুন'}
 						</button>
 					</form>

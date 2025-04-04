@@ -16,7 +16,7 @@ const Input: React.FC<InputProps> = ({ disabled, type,  defaultValue, onChange})
 			type={type}
       defaultValue={defaultValue}
       onChange={onChange}
-      className="w-full h-10 bg-netural_100 placeholder:text-gray text-primary_100 text-base font-bold border border-primary_300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary_100 hover:border-primary_100"
+      className="w-full h-10 bg-netural-100 placeholder:text-gray text-primary-100 text-base font-bold border border-primary-300 rounded-md pr-3 pl-3 text-base transition duration-300 ease focus:outline-none focus:border-primary-100 hover:border-primary-100"
     />
   );
 };

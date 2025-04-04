@@ -7,7 +7,7 @@ export default function Nav() {
   const [togleActive, setTogleActive] = useState(false);
 
   const navLinks = (
-    <ul className="flex flex-col md:flex-row items-center md:ml-20 gap-2 md:gap-10 items-center font-bold text-lg text-primary_300  [&>li:hover]:text-primary_100 [&>li:hover]:underline">
+    <ul className="flex flex-col md:flex-row items-center md:ml-20 gap-2 md:gap-10 items-center font-bold text-lg text-primary-300  [&>li:hover]:text-primary-100 [&>li:hover]:underline">
       <li><a className="md:p-4 py-3 px-0 block" href="/">হোমপেজ</a></li>
       <li><a className="md:p-4 py-3 px-0 block" href="#donars">রক্তদাতা</a></li>
       <li><a className="md:p-4 py-3 px-0 block" href="#report"> রিপোর্ট/মাতামত</a></li>
@@ -20,14 +20,14 @@ export default function Nav() {
       {token ? (
         <Link
           to="profile/"
-          className="bg-primary_300 text-netural_300 text-center text-sm md:text-lg font-bold border hover:bg-primary_100 rounded-md px-5 transition duration-300 ease focus:outline-none focus:border-primary_100"
+          className="bg-primary-300 text-netural-300 text-center text-sm md:text-lg font-bold border hover:bg-primary-100 rounded-md px-5 transition duration-300 ease focus:outline-none focus:border-primary-100"
         >
           প্রোফাইল
         </Link>
       ) : (
         <Link
           to="login/"
-          className="bg-primary_300 text-netural_300 text-center text-sm md:text-lg font-bold border hover:bg-primary_100 rounded-md px-5 transition duration-300 ease focus:outline-none focus:border-primary_100"
+          className="bg-primary-300 text-netural-300 text-center text-sm md:text-lg font-bold border hover:bg-primary-100 rounded-md px-5 transition duration-300 ease focus:outline-none focus:border-primary-100"
         >
           লগইন
         </Link>
@@ -36,11 +36,11 @@ export default function Nav() {
   );
 
   return (
-    <header className="w-full absolute md:bg-transparent bg-netural_300 lg:px-16 px-4 py-2 flex flex-wrap items-center  shadow-md">
+    <header className="w-full absolute md:bg-transparent bg-netural-300 lg:px-16 px-4 py-2 flex flex-wrap items-center  shadow-md">
       <div className="flex items-center gap-10">
         <a href="/" className="cursor-pointer flex items-center gap-2">
           <img id="navLogo" src={bloodBankLogo} className="w-15 h-15" alt="blood bank logo" />
-          <span className="md:w-1/4 w-3/4  text-lg font-bold text-primary_300 underline-none">ব্লাড ব্যাংক</span>
+          <span className="md:w-1/4 w-3/4  text-lg font-bold text-primary-300 underline-none">ব্লাড ব্যাংক</span>
         </a>
         <nav className="hidden md:block">{navLinks}</nav>
       </div>
