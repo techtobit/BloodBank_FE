@@ -5,7 +5,7 @@ import appStore from '../assets/app_store.svg';
 function Footer():React.ReactElement {
 	return (
 		<footer>
-		<div id='contact' className='w-full bg-secondary-100 grid grid-cols-1 md:grid-cols-3 justify-items-center gap-10 md:p-10'>
+		<div id='contact' className='w-full bg-secondary-100 grid grid-cols-1 md:grid-cols-3 justify-items-center gap-10 p-5 md:p-10'>
 			<div>
 				<h5 className='font-bold text-primary-300 pb-2'>যোগাযোগ</h5>
 				<p>চট্টগ্রাম, বান্দরবান, বোয়লখালী</p>

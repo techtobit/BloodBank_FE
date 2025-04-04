@@ -36,7 +36,7 @@ function UserInteraction(): React.ReactElement {
 			{
 				isActiveBtn
 					?
-					<div className='bg-netural-300/30 rounded-lg px-4 md:px-4 py-10 md:py-0 md:p-10'>
+					<div className='bg-netural-300/30 rounded-lg mx-5 md:mx-0 p-5 md:p-10'>
 						<h4 className='text-2xl font-bold text-primary-300'>দাতা/গ্রহিতাকে রিপোর্ট  করুন</h4>
 						<form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-5 items-center justify-center">
 							<div className='pt-2'>

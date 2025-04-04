@@ -21,7 +21,7 @@ export default function Feedback():React.ReactElement {
 		}
 	
 	return (
-		<div className='w-5/6 bg-netural-300/30 rounded-lg md:p-10'>
+		<div className='w-5/6 bg-netural-300/30 rounded-lg p-5 md:p-10'>
 		<h4 className='text-2xl text-center pb-10 font-bold text-primary-300'>আপনার মাতামত দিন</h4>
 		<form onSubmit={handleSubmit(onSubmitFeedback)} className="grid grid-cols-1 gap-5 items-center justify-center">
 			<input
