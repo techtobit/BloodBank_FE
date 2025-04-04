@@ -4,21 +4,22 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   deploy:
-    name: Deploy to Vercel
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: '^22' # Ensure this matches your project's Node.js version
-          cache: 'pnpm'
+          node-version: '22.14.0'
 
       - name: Install pnpm
         run: npm install -g pnpm
@@ -26,13 +27,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build project
-        run: pnpm build
+      - name: Build
+        run: pnpm run build
 
       - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v20
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-args: '--prod'
-          working-directory: ./
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm run deploy
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
