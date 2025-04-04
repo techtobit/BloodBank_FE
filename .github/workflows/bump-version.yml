@@ -35,5 +35,4 @@ jobs:
           git push
 
       - name: Deploy to Vercel
-        run: |
-          pnpm dlx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+        run: pnpm run deploy
