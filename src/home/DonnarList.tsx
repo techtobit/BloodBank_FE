@@ -85,7 +85,7 @@ function DonnarList() {
 			}}
 			className='w-full min-h-screen relative bg-netural_300'>
 
-			<form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-2 md:grid-cols-5 gap-4 md:p-10 items-center justify-center'>
+			<form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-2 md:grid-cols-5 gap-4 p-5  md:p-10 items-center justify-center'>
 				<div className="">
 					<label htmlFor='division' className="block mb-1 text-md font-bold text-primary_200 ">বিভাগ*</label>
 					<select {...register("division",
@@ -157,10 +157,10 @@ function DonnarList() {
 
 			<hr className="border-primary_300 dark:border-primary_300"></hr>
 
-			<div className='grid grid-cols-1 md:grid-cols-4 p-10 gap-4 justify-items-center items-center'>
+			<div className='grid grid-cols-1 md:grid-cols-4  md:p-10 gap-4 md:justify-items-center items-center'>
 				{
-					donars?.map((donar, index) => (
-						<div key={index} className='flex w-75 h-30  bg-white/65 justify-evenly items-center rounded-lg shadow-lg  '>
+					!donars?.map((donar, index) => (
+						<div key={index} className='flex w-64 md:w-75 h-30  bg-white/65 justify-evenly items-center rounded-lg shadow-lg  '>
 							<div>
 								<img className='rounded-lg ' src={`${AVATAR_BASE_URL}?name=${donar.full_name}&background=random`} alt="" />
 							</div>
@@ -181,9 +181,9 @@ function DonnarList() {
 					:
 					donars.length === 0  && (
 						<div className='flex flex-col justify-center items-center gap-4'>
-							<div className='w-95 bg-yellow-500 text-black text-center text-sm md:text-lg font-bold border rounded-md px-5 py-2'>কোন রক্তদাতা পাওয়া যায়নি</div>
-							<Link to='/register' className='w-95 bg-primary_300 text-netural_300 text-center text-sm md:text-lg font-bold border hover:bg-primary_100 rounded-md px-5 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100'>রক্ত দানকারী হিসাবে যোগদিন</Link>
-							<button onClick={handleReset} className='w-95 bg-yellow-500 text-black text-center text-sm md:text-lg font-bold border rounded-md px-5 py-2'>ফিল্টার বাতিল</button>
+							<div className='w-75 md:w-95 bg-yellow-500 text-black text-center text-sm md:text-lg font-bold border rounded-md px-5 py-2'>কোন রক্তদাতা পাওয়া যায়নি</div>
+							<Link to='/register' className='w-75 md:w-95 bg-primary_300 text-netural_300 text-center text-sm md:text-lg font-bold border hover:bg-primary_100 rounded-md px-5 py-2 transition duration-300 ease focus:outline-none focus:border-primary_100'>রক্ত দানকারী হিসাবে যোগদিন</Link>
+							<button onClick={handleReset} className='w-75 md:w-95 bg-yellow-500 text-black text-center text-sm md:text-lg font-bold border rounded-md px-5 py-2'>ফিল্টার বাতিল</button>
 						</div>
 					)
 			}
