@@ -20,7 +20,7 @@ export type RegisterInputType = BaseInputType & GeoAddressType &{
 
 type UserProfileType = Omit<RegisterInputType,  'password' | 'confirm_password'> & {
 	avatar: string
-	last_donation: Date,
+	last_donation: Date | null,
 	total_donation: number,
 	last_donation_date: Date | null,
 	last_login: Date,
