@@ -75,6 +75,7 @@ function DonnarList() {
 		fetchDonars('')
 	};
 
+
 	return (
 		<section id='donars'
 			style={{
@@ -159,7 +160,7 @@ function DonnarList() {
 
 			<div className='grid grid-cols-1 md:grid-cols-4  md:p-10 gap-4 md:justify-items-center items-center'>
 				{
-					!donars?.map((donar, index) => (
+					donars?.map((donar, index) => (
 						<div key={index} className='flex w-64 md:w-75 h-30  bg-white/65 justify-evenly items-center rounded-lg shadow-lg  '>
 							<div>
 								<img className='rounded-lg ' src={`${AVATAR_BASE_URL}?name=${donar.full_name}&background=random`} alt="" />
