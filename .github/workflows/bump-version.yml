@@ -13,10 +13,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js (v22)
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'  # Update to match your project
           cache: 'pnpm'
 
       - name: Install pnpm
@@ -35,3 +35,4 @@ jobs:
       - name: Deploy to Vercel
         run: |
           pnpm dlx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+					

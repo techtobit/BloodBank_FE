@@ -9,6 +9,7 @@ import UserProfile from './auth/UserProfile'
 import Error404 from './shared/Error404'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { Analytics } from '@vercel/analytics/react'
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
         <Route path='*' element={<Error404/>}/>
       </Routes>
       <Footer />
-
+      <Analytics/>
       <ToastContainer
         position="top-center"
         autoClose={5000}
