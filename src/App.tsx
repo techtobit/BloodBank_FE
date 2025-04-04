@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router'
-import { ToastContainer } from 'react-toastify'
 import './App.css'
 import Register from './auth/Register'
 import Login from './auth/Login'
@@ -8,8 +7,9 @@ import Footer from './shared/Footer'
 import ProtectedRoute from './auth/ProtectedRoute'
 import UserProfile from './auth/UserProfile'
 import Error404 from './shared/Error404'
-import Navgiation from './shared/Navgiation'
-import Nav from './shared/Nav'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 
 function App() {
 

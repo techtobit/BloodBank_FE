@@ -63,9 +63,9 @@ function DonnarList() {
 
 	useEffect(() => {
 		fetchDonars("")
-	}, [currentPage])
+	}, [])
 
-	const onSubmit = async (e: any) => {
+	const onSubmit = async (e: DonarSearchType) => {
 		const filterUrl = `${BASE_API_URL}donars/?division=${e.division}&district=${e.district}&upazila=${e?.upazila}&blood_group=${encodeURIComponent(e?.blood_group)}`
 		fetchDonars(filterUrl)
 	}
