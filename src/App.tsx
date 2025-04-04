@@ -22,7 +22,7 @@ function App() {
         <Route path='/profile' element={<ProtectedRoute><UserProfile/></ProtectedRoute>}/>
         <Route path='*' element={<Error404/>}/>
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
 
       <ToastContainer
         position="top-center"

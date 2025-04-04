@@ -7,9 +7,9 @@ import UserInteraction from './UserInteraction'
 export default function Outlet():React.ReactElement {
 	return (
 		<>
-			{/* <HeroPage/> */}
+			<HeroPage/>
 			<DonnarList/>
-			{/* <UserInteraction/> */}
+			<UserInteraction/>
 		</>
 	)
 }
