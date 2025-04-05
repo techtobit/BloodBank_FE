@@ -161,7 +161,7 @@ function DonnarList() {
 			<div className='grid grid-cols-1 md:grid-cols-4 p-10 gap-4 justify-items-center items-center'>
 				{
 					donars?.map((donar, index) => (
-						<div key={index} className='flex w-85 md:w-75 h-35 md:h-30  bg-white/65 justify-evenly items-center rounded-lg shadow-lg  '>
+						<div key={index} className='flex w-90 md:w-75 h-35 md:h-30  bg-white/65 justify-evenly items-center rounded-lg shadow-lg  '>
 							<div>
 								<img className='rounded-lg ' src={`${AVATAR_BASE_URL}?name=${donar.full_name}&background=random`} alt="" />
 							</div>
